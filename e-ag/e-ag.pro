@@ -1,0 +1,271 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2019-05-03T10:22:08
+#
+#-------------------------------------------------
+
+QT       += core gui network printsupport multimedia multimediawidgets svg openglwidgets
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = e-ag
+TEMPLATE = app
+
+# The following define makes your compiler emit warnings if you use
+# any feature of Qt which has been marked as deprecated (the exact warnings
+# depend on your compiler). Please consult the documentation of the
+# deprecated API in order to know how to port your code away from it.
+DEFINES += QT_DEPRECATED_WARNINGS
+
+# You can also make your code fail to compile if you use deprecated APIs.
+# In order to do so, uncomment the following line.
+# You can also select to disable deprecated APIs only up to a certain version of Qt.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+CONFIG += c++11
+
+SOURCES += \
+    filetransferclient.cpp \
+        main.cpp \
+        mainwindow.cpp \
+    multicast_receiver.cpp \
+    multicastaddressdialog.cpp \
+    mypc.cpp \
+    pcdata.cpp \
+    rubberband.cpp \
+    scdimgclient.cpp \
+    scdimgserver.cpp \
+    scdimgserverthread.cpp \
+    streamplayer/common/camerainforeader.cpp \
+    streamplayer/common/commandlineparser.cpp \
+    streamplayer/common/mediafileinforeader.cpp \
+    streamplayer/converter/videoconverter.cpp \
+    streamplayer/decoder/CpuVideoDecoder.cpp \
+    streamplayer/decoder/audioopusdecoder.cpp \
+    streamplayer/decoder/h264decoder.cpp \
+    streamplayer/decoder/h264depacketizer.cpp \
+    streamplayer/renderer/openglvaapizerocopyrenderer.cpp \
+    streamplayer/decoder/vaapivideodecoder.cpp \
+    streamplayer/decoder/vaapizerocopydecoder.cpp \
+    streamplayer/decoder/videodecoderfactory.cpp \
+    streamplayer/encoder/audioopusencoder.cpp \
+    streamplayer/player/audioplayback.cpp \
+    streamplayer/player/audioprocessor.cpp \
+    streamplayer/player/rtspsource.cpp \
+    streamplayer/player/rtspworker.cpp \
+    streamplayer/preview/openglvideopreview.cpp \
+    streamplayer/preview/videopreview.cpp \
+    streamplayer/renderer/openglvideorenderer.cpp \
+    streamplayer/renderer/testvideowidget.cpp \
+    streamplayer/renderer/videorenderer.cpp \
+    streamplayer/stream/receiverstream.cpp \
+    streamplayer/sync/audioscheduler.cpp \
+    streamplayer/sync/mastertime.cpp \
+    streamplayer/sync/mediaclock.cpp \
+    streamplayer/sync/videoscheduler.cpp \
+    streamplayer/udpmesageservice/controlchannel.cpp \
+    streamplayer/udpmesageservice/controlclient.cpp \
+    streamplayer/udpmesageservice/controlmessage.cpp \
+    streamplayer/udpmesageservice/controlserver.cpp \
+    userpassword.cpp \
+    userprivilegehelper.cpp
+
+
+HEADERS += \
+    CustomInputDialog.h \
+    Database.h \
+    MyCommand.h \
+    MyDialog.h \
+    SettingsWidget.h \
+    VideoDecodeThread.h \
+    VideoPlayer.h \
+    baseWidget.h \
+    deviceWidget.h \
+    filecopyWidget.h \
+    filetransferclient.h \
+    groupWidget.h \
+    keyboardmouseWidget.h \
+    languageWidget.h \
+    lockWidget.h \
+    loginLogoutWidget.h \
+        mainwindow.h \
+    menu.h \
+    messageWidget.h \
+    multicast_receiver.h \
+    multicastaddressdialog.h \
+    mypc.h \
+    pcdata.h \
+    powerrebootWidget.h \
+    rubberband.h \
+    runcommandWidget.h \
+    scdimgclient.h \
+    scdimgserver.h \
+    scdimgserverthread.h \
+    screenViewWidget.h \
+    sliderWidget.h \
+    streamplayer/audio/audioframe.h \
+    streamplayer/common/EncodedPacket.h \
+    streamplayer/common/MediaBuffer.h \
+    streamplayer/common/MediaClock.h \
+    streamplayer/common/MediaFrame.h \
+    streamplayer/common/MediaPacket.h \
+    streamplayer/common/StreamSettings.h \
+    streamplayer/common/VideoBuffer.h \
+    streamplayer/common/VideoCaptureSettings.h \
+    streamplayer/common/camerainforeader.h \
+    streamplayer/common/commandlineparser.h \
+    streamplayer/common/hardwareframe.h \
+    streamplayer/common/mediafileinforeader.h \
+    streamplayer/common/streamenums.h \
+    streamplayer/common/vaapihardwareframe.h \
+    streamplayer/converter/videoconverter.h \
+    streamplayer/decoder/AbstractVideoDecoder.h \
+    streamplayer/decoder/CpuVideoDecoder.h \
+    streamplayer/decoder/audioopusdecoder.h \
+    streamplayer/decoder/h264decoder.h \
+    streamplayer/decoder/h264depacketizer.h \
+    streamplayer/decoder/vaapivideodecoder.h \
+    streamplayer/decoder/vaapizerocopydecoder.h \
+    streamplayer/decoder/videodecoderfactory.h \
+    streamplayer/encoder/audioopusencoder.h \
+    streamplayer/interfaces/ICapture.h \
+    streamplayer/interfaces/IVideoCapture.h \
+    streamplayer/network/rtppacket.h \
+    streamplayer/player/audioplayback.h \
+    streamplayer/player/audioprocessor.h \
+    streamplayer/player/rtspsource.h \
+    streamplayer/player/rtspworker.h \
+    streamplayer/preview/openglvideopreview.h \
+    streamplayer/preview/videopreview.h \
+    streamplayer/renderer/AbstractVideoRenderer.h \
+    streamplayer/renderer/openglvaapizerocopyrenderer.h \
+    streamplayer/renderer/openglvideorenderer.h \
+    streamplayer/renderer/testvideowidget.h \
+    streamplayer/renderer/videorenderer.h \
+    streamplayer/stream/receiverstream.h \
+    streamplayer/sync/audioscheduler.h \
+    streamplayer/sync/mastertime.h \
+    streamplayer/sync/mediaclock.h \
+    streamplayer/sync/videoscheduler.h \
+    streamplayer/udpmesageservice/controlchannel.h \
+    streamplayer/udpmesageservice/controlclient.h \
+    streamplayer/udpmesageservice/controlmessage.h \
+    streamplayer/udpmesageservice/controlserver.h \
+    tcpudp.h \
+    selectpc.h \
+    funtion.h \
+    userpassword.h \
+    userprivilegehelper.h \
+    videoWidget.h \
+    vncrdpWidget.h \
+    volumeWidget.h \
+    webInternetWidget.h \
+    wolWidget.h
+
+FORMS +=
+
+# Linux için FFmpeg ayarları
+unix {
+
+    INCLUDEPATH += /usr/include
+    LIBS += -lavformat -lavcodec -lavutil -lswscale
+    LIBS += -lqt6keychain
+    CONFIG += link_pkgconfig
+
+    LIBS += -lEGL
+
+    PKGCONFIG += x264
+    PKGCONFIG += opus
+    PKGCONFIG += libva
+    PKGCONFIG += libdrm
+    INCLUDEPATH += \
+        /usr/include \
+        /usr/include/x86_64-linux-gnu
+
+    LIBS += \
+        -lavdevice \
+        -lavformat \
+        -lavcodec \
+        -lavutil \
+        -lswscale \
+        -lswresample
+
+
+        #INCLUDEPATH += /usr/include/pipewire-0.3
+        LIBS += -lpipewire-0.3
+        PKGCONFIG += libpipewire-0.3
+
+        INCLUDEPATH += \
+            /usr/include/pipewire-0.3 \
+            /usr/include/spa-0.2
+}
+# sudo apt install  qtkeychain-qt6-dev
+# Windows için FFmpeg ayarları (örnek: FFmpeg statik binary kurulu dizin)
+win32 {
+    INCLUDEPATH += C:/ffmpeg/include
+    LIBS += -LC:/ffmpeg/lib \
+            -lavformat \
+            -lavcodec \
+            -lavutil \
+            -lswscale
+}
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
+
+target.path = /usr/bin
+
+desktop_file.files = e-ag.desktop
+desktop_file.path = /usr/share/applications/
+
+icon.files = icons/e-ag.svg
+icon.path = /usr/share/icons/
+
+x11passwd.files = x11vncpasswd
+x11passwd.path = /usr/bin/
+
+x11servicedesktop.files = e-ag-x11vncdesktop.service
+x11servicedesktop.path = /lib/systemd/system/
+
+x11servicelogin.files = e-ag-x11vnclogin.service
+x11servicelogin.path = /lib/systemd/system/
+
+#webdisable.files = webdisable.sh
+#webdisable.path = /usr/share/e-ag/
+
+polkit_policy.files = e-ag.policy
+polkit_policy.path = /usr/share/polkit-1/actions/
+polkit_rules.files = e-ag.rules
+polkit_rules.path = /usr/share/polkit-1/rules.d/
+
+lang.files = translations/*
+lang.path = /usr/share/e-ag/translations/
+
+lisanss.files = lisans/*
+lisanss.path = /usr/share/doc/e-ag/LICENSES/
+
+keyring_default.files = default
+keyring_default.path = /root/.local/share/keyrings/
+
+keyring_default_file.files = anahtar.keyring
+keyring_default_file.path = /root/.local/share/keyrings/
+
+INSTALLS += target desktop_file icon x11passwd\
+x11servicedesktop x11servicelogin langen lang polkit_rules polkit_policy lisanss\
+keyring_default keyring_default_file
+
+DISTFILES +=e-ag.svg\
+    e-ag.desktop\
+    streamplayer/streamplayer.pro111 \
+    x11vncpasswd\
+    e-ag-x11vncdesktop.service\
+    e-ag-x11vnclogin.service\
+
+
+
+

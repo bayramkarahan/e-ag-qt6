@@ -1,0 +1,564 @@
+#ifndef FILECOPYWIDGET_H
+#define FILECOPYWIDGET_H
+#include<scdimgclient.h>
+#include <QDir>
+#include <QTextStream>
+#include<filetransferclient.h>
+#define  echo QTextStream(stderr) <<
+
+
+QWidget*  MainWindow::fileWidget()
+{
+    int e=en;
+    int b=boy;
+    // qDebug()<<"ayar click";
+    QFont ff( "Arial", 20, 0);
+    int yukseklik=b*7.5;
+    QWidget * d = new QWidget();
+    d->setWindowTitle(tr("Dosya Kopyalama Penceresi"));
+    QLineEdit *le = new QLineEdit();
+    le->setFixedSize(e*50,boy*15);
+    le->setStyleSheet("font-size:"+QString::number(font.toInt()+2)+"px;");
+
+    // le->setFont(ff);
+    /*QLineEdit * ple = new QLineEdit();
+    ple->setFixedSize(e*61,boy*7);
+    ple->setStyleSheet("font-size:"+QString::number(font.toInt()+2)+"px;");
+*/
+    QLabel *commandFileLabel=new QLabel("Dosya");
+    commandFileLabel->setFixedSize(e*7,yukseklik);
+    commandFileLabel->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+/*
+    QLabel *pathLabel=new QLabel("Hedef Konum\n/home/user/\n/tmp/");
+    pathLabel->setFixedSize(e*12,yukseklik);
+    pathLabel->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+*/
+
+
+    fileSelectButton=new QToolButton();
+    fileSelectButton->setFixedSize(e*13,yukseklik*2);
+    fileSelectButton->setAutoRaise(true);
+    //fileSelectButton->setAutoFillBackground(true);
+    fileSelectButton->setText(tr("Dosya\nSeç"));
+    fileSelectButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileSelectButton->setIcon(QIcon(":/icons/openfile.svg"));
+    fileSelectButton->setIconSize(QSize(b*6,yukseklik*0.9));
+    fileSelectButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileSelectButton, &QToolButton::clicked, [=]() {
+        //pcClickSlot(pcMac->text());
+        UserPrivilegeHelper helper;
+        QString seatUser = helper.detectActiveUser();// 1) Aktif kullanıcıyı bul
+        //qDebug()<<"Kullanıcı: "<<sessionUser;
+        QString fileName = QFileDialog::getOpenFileName(this,tr("Dosya Seç"),"/home/"+seatUser, tr("Files (*)"));
+        le->setText(fileName);
+
+        QFileInfo fi(le->text());
+
+        mesajSlot(tr("Dosya Seçildi."));
+
+    });
+
+
+    fileCopyButton=new QToolButton();
+    fileCopyButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyButton->setAutoRaise(true);
+    fileCopyButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyButton->setText(tr("Ev Dizinine\nGönder"));
+    fileCopyButton->setIcon(QIcon(":/icons/selectcopyfile.svg"));
+    fileCopyButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyButton, &QToolButton::clicked, [=]() {
+        if(le->text()=="") return;
+        QString name1 = QUrl::fromLocalFile(le->text()).path(QUrl::FullyEncoded);
+        name1.replace("%20","%5C%20");
+        QUrl pth;
+
+        QFileInfo fi(le->text());
+        //QString name = fi.fileName();
+
+        QString uzanti = fi.completeSuffix();
+        QString ad = fi.baseName().replace(" ","");
+        ad = turkceKarakterTemizle(ad);
+        if(uzanti=="")
+            selectFileCopySlot("homesendfile",pth.fromPercentEncoding(name1.toUtf8()),ad);
+         else
+            selectFileCopySlot("homesendfile",pth.fromPercentEncoding(name1.toUtf8()),ad+"."+uzanti);
+
+
+        mesajSlot("Dosya Seçili Pc'ye Kopyalandı.");
+    });
+
+    fileCopyInstallButton=new QToolButton();
+    fileCopyInstallButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyInstallButton->setAutoRaise(true);
+    fileCopyInstallButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyInstallButton->setText(tr("Paketi\nKur"));
+    fileCopyInstallButton->setIcon(QIcon(":/icons/install.svg"));
+    fileCopyInstallButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyInstallButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyInstallButton, &QToolButton::clicked, [=]() {
+        if(le->text()=="") return;
+        QString name1 = QUrl::fromLocalFile(le->text()).path(QUrl::FullyEncoded);
+        name1.replace("%20","%5C%20");
+        QUrl pth;
+
+        QFileInfo fi(le->text());
+        QString name = fi.fileName();
+
+        QString uzanti = fi.completeSuffix();
+        QString ad = fi.baseName().replace(" ","");
+        ad = turkceKarakterTemizle(ad);
+        QString dosya=QString("cat >/tmp/debeagscript << EOF"
+                                "\n#!/bin/bash"
+                                "\nexport DEBIAN_FRONTEND=noninteractive"
+                                "\napt-get --fix-broken install -y"
+                                "\napt-get install -f -y"
+                                "\napt-get autoremove -y"
+                                "\napt-get update"
+                                "\napt-get install /tmp/%1 -y"
+                                "\napt-get install -f -y"
+                                "\nEOF").arg(name);
+
+        system(dosya.toStdString().c_str());
+        /*****************************************************************************/
+
+        selectFileCopySlot("realdebsendfile",pth.fromPercentEncoding(name1.toUtf8()),name);
+        //system("sleep 0.1");
+        selectFileCopySlot("debscriptsendfile", "/tmp/debeagscript","debeagscript");
+        for(int i=0;i<onlinePcList.count();i++)
+        {
+            if((onlinePcList[i]->select||onlinePcList[i]->multiSelect))
+            {
+                onlinePcList[i]->setCommandButonState(false);
+            }
+        }
+       mesajSlot("Dosya Seçili Pc'ye Kopyalandı ve Kuruldu.");
+    });
+
+    fileCopyInstallScriptButton=new QToolButton();
+    fileCopyInstallScriptButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyInstallScriptButton->setAutoRaise(true);
+    fileCopyInstallScriptButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyInstallScriptButton->setText(tr("Scripti\nÇalıştır"));
+    fileCopyInstallScriptButton->setIcon(QIcon(":/icons/bash.svg"));
+    fileCopyInstallScriptButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyInstallScriptButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyInstallScriptButton, &QToolButton::clicked, [=]() {
+        if(le->text()=="") return;
+        QString name1 = QUrl::fromLocalFile(le->text()).path(QUrl::FullyEncoded);
+        name1.replace("%20","%5C%20");
+        QUrl pth;
+
+        QFileInfo fi(le->text());
+        QString name = fi.fileName();
+
+        QString uzanti = fi.completeSuffix();
+        QString ad = fi.baseName().replace(" ","");
+        ad = turkceKarakterTemizle(ad);
+        QString dosya=QString("cat >/tmp/eagscript << EOF"
+                                "\n#!/bin/bash"
+                                "\nexport DEBIAN_FRONTEND=noninteractive"
+                                "\napt-get --fix-broken install -y"
+                                "\napt-get install -f -y"
+                                "\napt-get autoremove -y"
+                                "\napt-get update"
+                                "\nbash /tmp/%1"
+                                "\nEOF").arg(name);
+
+        system(dosya.toStdString().c_str());
+        /*****************************************************************************/
+
+        selectFileCopySlot("realscriptsendfile",pth.fromPercentEncoding(name1.toUtf8()),name);
+        //system("sleep 0.1");
+        selectFileCopySlot("scriptsendfile", "/tmp/eagscript","eagscript");
+
+    for(int i=0;i<onlinePcList.count();i++)
+    {
+     if((onlinePcList[i]->select||onlinePcList[i]->multiSelect))
+     {
+            onlinePcList[i]->setCommandButonState(false);
+     }
+    }
+        mesajSlot("Script Dosya Seçili Pc'ye Kopyalandı ve Kuruldu.");
+    });
+
+
+    QToolButton *fileCopyDesktopNotGetSendButton=new QToolButton();
+    fileCopyDesktopNotGetSendButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyDesktopNotGetSendButton->setAutoRaise(true);
+    fileCopyDesktopNotGetSendButton->setText(tr("Masaüstüne\nGönder"));
+    fileCopyDesktopNotGetSendButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyDesktopNotGetSendButton->setIcon(QIcon(":/icons/senddesktopfile.svg"));
+    fileCopyDesktopNotGetSendButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyDesktopNotGetSendButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyDesktopNotGetSendButton, &QToolButton::clicked, [=]() {
+        if(le->text()=="") return;
+        QString name1 = QUrl::fromLocalFile(le->text()).path(QUrl::FullyEncoded);
+        name1.replace("%20","%5C%20");
+        QUrl pth;
+
+        QFileInfo fi(le->text());
+        QString name = fi.fileName();
+
+        QString uzanti = fi.completeSuffix();
+        QString ad = fi.baseName().replace(" ","");
+        ad = turkceKarakterTemizle(ad);
+        if(uzanti=="")
+            selectFileCopySlot("desktopsendfile", pth.fromPercentEncoding(name1.toUtf8()),ad);
+        else
+            selectFileCopySlot("desktopsendfile", pth.fromPercentEncoding(name1.toUtf8()),ad+"."+uzanti);
+
+        mesajSlot("Dosya Masaüstlerine Gönderildi.");
+    });
+
+    QLineEdit *fileGetUzantiLE=new QLineEdit(d);
+    fileGetUzantiLE->setFixedSize(e*15,yukseklik*0.5);
+    fileGetUzantiLE->setText("*.docx");
+    fileGetUzantiLE->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+
+    QToolButton *fileGetUzantiliButton=new QToolButton();
+    fileGetUzantiliButton->setFixedSize(e*15,yukseklik*1.5);
+    fileGetUzantiliButton->setAutoRaise(true);
+    //fileGetUzantiliButton->setAutoFillBackground(true);
+    fileGetUzantiliButton->setText(tr("Dosya Topla"));
+    fileGetUzantiliButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileGetUzantiliButton->setIcon(QIcon(":/icons/getdesktopextension.svg"));
+    fileGetUzantiliButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileGetUzantiliButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileGetUzantiliButton, &QToolButton::clicked, [=]() {
+        for (MyPc *pc : onlinePcList) {
+            if ((pc->select || pc->multiSelect)&&pc->connectState)
+            {
+                pc->setCommandState("Çalışma Toplama","Çalışma Toplama Başlatıldı.","2");//2 kopayalama başla
+            }
+        }
+        qDebug()<<"dosya toplama: "<<fileGetUzantiLE->text();
+        udpSendData("dosyatoplauzanti","",fileGetUzantiLE->text(),"Dosya Masaüstlerinden Alındı",false);
+        mesajSlot("Dosya Masaüstlerinden Alındı.");
+    });
+
+
+    QToolButton *fileCopyDesktopSendButton=new QToolButton();
+    fileCopyDesktopSendButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyDesktopSendButton->setAutoRaise(true);
+    fileCopyDesktopSendButton->setText(tr("Çalışma\n Dağıt"));
+    fileCopyDesktopSendButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyDesktopSendButton->setIcon(QIcon(":/icons/senddesktopquiz.svg"));
+    fileCopyDesktopSendButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyDesktopSendButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyDesktopSendButton, &QToolButton::clicked, [=]() {
+        if(le->text()=="") return;
+        QString name1 = QUrl::fromLocalFile(le->text()).path(QUrl::FullyEncoded);
+        name1.replace("%20","%5C%20");
+        QUrl pth;
+
+        QFileInfo fi(le->text());
+        QString name = fi.fileName();
+        QString uzanti = fi.completeSuffix();
+        QString onlypath=fi.canonicalPath();
+
+        /*qDebug()<<"dosya adı-uzantısı:"<<name;
+        qDebug()<<"dosya sadece adı:"<<fi.baseName();
+        qDebug()<<"dosya sadece uzantı:"<<uzanti;
+        qDebug()<<"dosya sadece yol:"<<onlypath;
+        qDebug()<<"dosya ve yolu:"<<pth.fromPercentEncoding(name1.toUtf8());
+*/
+        //return;
+          if(uzanti=="")
+            selectFileCopySlot("desktopsendworkfile",pth.fromPercentEncoding(name1.toUtf8()),"e-ag-server-"+fi.baseName());
+         else
+             selectFileCopySlot("desktopsendworkfile",pth.fromPercentEncoding(name1.toUtf8()),"e-ag-server-"+name);
+         mesajSlot("Dosya Masaüstlerine Gönderildi.");
+    });
+
+    QCheckBox *calismaToplaCB=new QCheckBox(d);
+    calismaToplaCB->setFixedSize(e*18,yukseklik*2);
+    calismaToplaCB->setText("İstemciden Sil");
+    calismaToplaCB->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    // OKU
+    CustomInputDialog *cidctcb=new CustomInputDialog(tr(""),tr(""),"",300,100,this);
+    cidctcb->readMetaData("calismaToplaCB", [this, calismaToplaCB](QString _data){
+        if(_data != ""){
+            //qDebug() << "checkbox geldi:" << _data;
+            calismaToplaCB->setChecked(_data == "1");  // veya "true"
+        }
+    });
+    // KAYDET
+    connect(calismaToplaCB, &QCheckBox::toggled, this,
+        [=](const bool checked){
+            cidctcb->saveMetaData("calismaToplaCB", checked ? "1" : "0");
+        });
+    QToolButton *fileCopyDesktopGetButton=new QToolButton();
+    fileCopyDesktopGetButton->setFixedSize(e*20,yukseklik*1.5);
+    fileCopyDesktopGetButton->setAutoRaise(true);
+    //fileCopyDesktopGetButton->setAutoFillBackground(true);
+    fileCopyDesktopGetButton->setText(tr("Çalışma Topla"));
+    fileCopyDesktopGetButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    fileCopyDesktopGetButton->setIcon(QIcon(":/icons/getdesktopquiz.svg"));
+    fileCopyDesktopGetButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    fileCopyDesktopGetButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(fileCopyDesktopGetButton, &QToolButton::clicked, [=]() {
+        for (MyPc *pc : onlinePcList) {
+            if ((pc->select || pc->multiSelect)&&pc->connectState)
+            {
+                pc->setCommandState("Çalışma Toplama","Çalışma Toplama Başlatıldı.","2");//2 kopayalama başla
+            }
+        }
+       QString toplaVeSil = calismaToplaCB->isChecked() ? "true" : "false";
+       qDebug()<<"dosya toplama: "<<toplaVeSil;
+        udpSendData("dosyatopla","",toplaVeSil,"Dosya Masaüstlerinden Alındı",false);
+        mesajSlot("Dosya Masaüstlerinden Alındı.");
+    });
+
+    QToolButton *helpButton= new QToolButton;
+    helpButton->setFixedSize(e*13,yukseklik*2);
+    helpButton->setAutoRaise(true);
+    // bilgiButton->setAutoFillBackground(true);
+    helpButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    helpButton->setText(tr("Yardım"));
+    helpButton->setIcon(QIcon(":/icons/help.svg"));
+    helpButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    helpButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(helpButton, &QToolButton::clicked, [=]() {
+        QTextDocument *doc=new QTextDocument();
+
+        doc->setHtml(tr("<center><h2>Dosya Kopyalama</h2></center>"
+                    "<center><img src=\":/icons/dosyakopyalama.png\" /></center> "
+                    "<center><img src=\":/icons/istemci.png\" /></center>"
+                    "<br/>1- <b>Dosya Seç</b> seçeneği ile dosya seçimi yapılır."
+                    "<br/>2- <b>Paketi Kur</b> seçeneği ile deb uzantılı paketi istemciye kururulumu yapılır."
+                    "<br/>3- <b>Scripti Çalıştır</b> seçeneği ile scripti istemci üzerinde çalıştırır."
+                    "<br/>4- İstemcide açık kullanıcı masaüstüne dosya kopyalama için <b>Masaüstlerine Dağıt</b> seçeneğini kullanabilirsiniz."
+                    "<br/>5- <b>Ev Dizinine Göder</b> seçeneği İstemcide açık kullanıcının ev dizinine kopyalanacaktır."
+                    "<br/>6- İstemcide açık kullanıcı masaüstüne <b>çalışma dosyası</b> göndermek için <b>Çalışmaları Dağıt</b>  seçeneğini kullanabilirsiniz."
+                    "<br/>7- İstemcide açık kullanıcı masaüstündeki <b>çalışma dosyasını</b> Sunucuya toplamak için <b>Çalışmaları Topla</b> seçeneğini kullanabilirsiniz."
+                    "<br/>8- Birden fazla istemciye kopyalama için istemcileri seçerek kopyalanabilir."
+                    "<br/>9- <b>C</b> simgesi <b>Turkuaz</b> ise dosya kopyalamanın <b>başlatılmış</b> olduğunu ifade eder."
+                    "<br/>10- <b>C</b> simgesi <b>Mavi</b> ise dosya kopyalamanın <b>başarılı tamamlandı</b> ifade eder."
+                    "<br/>11- <b>C</b> simgesi <b>Kırmızı</b> ise dosya kopyalamanın <b>başarısız</b> olduğunu ifade eder."
+
+                    ));
+        QPrinter pdf;
+        pdf.setOutputFileName("/tmp/dosyakopyalama.pdf");
+        pdf.setOutputFormat(QPrinter::PdfFormat);
+        doc->print(&pdf);
+
+        QTextEdit *document = new QTextEdit();
+        document->setReadOnly(true);
+        //  document->show();
+        document->setDocument(doc);
+        QVBoxLayout * vbox = new QVBoxLayout();
+        QHBoxLayout * hbox1= new QHBoxLayout();
+
+        // hbox1->addWidget(commandFileLabel);
+        hbox1->addWidget(document);
+
+        vbox->addLayout(hbox1);
+        QDialog * d1 = new QDialog();
+        d1->setWindowTitle(tr("Dosya Kopyalama Yardım Penceresi"));
+        d1->setFixedSize(QSize(boy*215,boy*110));
+        auto appIcon = QIcon(":/icons/e-ag.svg");
+        d1->setWindowIcon(appIcon);
+
+        d1->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+
+        d1->setLayout(vbox);
+        d1->exec();
+    });
+    QGridLayout * vbox = new QGridLayout();
+
+    vbox->setContentsMargins(0, 0, 0,0);
+    vbox->setVerticalSpacing(0);
+    //vbox->addWidget(pathLabel,2,1,1,1);
+    //vbox->addWidget(ple,2,2,1,1);
+    vbox->addWidget(commandFileLabel,1,1,1,1);
+    vbox->addWidget(le,1,2,1,1);
+    vbox->addWidget(fileSelectButton,1,3,2,1);
+    vbox->addWidget(fileCopyInstallButton,1,4,2,1);
+    vbox->addWidget(fileCopyInstallScriptButton,1,5,2,1);
+    vbox->addWidget(fileCopyButton,1,6,2,1);
+    //vbox->addWidget(fileCopyAllButton,1,7,2,1);
+    vbox->addWidget(fileCopyDesktopNotGetSendButton,1,7,2,1);
+
+    vbox->addWidget(fileGetUzantiliButton,1,8,1,1);
+    vbox->addWidget(fileGetUzantiLE,3,8,2,1);
+
+    vbox->addWidget(fileCopyDesktopSendButton,1,9,2,1,Qt::AlignCenter);
+
+    vbox->addWidget(fileCopyDesktopGetButton,1,10,1,1,Qt::AlignCenter);
+    vbox->addWidget(calismaToplaCB,2,10,2,1,Qt::AlignCenter);
+
+
+    vbox->addWidget(helpButton,1,11,2,1);
+
+    d->setLayout(vbox);
+    return d;
+}
+
+/*void MainWindow::selectFileCopySlot(QString _mesajtype,QString _sourcePath,QString _targetPath)
+{
+       for(int i=0;i<onlinePcList.count();i++)
+    {
+     if((onlinePcList[i]->select||onlinePcList[i]->multiSelect))
+     {
+     if((_mesajtype=="desktopsendworkfile"||
+         _mesajtype=="desktopsendfile")
+        &&onlinePcList[i]->user=="noLogin")
+        continue;
+        qDebug()<<"kopyalanacak dosya: "<<_sourcePath<<_targetPath<<onlinePcList[i]->ip;
+        ///QString komut="/usr/bin/scd-client "+onlinePcList[i]->ip+" "+onlinePcList[i]->netProfil.ftpPort+" PUT "+_sourcePath+" /"+_targetPath;
+        //system(komut.toStdString().c_str());
+       // fileCopyTasks.enqueue({_mesajtype,onlinePcList[i]->ip,onlinePcList[i]->netProfil.ftpPort,_sourcePath,_targetPath});
+        FileTransferClient *transfer =
+        new FileTransferClient(onlinePcList[i]->ip, onlinePcList[i]->netProfil.ftpPort.toUShort());
+        /*connect(transfer, &FileTransferClient::finished,
+                this, &YourClass::onFileTransferFinished);*/
+/*
+        connect(transfer, &FileTransferClient::finished, this,
+                [transfer, src = _sourcePath, dst = _targetPath](bool success, QString message)
+                {
+                    if(success)
+                        qDebug() << "Transfer tamamlandı:" << src << "->" << dst;
+                    else
+                        qDebug() << "Transfer hatası:" << message;
+
+                    transfer->deleteLater();
+                });
+
+        transfer->uploadFile(_sourcePath,"/"+_targetPath);
+        //transfer->uploadFile("C:/test/file.zip","/server/file.zip");
+        //transfer->downloadFile("/server/file.zip","C:/download/");
+        //transfer->deleteFile("/server/file.zip");*/
+ /*    }
+    }
+    //listeyiKopyala();
+    mesajSlot("Dosya Seçili Pc'lere Kopyalandı");
+}
+*/
+void MainWindow::selectFileCopySlot(QString _mesajtype, QString _sourcePath, QString _targetPath)
+{
+    QString kmt="cp "+_sourcePath+" "+"/tmp/"+_targetPath;
+    system(kmt.toStdString().c_str());
+
+    for (MyPc *pc : onlinePcList) {
+    //for(int i=0; i<onlinePcList.count(); i++)
+    //{
+        if((pc->select || pc->multiSelect)&&pc->connectState)
+        {
+            if((_mesajtype=="desktopsendworkfile" || _mesajtype=="desktopsendfile") &&
+               pc->user=="noLogin")
+                continue;
+
+            qDebug() << "Kopyalanacak dosya:" << _sourcePath << _targetPath << pc->ip;
+            pc->setCommandState("Dosya Kopyalama","Kopyalama Başlatıldı","2");//2 kopayalama başla
+            // Job oluştur ve queue'ya ekle
+            TransferJob job;
+            job.mesajtype=_mesajtype;
+            job.ip = pc->ip;
+            job.port = pc->netProfil.ftpPort.toUShort();
+            job.sourcePath = "/tmp/" + _targetPath;//_sourcePath;
+            job.targetPath = "/" + _targetPath;
+
+            transferQueue.enqueue(job);
+        }
+    }
+
+    // Transferleri başlat
+    startNextFileTransfer();
+}
+void MainWindow::startNextFileTransfer()
+{
+       qDebug() << "startNextFileTransfer";
+    // Sıralı olarak queue’dan job al ve maxParallelTransfers sınırını aşma
+    while(runningTransfers < maxParallelTransfers && !transferQueue.isEmpty())
+    {
+        TransferJob job = transferQueue.dequeue();
+        runningTransfers++;
+
+        FileTransferClient *client = new FileTransferClient(job.ip, job.port);
+
+        // finished sinyalini bağla
+        connect(client, &FileTransferClient::finished, this,
+                [this, client,job](bool success, QString message)
+                {
+                    runningTransfers--;
+                    client->deleteLater();
+
+                    if(success){
+                        qDebug() << "Transfer tamamlandı...:" << message<<job.mesajtype<<job.ip;
+                        udpSendData(job.mesajtype,job.targetPath,"","",false);
+                        /***************************************************/
+                        for (MyPc *pc : onlinePcList) {
+                            if (pc->ip == job.ip&&
+                                    (pc->select || pc->multiSelect)&&
+                                    pc->connectState)
+                            {
+                                pc->setCommandState("Dosya Kopyalama","Kopyalama Tamamlandı.","3");//2 kopayalama başla
+                            }
+                        }
+                        /***************************************************/
+                    }
+                    else
+                    {
+                        qDebug() << "Transfer hatası:" << message;
+                    }
+                    // sıradaki transferi başlat
+                    startNextFileTransfer();
+                });
+        client->uploadFile(job.sourcePath, job.targetPath);
+    }
+
+    // Eğer queue boş ve tüm transferler bitti ise mesaj verebilirsiniz
+    if(transferQueue.isEmpty() && runningTransfers == 0)
+    {
+
+        qDebug() << "Tüm transferler tamamlandı.";
+        mesajSlot("Dosya Seçili Pc'lere Kopyalandı");
+    }
+}
+
+void MainWindow::listeyiKopyala() {
+    if (fileCopyTasks.isEmpty()) {
+        qDebug() << "Tüm bilgisayarlara dosya gönderildi.";
+        return;
+    }
+    fileCopyTask current = fileCopyTasks.dequeue();
+    QString komut="/usr/bin/scd-client "+current.ip+" "+current.port+" PUT "+current.sourcePath+" /"+current.targetPath;
+    qDebug()<<"kopyalama komutu"<<komut;
+    /*********************QProcess***********************************/
+    /*********************QProcess***********************************/
+    QStringList arguments;
+    QProcess *process = new QProcess(this);
+    connect(process,
+               QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+               [=](int exitCode, QProcess::ExitStatus exitStatus) {
+                   this->onProcessFinished(exitCode, exitStatus, current);
+                   process->deleteLater();
+                   listeyiKopyala();
+               });
+    arguments << "-c" << komut<<" &";
+    process->start("/bin/bash",arguments);
+}
+
+void MainWindow::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus, fileCopyTask task) {
+    if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        qDebug() << "Dosya Kopyalama Başarılı:" << task.mesajtype << "->" << task.ip<<task.targetPath;
+        udpSendData(task.mesajtype,task.targetPath,"","",false);
+    } else {
+        qDebug() << "Dosya Kopyalama Hata oluştu:" << task.mesajtype << "->" << task.ip;
+    }
+    udpSendData(task.mesajtype,task.targetPath,"","",false);
+}
+
+
+
+#endif // FILECOPYWIDGET_H
