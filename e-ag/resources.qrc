@@ -105,5 +105,6 @@
         <file>icons/device.png</file>
         <file>icons/delhost.svg</file>
         <file>icons/getdesktopextension.svg</file>
+        <file>icons/dds.svg</file>
     </qresource>
 </RCC>

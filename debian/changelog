@@ -1,11 +1,26 @@
+e-ag (2.9.9.1) unstable; urgency=medium
+
+  * add dds dosya dağıtım sistemi
+  
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2026 14:31:08 +0300
+ 
+e-ag (2.9.9.0) unstable; urgency=medium
+
+  * add mediastreamer
+  
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2026 14:31:08 +0300
+ 
 e-ag (2.9.8.1) unstable; urgency=medium
 
   * wol fixed
-  
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2020 14:31:08 +0300
+ 
 e-ag (2.9.8) unstable; urgency=medium
 
   * get file and by extension
-
+  
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2020 14:31:08 +0300
+ 
 e-ag (2.9.7) unstable; urgency=medium
 
   * get file and delete
@@ -13,7 +28,8 @@ e-ag (2.9.7) unstable; urgency=medium
   * pc select updated
   * keyring first user hide
   
-  
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2020 14:31:08 +0300
+ 
 e-ag (2.9.6) unstable; urgency=medium
 
   * get workfile
@@ -27,7 +43,8 @@ e-ag (2.9.6) unstable; urgency=medium
   * ssh terminal x-terminal-emulator add 
   * novnc x-www-browser  add
   
-
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2020 14:31:08 +0300
+ 
 e-ag (2.9.4.0) unstable; urgency=medium
 
   * Initial Release

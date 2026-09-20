@@ -124,12 +124,13 @@ MyPc::MyPc(const QString _mac, QString _ip, QWidget *parent) : QWidget(parent)
     btnayar->setAutoRaise(true);
     //iconLabel->setAutoFillBackground(true);
     multiSelect=false;
-    auto layout = new QGridLayout(this);
+    //auto
+    layout = new QGridLayout(this);
     layout->setContentsMargins(2, 2, 2,2);
     layout->setVerticalSpacing(1);
     layout->addWidget(hostnameLabel, 2, 1,1,6,Qt::AlignHCenter);
     //layout->addWidget(videoWidget, 3,1,1,5,Qt::AlignHCenter);
-    //layout->addWidget(iconstateLabel, 3,1,1,6,Qt::AlignHCenter);
+    layout->addWidget(iconstateLabel, 3,1,1,6,Qt::AlignHCenter);
     layout->addWidget(btncommand, 4,1,1,1,Qt::AlignHCenter);
     layout->addWidget(sshstateLabel, 4, 2,1,1,Qt::AlignHCenter);
     layout->addWidget(vncstateLabel, 4, 3,1,1,Qt::AlignHCenter);
@@ -149,18 +150,18 @@ MyPc::MyPc(const QString _mac, QString _ip, QWidget *parent) : QWidget(parent)
 
     /**************************************************/
     /**************************************************/
-    StreamSettings settings;
+  /*  StreamSettings settings;
     settings.mode = StreamMode::Receiver;
     settings.captureMode = CaptureMode::Video;
     settings.videoBitrate = 2000;
     settings.video.screenIndex = 0;
 
-    receiverStream = new ReceiverStream;
-    if (!receiverStream->open(settings))return;
-    receiverStream->start("192.168.1.103");
-   // receiverStream->m_openglrenderer->hide();
-    layout->addWidget(receiverStream->m_openglrenderer,3, 1, 1, 6);
-
+    receiverStream = new ReceiverStream(iconstateLabel);
+    if (!receiverStream->open(settings))return;*/
+    //receiverStream->start("192.168.1.103");
+   //
+   // layout->addWidget(receiverStream->m_openglrenderer,3, 1, 1, 6);
+    //receiverStream->m_openglrenderer->hide();
 
     this->setLayout(layout);
 
@@ -437,12 +438,33 @@ void MyPc::setIconControlState(bool state)
 {
     if(state)
     {qDebug()  <<"çalıştır";
-        receiverStream->start("192.168.1.103");
+        StreamSettings settings;
+        settings.mode = StreamMode::Receiver;
+        settings.captureMode = CaptureMode::Video;
+        settings.videoBitrate = 2000;
+        settings.video.screenIndex = 0;
+
+        receiverStream = new ReceiverStream(iconstateLabel);
+        if (!receiverStream->open(settings))return;
+        receiverStream->start(ip);
+         //receiverStream->start("192.168.1.103");
+        layout->addWidget(receiverStream->m_openglrenderer,3, 1, 1, 6);
+
+
         //receiverStream->m_openglrenderer->show();
     }else
     {
         qDebug()  <<"durdur";
-        receiverStream->stop();
+        if (receiverStream)
+        {
+            receiverStream->stop();
+
+            if (receiverStream->m_openglrenderer)
+            {
+                layout->removeWidget(receiverStream->m_openglrenderer);
+                receiverStream->m_openglrenderer->hide();
+            }
+        }
     }
     return;
     // 🔒 Her durumda sadece 1 thread çalışsın

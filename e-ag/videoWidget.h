@@ -92,9 +92,9 @@ QWidget* MainWindow::videoWidget()
         {
             streamState=true;
             videoYayinButton->setStyleSheet("QToolButton { background-color: rgba(0, 255, 0, 1.0); }");
-            system("pkill servervideo");
-            system("clientcamera&");
-            QString kmt10="servervideo "+commandFileLE->text()+"&";
+            system("pkill mediastreamer");
+            ///system("clientcamera&");
+            QString kmt10="mediastreamer --mode sender --preview none  --capture audiovideo --source file --file "+commandFileLE->text()+"&";
             system(kmt10.toStdString().c_str());
         }
       });
@@ -137,11 +137,9 @@ QWidget* MainWindow::videoWidget()
         streamState=true;
         liveStreamButton->setStyleSheet("QToolButton { background-color: rgba(0, 255, 0, 1.0); }");
         qDebug()<<"camera yayın start";
-        system("pkill servercamera");
-        system("pkill ffmpeg &");
-        QString kmt10="servercamera "+kamera->currentText()+" "+ses->currentText()+"&";
+        system("pkill mediastreamer");
+        QString kmt10="mediastreamer --mode sender --preview none --source camera --device "+kamera->currentText()+"&";
         system(kmt10.toStdString().c_str());
-        system("clientcamera&");
         mesajSlot("Seçili Pc'ye Komut Gönderildi.");
     });
 
@@ -157,8 +155,7 @@ QWidget* MainWindow::videoWidget()
         if(streamState)
         {
             qDebug()<<"video yayın stop"<<streamState;
-            system("pkill servervideo");
-            system("pkill ffmpeg &");
+            system("pkill mediastreamer");
             ///udpSendData("x11command","x11command","pkill clientcamera");
             mesajSlot(tr("Video durduruldu."));
             streamState=false;
@@ -181,8 +178,7 @@ QWidget* MainWindow::videoWidget()
         if(streamState)
         {
             qDebug()<<"camera yayın stop"<<streamState;
-            system("pkill servercamera &");
-            system("pkill ffmpeg &");
+            system("pkill mediastreamer &");
             //udpSendData("x11command","x11command","pkill clientcamera");
             streamState=false;
             liveStreamButton->setStyleSheet("QToolButton { background-color: rgba(0, 255, 0, 0.0); }");
@@ -204,9 +200,9 @@ QWidget* MainWindow::videoWidget()
         //if(streamState)
         //{
             qDebug()<<"akışı paylaş"<<streamState;
-            udpSendData("x11command","x11command","pkill clientcamera","",false);
+            udpSendData("x11command","x11command","pkill streamplayer","",false);
             system("sleep 2");
-            udpSendData("x11command","x11command","clientcamera","",false);
+            udpSendData("x11command","x11command","streamplayer","",false);
 
             //streamState=false;
        //}
@@ -227,7 +223,7 @@ QWidget* MainWindow::videoWidget()
         //{
             qDebug()<<"akışı  durdur"<<streamState;
             //system("pkill servercamera &");
-            udpSendData("x11command","x11command","pkill clientcamera","",false);
+            udpSendData("x11command","x11command","pkill streamplayer","",false);
             //streamState=false;
         //}
 

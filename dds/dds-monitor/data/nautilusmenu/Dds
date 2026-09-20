@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/dds-monitor --mode rightclick --target deb "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS"

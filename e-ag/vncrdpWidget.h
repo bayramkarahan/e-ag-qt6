@@ -209,14 +209,16 @@ QWidget* MainWindow::rdpWidget()
 
 
         /************************************************************/
-        system("pkill ffmpeg");
-        system("pkill serverscreen");
-        QString kmt="/usr/bin/serverscreen "+ekranScale1->currentText()+" "+newIp+" &";
-        system(kmt.toStdString().c_str());
+        system("pkill mediastreamer");
+        QString kmt10="mediastreamer --mode sender --capture video --preview none --source screen --screen 0 &";
+        system(kmt10.toStdString().c_str());
+
+        //QString kmt="/usr/bin/serverscreen "+ekranScale1->currentText()+" "+newIp+" &";
+        //system(kmt.toStdString().c_str());
         QThread::sleep(1); // saniye cinsinden
-        udpSendData("x11command","x11command","pkill clientscreen","",false);
+        udpSendData("x11command","x11command","pkill streamplayer","",false);
         QThread::sleep(1); // saniye cinsinden
-        udpSendData("x11command","x11command","clientscreen "+newIp,"",false);
+        udpSendData("x11command","x11command","streamplayer --capture video --preview fullscreen --serveraddress "+interfaceList[0].ip,"",false);
 
         //tabwid->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px; background-color:#afa1a1;");
         vncPc->setEnabled(false);
@@ -277,11 +279,10 @@ QWidget* MainWindow::rdpWidget()
     // ekranYansitFfmpegDurdur->setAutoFillBackground(true);
     ekranYansitFfmpegDurdur->setText(tr("Yansıtmayı \nffmpeg Durdur"));
     connect(ekranYansitFfmpegDurdur, &QToolButton::clicked, [=]() {
-        system("pkill ffmpeg");
-        system("pkill serverscreen");
+        system("pkill mediastreamer");
         ///system("/usr/bin/serverscreen&");
         QThread::sleep(1); // saniye cinsinden
-        udpSendData("x11command","x11command","pkill clientscreen","",false);
+        udpSendData("x11command","x11command","pkill streamplayer","",false);
         QThread::sleep(1); // saniye cinsinden
         ///udpSendData("x11command","x11command","clientscreen");
         udpSendData("x11command", "keyboardmouseon", "","keyboard-mouse-on",false);

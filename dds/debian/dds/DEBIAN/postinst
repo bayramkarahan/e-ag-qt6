@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+systemctl daemon-reload || true
+systemctl enable dds-service.service || true
+systemctl start dds-service.service || true
+
+systemctl enable dds-debinstaller@.service || true
+systemctl start ddsd-ebinstaller@.service || true
+
+systemctl enable dds-scriptexec@.service || true
+systemctl start dds-scriptexec@.service || true
+
+
+
+exit 0

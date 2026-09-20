@@ -44,6 +44,7 @@
 #include <QStyle>
 #include "streamplayer/stream/receiverstream.h"
 #include "streamplayer/renderer/AbstractVideoRenderer.h"
+#include<QGridLayout>
 
 class NetProfil
 {
@@ -217,6 +218,8 @@ bool refreshContinueState=false;
     //QPointer<MulticastReceiver> receiver;
     QImage prevImage;
      ReceiverStream *receiverStream;
+
+     QGridLayout *layout;
 };
 
 

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+export DEBIAN_FRONTEND=noninteractive
+
+DEBFILE="$1"
+
+[ -f "$DEBFILE" ] || exit 1
+
+apt-get install -y "$DEBFILE"

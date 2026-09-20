@@ -1,0 +1,10 @@
+[Unit]
+Description=dds script exec
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/dds/dds-scriptexec %I
+StandardOutput=append:/tmp/dds.log
+StandardError=append:/tmp/dds.log
+[Install]
+WantedBy=multi-user.target

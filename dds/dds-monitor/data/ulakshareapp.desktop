@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Comment[tr]=ulakshare uygulaması
+Terminal=false
+Exec=/usr/bin/ulakshare-monitor
+Icon=ulakshare
+Categories=Qt;Utility;
+Keywords=dosya;ftp;sftp;scp;
+Name[tr]=Ulakshare
+Name[tr_TR]=dds

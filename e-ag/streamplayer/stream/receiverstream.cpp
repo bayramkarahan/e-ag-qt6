@@ -25,7 +25,7 @@
 ReceiverStream::ReceiverStream(QObject *parent)
     : QObject(parent)
 {
-    m_controlClient = new ControlClient(this);
+  /*  m_controlClient = new ControlClient(this);
 
     connect(m_controlClient,&ControlClient::serverFound,
         this,&ReceiverStream::onServerFound);
@@ -34,7 +34,7 @@ ReceiverStream::ReceiverStream(QObject *parent)
         this,&ReceiverStream::onControlMessage);
 
     m_controlClient->start(6001);
-
+*/
    // m_controlClient->discoverServer();
 
 }
@@ -138,7 +138,27 @@ void ReceiverStream::onControlMessage(
 bool ReceiverStream::open(const StreamSettings &settings)
 {
     m_settings = settings;
+/*
+    if(m_settings.captureMode==CaptureMode::Video||
+            m_settings.captureMode==CaptureMode::AudioVideo)
+    {
+        m_videoDecoder = VideoDecoderFactory::create(this);
+        if(!m_videoDecoder->start())
+            return -1;
+        m_videoDecoder->setSettings(m_settings);
 
+        if (m_videoDecoder->type() ==AbstractVideoDecoder::Type::VAAPI)
+        {
+            qDebug() << "Renderer: VAAPI";
+            m_openglrenderer =new OpenGLVaapiZeroCopyRenderer;
+        }
+        else
+        {
+            qDebug() << "Renderer: CPU";
+            m_openglrenderer =new OpenGLVideoRenderer;
+            //m_openglrenderer =new VideoRenderer;
+        }
+    }*/
     return true;
 }
 bool ReceiverStream::start(QString hostIp)
@@ -293,14 +313,183 @@ bool ReceiverStream::start(QString hostIp)
     m_rtspSource->open(url,m_settings);
     m_rtspSource->start();
 
+
     return true;
+}
+
+ReceiverStream::~ReceiverStream()
+{
+  //  qDebug() << "========== ReceiverStream DESTRUCTOR ==========";
+
+    stop();
+
+    if (m_rtspSource)
+    {
+        //qDebug() << "DETACH RTSP";
+        m_rtspSource->setParent(nullptr);
+    }
+
+    if (m_videoDecoder)
+    {
+        //qDebug() << "DETACH VIDEO DECODER";
+        m_videoDecoder->setParent(nullptr);
+    }
+
+    //qDebug() << "========== ReceiverStream DESTRUCTOR END ==========";
 }
 
 
 void ReceiverStream::stop()
 {
+   /// qDebug() << "========== ReceiverStream STOP ==========";
 
+    // --------------------------------------------------
+    // 1. RTSP DURDUR
+    // --------------------------------------------------
+
+    if (m_rtspSource)
+    {
+       /// qDebug() << "1 - RTSP stop";
+
+        m_rtspSource->stop();
+
+        QObject::disconnect(
+            m_rtspSource,
+            nullptr,
+            nullptr,
+            nullptr
+        );
+    }
+
+
+    // --------------------------------------------------
+    // 2. TÜM SIGNAL ZİNCİRİNİ KES
+    // --------------------------------------------------
+
+    if (m_videoDecoder)
+    {
+        QObject::disconnect(
+            m_videoDecoder,
+            nullptr,
+            nullptr,
+            nullptr
+        );
+    }
+
+    if (m_audioDecoder)
+    {
+        QObject::disconnect(
+            m_audioDecoder,
+            nullptr,
+            nullptr,
+            nullptr
+        );
+    }
+
+    if (m_videoScheduler)
+    {
+        QObject::disconnect(
+            m_videoScheduler,
+            nullptr,
+            nullptr,
+            nullptr
+        );
+    }
+
+    if (m_audioScheduler)
+    {
+        QObject::disconnect(
+            m_audioScheduler,
+            nullptr,
+            nullptr,
+            nullptr
+        );
+    }
+
+    ///qDebug() << "2 - Signals disconnected";
+
+
+    // --------------------------------------------------
+    // 3. DECODER'LARI DURDUR
+    // --------------------------------------------------
+
+    if (m_videoDecoder)
+    {
+       /// qDebug() << "3 - Video decoder stop";
+        m_videoDecoder->stop();
+    }
+
+    if (m_audioDecoder)
+    {
+       /// qDebug() << "3 - Audio decoder stop";
+
+        // AudioOpusDecoder'da stop varsa:
+        // m_audioDecoder->stop();
+    }
+
+
+    // --------------------------------------------------
+    // 4. SCHEDULER'LARI DURDUR
+    // --------------------------------------------------
+
+    if (m_videoScheduler)
+    {
+       /// qDebug() << "4 - Video scheduler stop";
+
+        // varsa:
+        // m_videoScheduler->stop();
+    }
+
+    if (m_audioScheduler)
+    {
+       /// qDebug() << "4 - Audio scheduler stop";
+
+        // varsa:
+        // m_audioScheduler->stop();
+    }
+
+
+    // --------------------------------------------------
+    // 5. AUDIO PLAYBACK
+    // --------------------------------------------------
+
+    if (m_playback)
+    {
+      ///  qDebug() << "5 - Audio playback stop";
+
+        // varsa:
+        // m_playback->stop();
+    }
+
+
+    // --------------------------------------------------
+    // 6. RENDERER
+    // --------------------------------------------------
+
+    if (m_openglrenderer)
+    {
+      ///  qDebug() << "6 - Renderer hide";
+
+        m_openglrenderer->hide();
+    }
+
+
+    // --------------------------------------------------
+    // 7. STATE
+    // --------------------------------------------------
+
+    m_videoStarted = false;
+    m_audioStarted = false;
+
+    m_firstVideoPts = 0;
+    m_firstAudioPts = 0;
+
+    m_playbackSynchronized = false;
+
+
+  ///  qDebug() << "========== ReceiverStream STOPPED ==========";
 }
+
 void ReceiverStream::tryStartPlayback()
 {
     if (!m_audioStarted && !m_videoStarted)

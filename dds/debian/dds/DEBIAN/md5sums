@@ -1,0 +1,16 @@
+69d902ccefe4e961e8720b903a32c52c  lib/systemd/system/dds-debinstaller@.service
+9a820e6ffa937ce658f6cb8ecfdc0bd7  lib/systemd/system/dds-scriptexec@.service
+9c53a4e595435375414f3c1fd65e0cba  lib/systemd/system/dds-service.service
+e3f3fa139fc7fecaa70a585ccc2363a9  usr/bin/dds-conf
+f3f05e0d45fa8da169827bdd22704b74  usr/bin/dds-monitor
+1724a1047ec2807319982fda850539c8  usr/bin/dds-service
+1bdcdddf89fa397f27f8e7a375f02b39  usr/share/Thunar/dds-send.xml
+e2c835aecf1bd13735598f76859e209b  usr/share/dds/dds-debinstaller
+cd9185f21520d422215e39a177c3a3d4  usr/share/dds/dds-scriptexec
+b1bb072bc01f0c700cc83be546a2652a  usr/share/dds/dds.json
+c5c4e605dc212c3ce6977ba4b1b1bcc9  usr/share/doc/dds/changelog.gz
+55f15e0008a1a16d004539f90e062d5c  usr/share/doc/dds/copyright
+bd2db647fc22a735d5e70fb8874f5686  usr/share/icons/dds.svg
+75c144dc76be20664c736f6fa5d1c1d7  usr/share/kservices5/ServiceMenus/dds-monitor.desktop
+bd22131d2efc3b6e399c0f56bc75c85b  usr/share/nautilus/scripts/Dds
+12ade39562f4cce466880afbfae6e18c  usr/share/nemo/actions/dds-send.nemo_action

@@ -1,0 +1,20 @@
+dds (1.0.3) unstable; urgency=medium
+
+  * cancel filetransfer
+  
+dds (1.0.2) unstable; urgency=medium
+
+  * norm added
+  
+dds (1.0.1) unstable; urgency=medium
+
+  * langue fix
+  * gui fix
+  * filesender chunksize update
+  
+  
+dds (1.0.0) unstable; urgency=medium
+
+  * Initial Release
+
+ -- Bayram KARAHAN <bayramk@gmail.com>  Sun, 27 Dec 2020 14:31:08 +0300

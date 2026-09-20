@@ -1,0 +1,17 @@
+Source: dds
+Section: utils
+Priority: optional
+Maintainer: Bayram KARAHAN <bayramk@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               qt6-base-dev,
+               qt6-base-dev-tools,
+               pkg-config
+Standards-Version: 4.6.2
+Homepage: https://github.com/bayramkarahan/dds
+Rules-Requires-Root: no
+
+Package: dds
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends},
+         qt6-svg-plugins | libqt6svg6
+Description: Dosya Dağıtım Sistemi

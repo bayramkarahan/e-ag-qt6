@@ -7,5 +7,6 @@ SUBDIRS += \
     scd-client\
     servercamera\
     serverscreen\
-    servervideo\
-    clientcamera
+    clientcamera\
+    mediastreamer\
+    dds

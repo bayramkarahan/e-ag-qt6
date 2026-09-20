@@ -76,19 +76,10 @@ QWidget* MainWindow::ekranWidget()
 void MainWindow::slotEkranIzle()
 {
     qDebug()<<"izle";
-    for(int i=0;i<onlinePcList.count();i++)
-    {//onlinePcList[i]->connectState&&
-        if((onlinePcList[i]->select||onlinePcList[i]->multiSelect))
-        {
-            onlinePcList[i]->setIconControlState(true);
-        }
-    }
-    udpSendData("x11command","x11command","pkill serverscreen","",false);
-    udpSendData("x11command","x11command","pkill ffmpeg","",false);
-    system("sleep 1");
+    udpSendData("x11command","x11command","pkill mediastreamer","",false);
+    QThread::sleep(1); // saniye cinsinden
 
-
-    QString uport="7879";
+   QString uport="7879";
    for(int i=0;i<onlinePcList.count();i++)
     {
         if(onlinePcList[i]->connectState&&(onlinePcList[i]->select||onlinePcList[i]->multiSelect))
@@ -103,7 +94,7 @@ void MainWindow::slotEkranIzle()
             QJsonObject sendJson;
             sendJson["mainmessagetype"] = "x11command";
             sendJson["submessagetype"] ="x11command" ;
-            sendJson["mission"] = "serverscreen "+onlinePcList[i]->ip;
+            sendJson["mission"] = "mediastreamer --mode sender --capture video --preview none --source screen --screen 0 ";
             sendJson["missionmessage"]="";
             sendJson["messagevisible"]="0";
             sendJson["server_address"] = onlinePcList[i]->netProfil.serverAddress;
@@ -111,10 +102,18 @@ void MainWindow::slotEkranIzle()
 
             QByteArray datagram = QJsonDocument(sendJson).toJson(QJsonDocument::Compact);
             udpSocketSend->writeDatagram(datagram,QHostAddress(onlinePcList[i]->ip), uport.toInt());
-
-
         }
     }
+
+   QThread::sleep(2); // saniye cinsinden
+
+   for(int i=0;i<onlinePcList.count();i++)
+   {//onlinePcList[i]->connectState&&
+       if((onlinePcList[i]->select||onlinePcList[i]->multiSelect))
+       {
+           onlinePcList[i]->setIconControlState(true);
+       }
+   }
 
     mesajSlot(tr("Seçili Ekran İzlemeler Başlatıldı."));
 }
@@ -131,11 +130,10 @@ void MainWindow::slotEkranIzleDurdur()
     }
 
     // Küçük bekleme thread’in durması için
-    QThread::msleep(50);
+    QThread::sleep(1);
 
     // Ardından client uygulamalarını kapat
-    udpSendData("x11command", "x11command", "pkill serverscreen", "", false);
-    udpSendData("x11command", "x11command", "pkill ffmpeg", "", false);
+    udpSendData("x11command", "x11command", "pkill mediastreamer", "", false);
 
     mesajSlot(tr("Seçili Ekran İzlemeler Durduruldu."));
 

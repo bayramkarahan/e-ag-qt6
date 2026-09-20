@@ -15,6 +15,7 @@
 #include <QThread>
 #include<ipwatcher.h>
 #include <QNetworkInformation>
+
 class IpMac
 {
 public:

@@ -48,7 +48,7 @@ auto_start.path = /etc/xdg/autostart/
 
 
 
-INSTALLS += target icon auto_start
+INSTALLS += target auto_start
 #service
 
 #DISTFILES += \

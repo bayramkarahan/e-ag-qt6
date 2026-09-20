@@ -1,0 +1,147 @@
+QDialog {
+        background-color: #f5f7fb;
+        color: #1f2a37;
+        font-family: Arial;
+        font-size: %FONT_SIZE%px;
+    }
+
+    /* BUTTONS */
+
+    QToolButton {
+        background-color: #ffffff;
+        border: 1px solid #e5eaf2;
+        padding: 5px 10px;
+        border-radius: 8px;
+        color: #1f2a37;
+        /*font-weight:600;*/
+        font-size: %FONT_SIZE%px;
+    }
+
+    QToolButton#aboutButton {
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+        border-radius: 10px;
+        color: #1f2a37;
+        /*font-weight:600;*/
+        font-size: %FONT_SIZE%px;
+    }
+    QToolButton#aboutButton {
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+        border-radius: 10px;
+        color: #1f2a37;
+        /*font-weight:600;*/
+        font-size: %FONT_SIZE%px;
+    }
+
+   QToolButton#directorySelectButton {
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+        border-radius: 10px;
+        color: #1f2a37;
+        /*font-weight:600;*/
+        font-size: %FONT_SIZE%px;
+    }
+
+    QToolButton#fileSelectButton  {
+        background-color: transparent;
+        border: none;
+        padding: 0px;
+        border-radius: 10px;
+        color: #1f2a37;
+        /*font-weight:600;*/
+        font-size: %FONT_SIZE%px;
+    }
+
+
+    QToolButton:hover {
+        background-color: #f0f6ff;
+        border: 1px solid #cfe2ff;
+    }
+
+    QToolButton:pressed {
+        background-color: #e6f0ff;
+    }
+
+    /* PRIMARY BUTTON */
+/*
+    QToolButton#sendFileButton {
+        background-color: #ffffff;
+        color: white;
+        border: none;
+    }
+
+    QToolButton#sendFileButton:hover {
+        background-color: #256fd1;
+    }*/
+
+    /* TOTAL BAR */
+
+    QProgressBar {
+        border: none;
+        border-radius: 6px;
+        background-color: #e9eef5;
+        text-align: center;
+        color: #1f2a37;
+        height: 10px;
+        font-size:%FONT_SIZE%px;
+    }
+
+    QProgressBar::chunk {
+        background-color: #2f80ed;
+        border-radius: 6px;
+    }
+
+    QScrollArea {
+        border: none;
+        background: transparent;
+        border: none;
+
+    }
+
+QLineEdit {
+    background-color: #ffffff;
+    border: 1px solid #e5eaf2;
+    border-radius: 8px;
+    padding: 2px 2px;
+    color: #1f2a37;
+    selection-background-color: #2f80ed;
+    selection-color: white;
+    font-size: %FONT_SIZE%px;
+}
+
+QLineEdit:hover {
+    border: 1px solid #cfe2ff;
+    background-color: #fafdff;
+}
+
+QLineEdit:focus {
+    border: 1px solid #2f80ed;
+    background-color: #ffffff;
+font-size: %FONT_SIZE%px;
+}
+
+QLineEdit:disabled {
+    background-color: #eef2f7;
+    color: #8a94a6;
+}
+
+QCheckBox {
+    spacing: 0px;
+}
+
+QCheckBox::indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    border: 1px solid #cfd8e3;
+    background-color: white;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #2f80ed;
+    border: 1px solid #2f80ed;
+}

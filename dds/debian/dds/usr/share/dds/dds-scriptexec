@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+SCRIPTFILE="$1"
+[ -f "$SCRIPTFILE" ] || exit 1
+exec bash "$SCRIPTFILE"

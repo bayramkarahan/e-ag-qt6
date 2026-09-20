@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+systemctl disable dds-service.service || true
+systemctl stop dds-service.service || true
+
+
+systemctl disable dds-debinstaller@.service || true
+systemctl stop dds-debinstaller@.service || true
+
+systemctl disable dds-scriptexec@.service || true
+systemctl stop dds-scriptexec@.service || true
+
+systemctl daemon-reload  || true
+
+exit 0

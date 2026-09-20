@@ -36,7 +36,7 @@ QWidget*  MainWindow::fileWidget()
 
 
     fileSelectButton=new QToolButton();
-    fileSelectButton->setFixedSize(e*13,yukseklik*2);
+    fileSelectButton->setFixedSize(e*10,yukseklik*2);
     fileSelectButton->setAutoRaise(true);
     //fileSelectButton->setAutoFillBackground(true);
     fileSelectButton->setText(tr("Dosya\nSeç"));
@@ -59,9 +59,42 @@ QWidget*  MainWindow::fileWidget()
 
     });
 
+    QToolButton *ddsButton=new QToolButton();
+    ddsButton->setFixedSize(e*15,yukseklik*2);
+    ddsButton->setAutoRaise(true);
+    ddsButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
+    ddsButton->setText(tr("Dosya Dağıtım\nSistemi"));
+    ddsButton->setIcon(QIcon(":/icons/dds.svg"));
+    ddsButton->setIconSize(QSize(b*8,yukseklik*0.9));
+    ddsButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+    connect(ddsButton, &QToolButton::clicked, [=]() {
+        QString kmt="/usr/bin/dds-monitor";
+        // 1️⃣ Komutu boşluklara göre böl
+        QStringList parts = kmt.split(' ', Qt::SkipEmptyParts);
+
+        if(parts.isEmpty()) {
+            qDebug() << "Komut boş!";
+            return;
+        }
+
+        // 2️⃣ İlk eleman program, geri kalanı argümanlar
+        QString program = parts.takeFirst();
+        QStringList args = parts;
+
+        qint64 pid;
+        bool ok = QProcess::startDetached(program, args, QString(), &pid);
+
+        if(ok)
+            qDebug() << "Program started, PID:" << pid;
+        else
+            qDebug() << "Failed to start program";
+         mesajSlot("Dosya Dağıtım Sistemi Seçildi.");
+    });
+
 
     fileCopyButton=new QToolButton();
-    fileCopyButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyButton->setFixedSize(e*10,yukseklik*2);
     fileCopyButton->setAutoRaise(true);
     fileCopyButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
     fileCopyButton->setText(tr("Ev Dizinine\nGönder"));
@@ -91,7 +124,7 @@ QWidget*  MainWindow::fileWidget()
     });
 
     fileCopyInstallButton=new QToolButton();
-    fileCopyInstallButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyInstallButton->setFixedSize(e*10,yukseklik*2);
     fileCopyInstallButton->setAutoRaise(true);
     fileCopyInstallButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
     fileCopyInstallButton->setText(tr("Paketi\nKur"));
@@ -139,7 +172,7 @@ QWidget*  MainWindow::fileWidget()
     });
 
     fileCopyInstallScriptButton=new QToolButton();
-    fileCopyInstallScriptButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyInstallScriptButton->setFixedSize(e*12,yukseklik*2);
     fileCopyInstallScriptButton->setAutoRaise(true);
     fileCopyInstallScriptButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
     fileCopyInstallScriptButton->setText(tr("Scripti\nÇalıştır"));
@@ -188,7 +221,7 @@ QWidget*  MainWindow::fileWidget()
 
 
     QToolButton *fileCopyDesktopNotGetSendButton=new QToolButton();
-    fileCopyDesktopNotGetSendButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyDesktopNotGetSendButton->setFixedSize(e*12,yukseklik*2);
     fileCopyDesktopNotGetSendButton->setAutoRaise(true);
     fileCopyDesktopNotGetSendButton->setText(tr("Masaüstüne\nGönder"));
     fileCopyDesktopNotGetSendButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
@@ -245,7 +278,7 @@ QWidget*  MainWindow::fileWidget()
 
 
     QToolButton *fileCopyDesktopSendButton=new QToolButton();
-    fileCopyDesktopSendButton->setFixedSize(e*13,yukseklik*2);
+    fileCopyDesktopSendButton->setFixedSize(e*12,yukseklik*2);
     fileCopyDesktopSendButton->setAutoRaise(true);
     fileCopyDesktopSendButton->setText(tr("Çalışma\n Dağıt"));
     fileCopyDesktopSendButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
@@ -319,7 +352,7 @@ QWidget*  MainWindow::fileWidget()
     });
 
     QToolButton *helpButton= new QToolButton;
-    helpButton->setFixedSize(e*13,yukseklik*2);
+    helpButton->setFixedSize(e*12,yukseklik*2);
     helpButton->setAutoRaise(true);
     // bilgiButton->setAutoFillBackground(true);
     helpButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
@@ -383,6 +416,7 @@ QWidget*  MainWindow::fileWidget()
     vbox->addWidget(commandFileLabel,1,1,1,1);
     vbox->addWidget(le,1,2,1,1);
     vbox->addWidget(fileSelectButton,1,3,2,1);
+
     vbox->addWidget(fileCopyInstallButton,1,4,2,1);
     vbox->addWidget(fileCopyInstallScriptButton,1,5,2,1);
     vbox->addWidget(fileCopyButton,1,6,2,1);
@@ -397,8 +431,9 @@ QWidget*  MainWindow::fileWidget()
     vbox->addWidget(fileCopyDesktopGetButton,1,10,1,1,Qt::AlignCenter);
     vbox->addWidget(calismaToplaCB,2,10,2,1,Qt::AlignCenter);
 
+    vbox->addWidget(ddsButton,1,11,2,1);
 
-    vbox->addWidget(helpButton,1,11,2,1);
+    vbox->addWidget(helpButton,1,12,2,1);
 
     d->setLayout(vbox);
     return d;

@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/search.svg</file>
+        <file>icons/select.svg</file>
+        <file>icons/send.svg</file>
+        <file>icons/unselect.svg</file>
+        <file>icons/sendcustom.svg</file>
+        <file>icons/senddesktop.svg</file>
+        <file>icons/sendhome.svg</file>
+        <file>icons/sendtmp.svg</file>
+        <file>icons/scriptexec.svg</file>
+        <file>icons/debinstall.svg</file>
+        <file>icons/directory.svg</file>
+        <file>icons/file.svg</file>
+        <file>icons/settings.svg</file>
+        <file>icons/getdesktop.svg</file>
+        <file>icons/dds.svg</file>
+        <file>icons/about.svg</file>
+        <file>style/style.qss</file>
+        <file>icons/save.svg</file>
+        <file>icons/stop.svg</file>
+    </qresource>
+</RCC>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 9.0.2, 2026-09-08T22:05:27. -->
+<!-- Written by QtCreator 9.0.2, 2026-09-20T17:30:29. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -95,7 +95,7 @@
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveRunConfiguration">3</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag/../build-e-ag-server-qt6-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag-qt6/../build-e-ag-server-qt6-Debug</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
@@ -134,7 +134,7 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag/../build-e-ag-server-qt6-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag-qt6/../build-e-ag-server-qt6-Release</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
@@ -174,7 +174,7 @@
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag/../build-e-ag-server-qt6-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/etapadmin/Masaüstü/e-ag-qt6/../build-e-ag-server-qt6-Profile</value>
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
@@ -234,8 +234,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/clientcamera/clientcamera.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/clientcamera/clientcamera.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/clientcamera/clientcamera.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/clientcamera/clientcamera.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -250,14 +250,30 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/e-ag-networkprofil/e-ag-networkprofil.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/e-ag-networkprofil/e-ag-networkprofil.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/e-ag-networkprofil.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/e-ag-networkprofil.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/e-ag-networkprofil</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.10">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-service/dds-service.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-service/dds-service.pro</value>
+    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/dds/dds-service</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
     <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
@@ -266,8 +282,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/e-ag-tray/e-ag-tray.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/e-ag-tray/e-ag-tray.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/e-ag-tray.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/e-ag-tray.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -282,8 +298,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/e-ag/e-ag.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/e-ag/e-ag.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/e-ag/e-ag.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/e-ag/e-ag.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -298,8 +314,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/scd-client/scd-client.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/scd-client/scd-client.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/scd-client/scd-client.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/scd-client/scd-client.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -314,8 +330,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/servercamera/servercamera.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/servercamera/servercamera.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/servercamera/servercamera.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/servercamera/servercamera.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -330,8 +346,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/serverscreen/serverscreen.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/serverscreen/serverscreen.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/serverscreen/serverscreen.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/serverscreen/serverscreen.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
@@ -346,16 +362,48 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag/servervideo/servervideo.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag/servervideo/servervideo.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/mediastreamer/mediastreamer.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/mediastreamer/mediastreamer.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/servervideo</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/mediastreamer</value>
    </valuemap>
-   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">8</value>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.8">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-conf/dds-conf.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-conf/dds-conf.pro</value>
+    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/dds/dds-conf</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.9">
+    <value type="bool" key="Analyzer.Perf.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.QmlProfiler.Settings.UseGlobalSettings">true</value>
+    <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
+    <valuelist type="QVariantList" key="CustomOutputParsers"/>
+    <value type="int" key="PE.EnvironmentAspect.Base">2</value>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-monitor/dds-monitor.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-monitor/dds-monitor.pro</value>
+    <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
+    <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/etapadmin/Masaüstü/build-e-ag-server-qt6-Debug/dds/dds-monitor</value>
+   </valuemap>
+   <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">11</value>
   </valuemap>
  </data>
  <data>

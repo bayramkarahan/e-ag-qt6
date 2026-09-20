@@ -1,0 +1,5 @@
+polkit.addRule(function(action, subject) {
+        if (action.id == "org.example.ulakshare-sender"){
+            return polkit.Result.YES;
+        }
+});
