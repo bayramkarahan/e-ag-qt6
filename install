@@ -6,3 +6,16 @@ sudo apt update
 sudo apt install qtkeychain-qt6-dev
 
 sudo apt install libnorm-dev
+
+sudo apt install libqt6keychain1
+sudo apt install libqt6openglwidget6
+sudo apt install qtkeychain-qt6-dev
+sudo apt install qt6-multimedia-dev qt6-svg-dev
+sudo apt install libavformat-dev
+sudo apt install libavdevice-dev
+sudo apt install libdrm-dev
+sudo apt install libva-dev
+sudo apt install libpipewire-0.3-dev
+sudo apt install libx264-dev
+sudo apt install libopus-dev
+sudo apt install libvlc-dev

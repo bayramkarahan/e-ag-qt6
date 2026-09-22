@@ -212,7 +212,7 @@ private slots:
     void hideShowPcSlot();
     void networkProfil();
     void updateSlider(int val);
-    void groupListChange(const QList<groupList> &liste);
+    //void groupListChange(QString groupName,bool groupSelect);
 
     void vncDisplaySlot();
 

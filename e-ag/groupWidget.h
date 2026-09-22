@@ -1,6 +1,6 @@
 #ifndef GROUPWIDGET_H
 #define GROUPWIDGET_H
-
+#include<Database.h>
 
 QWidget* MainWindow::groupWidget(QWidget *targetWidget)
 {
@@ -15,7 +15,13 @@ QWidget* MainWindow::groupWidget(QWidget *targetWidget)
     localDir = "/usr/share/e-ag/";
 #endif
 
-    DatabaseHelper db(localDir + "persist.json");
+    DatabaseHelper db(localDir+"group.json");
+    QJsonArray dizi=db.Oku();
+    int sr=0;
+
+
+
+ /*   DatabaseHelper db(localDir + "persist.json");
     QJsonArray dizi = db.Oku();
     PcData::groupListe.clear();
     if (dizi.count() > 0) {
@@ -81,6 +87,43 @@ QWidget* MainWindow::groupWidget(QWidget *targetWidget)
     listLayout->setContentsMargins(2, 2, 2, 2);
     listLayout->setSpacing(2);
 
+    /***************************************************/
+
+    for (const QJsonValue &item : dizi) {
+        QJsonObject veri=item.toObject();
+        bool groupSelect=veri.value("groupSelect").toBool();
+        QString groupName=veri.value("groupName").toString();
+
+
+        QWidget *row = new QWidget();
+        QHBoxLayout *rowLayout = new QHBoxLayout(row);
+        rowLayout->setContentsMargins(2, 0, 2, 0);
+        rowLayout->setSpacing(5);
+
+        QCheckBox *check = new QCheckBox();
+        check->setChecked(groupSelect);
+        QLabel *label = new QLabel(groupName);
+        check->setObjectName("checkWidget");
+        check->setStyleSheet("#checkWidget { border: 1px solid #e1e1e1; }");
+        connect(check, &QCheckBox::toggled, sor, [this, check,groupName]() {
+            DatabaseHelper data(localDir+"group.json");
+            QJsonObject obj;
+            obj["groupName"] = groupName;
+            obj["groupSelect"] =check->isChecked();
+            data.Sil("groupName",groupName);
+            data.Ekle(obj);
+            qDebug() << "group yazıldı:" << groupName<<check->isChecked();
+
+            pcListeGuncelleSlot("groupListChange");
+
+        });
+
+        rowLayout->addWidget(check);
+        rowLayout->addWidget(label);
+        rowLayout->addStretch();
+        listLayout->addWidget(row);
+    }
+    /*
     for (int i = 0; i < PcData::groupListe.size(); ++i) {
         groupList &grp = PcData::groupListe[i];
 
@@ -103,7 +146,7 @@ QWidget* MainWindow::groupWidget(QWidget *targetWidget)
         rowLayout->addWidget(label);
         rowLayout->addStretch();
         listLayout->addWidget(row);
-    }
+    }*/
 
     listLayout->addStretch();
     container->setLayout(listLayout);
@@ -113,11 +156,23 @@ QWidget* MainWindow::groupWidget(QWidget *targetWidget)
     sor->setLayout(mainLayout);
     return sor;
 }
-
-void MainWindow::groupListChange(const QList<groupList> &liste)
+/*
+void MainWindow::groupListChange(QString groupName,bool groupSelect)
 {
     pcListeGuncelleSlot("groupListChange");
-}
 
+    DatabaseHelper db(localDir+"group.json");
+    for (const groupList &g : PcData::groupListe) {
+            qDebug()<<"gruplar"<<g.groupSelect << g.groupName;
+            QJsonObject obj;
+            obj["groupName"] = g.groupName;
+            obj["groupSelect"] = g.groupSelect;
+            db.Sil("groupName",g.groupName);
+            db.Ekle(obj);
+            ///qDebug() << "group yazıldı:" << g.groupName<<g.groupSelect;
+
+    }
+}
+*/
 
 #endif // GROUPWIDGET_H

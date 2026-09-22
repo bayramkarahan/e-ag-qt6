@@ -279,7 +279,8 @@ void MainWindow::pcListeGuncelleSlot(QString mission)
                      return false;
                  });
      hostsCountLabel->setText(tr("Açık Hosts : ")+QString::number(onlinePcList1.size()));
-/***********seçili olmayanları unselect yapmak için işlemler**************************/
+
+     /***********seçili olmayanları unselect yapmak için işlemler**************************/
      std::vector<MyPc*> farkListesi;
      for (MyPc* pc : onlinePcList) {
          if (std::find(onlinePcList1.begin(),
@@ -288,6 +289,7 @@ void MainWindow::pcListeGuncelleSlot(QString mission)
              farkListesi.push_back(pc);
          }
      }
+
      for (MyPc *pc : farkListesi) {
          for (MyPc *pc1 : onlinePcList) {
          if (pc->mac.toUpper() == pc1->mac.toUpper()) {
