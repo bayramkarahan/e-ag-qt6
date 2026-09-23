@@ -935,9 +935,25 @@ void MyPc::slotPcAyar()
             else
                 hostnameLabel->setText(this->caption);
 
-            DatabaseHelper *db=new DatabaseHelper(localDir+"persist.json");
-            db->Sil("mac",this->mac);
-            db->Ekle(veri);
+            DatabaseHelper db(localDir+"persist.json");
+            db.Sil("mac",this->mac);
+            db.Ekle(veri);
+
+            /******************************************************/
+            // group Ekleme
+            DatabaseHelper dbgroup(localDir + "group.json");
+            QJsonArray dizigroup = dbgroup.Ara("groupName",this->groupname);
+            if (dizigroup.count() == 0) {
+                qDebug()<<"eklenecek grup:"<<this->groupname;
+                QJsonObject obj;
+                obj["groupName"] = this->groupname;
+                obj["groupSelect"] =true;
+                //dbgroup.Sil("groupName",this->groupname);
+                dbgroup.Ekle(obj);
+            }
+
+            /******************************************************/
+
             //qDebug()<<"mypc gizleniyor"<<mac<<visibleState;
             //if(!visibleState) { emit pcHideSignal(this->mac);}
 

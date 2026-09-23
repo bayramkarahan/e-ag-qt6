@@ -1,0 +1,15 @@
+Package: e-ag
+Version: 2.9.9.2
+Architecture: amd64
+Maintainer: Bayram KARAHAN <bayramk@gmail.com>
+Installed-Size: 3443
+Depends: libavcodec59 | libavcodec61 | libavcodec62, libavformat59 | libavformat61 | libavformat62, libavutil57 | libavutil59 | libavutil60, libswscale6 | libswscale8 | libswscale9, libqt6core6, libqt6gui6, libqt6network6, libqt6widgets6, libqt6multimedia6, libqt6opengl6, libqt6openglwidgets6, libqt6keychain1, openssh-server, x11vnc, xtightvncviewer, net-tools, ethtool, wakeonlan, iptables, xorgxrdp, xrdp, ffmpeg, libvlc5, xdg-utils, dnsutils, xinput, ipset, libpcap0.8, jq, wmctrl, xdotool, rdesktop, ssvnc, netcat-openbsd, gnome-keyring, libsecret-1-0
+Section: utils
+Priority: optional
+Homepage: https://github.com/bayramkarahan/e-ag
+Description: e-ag Uzaktan Yönetim ve Görüntüleme Sunucusu
+ e-ag, yerel ağ üzerindeki bilgisayarları uzaktan izleme,
+ ekran paylaşımı, dosya aktarımı ve yönetim işlemleri için
+ geliştirilmiş bir Qt tabanlı sunucu uygulamasıdır.
+ FFmpeg ve Qt Multimedia bileşenlerini kullanarak
+ ekran görüntülerini gerçek zamanlı olarak yayınlar.

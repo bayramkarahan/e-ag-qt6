@@ -1,0 +1,17 @@
+# Automatically added by dh_icons/13.11.4
+if command -v update-icon-caches >/dev/null; then
+	update-icon-caches /usr/share/icons/dds.svg /usr/share/icons/e-ag.svg
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/13.11.4
+if [ "$1" = remove ] && [ -d /run/systemd/system ] ; then
+	systemctl --system daemon-reload >/dev/null || true
+fi
+# End automatically added section
+# Automatically added by dh_installsystemd/13.11.4
+if [ "$1" = "purge" ]; then
+	if [ -x "/usr/bin/deb-systemd-helper" ]; then
+		deb-systemd-helper purge 'dds-service.service' 'e-ag-networkprofil.service' 'e-ag-x11vncdesktop.service' 'e-ag-x11vnclogin.service' >/dev/null || true
+	fi
+fi
+# End automatically added section

@@ -1,6 +1,6 @@
 #ifndef USERPASSWORD_H
 #define USERPASSWORD_H
-#include <qt5keychain/keychain.h>
+#include <qt6keychain/keychain.h>
 #include<QDebug>
 using namespace QKeychain;
 class UserPassword

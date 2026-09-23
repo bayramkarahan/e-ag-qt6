@@ -453,27 +453,22 @@ void MainWindow::slotPcEkle(QString _mac,QString _ip,QString info)
 
     onlinePcList.append(mypc);
     pcopencount++;
-/************************grup ekeleme*******************************/
-    bool foundg = false;
-
-    for (groupList &g : PcData::groupListe) {
-        if (g.groupName == mypc->groupname) {
-            foundg = true;
-            // Eğer grup varsa ama seçili değilse, seçili hale getir
-            if (!g.groupSelect)
-                g.groupSelect = true;
-            break;
-        }
+    /************************grup ekeleme*******************************/
+    // group Ekleme
+    DatabaseHelper dbgroup(localDir + "group.json");
+    QJsonArray dizigroup = dbgroup.Ara("groupName",mypc->groupname);
+    if (dizigroup.count() == 0) {
+        qDebug()<<"eklenecek grup:"<<mypc->groupname;
+        QJsonObject obj;
+        obj["groupName"] = mypc->groupname;
+        obj["groupSelect"] =true;
+        //dbgroup.Sil("groupName",this->groupname);
+        dbgroup.Ekle(obj);
+        // Eğer grup bulunmadıysa, yeni olarak ekle
+        //PcData::groupListe.append({true, mypc->groupname});
+        groupwidget1=groupWidget(groupwidget1);
     }
-
-    // Eğer grup bulunmadıysa, yeni olarak ekle
-    if (!foundg) {
-        PcData::groupListe.append({true, mypc->groupname});
-    }
-
-/*******************************************************************/
-
-
+    /*******************************************************************/
     mypc->setVolumeState(false);
     mypc->setKeyboardState(false);
     mypc->setMouseState(false);

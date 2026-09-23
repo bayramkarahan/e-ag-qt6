@@ -208,7 +208,22 @@ statusbar->addPermanentWidget(sliderWidget(),0);
 
 /*************************************************************************/
  hostListe->show();
+/******************************************/
+// grup liste güncelleme
+DatabaseHelper dbgrp(localDir + "group.json");
+QJsonArray dizigrp = dbgrp.Oku();
+PcData::groupListe.clear();
+if (dizigrp.count() > 0) {
+    for (const QJsonValue &itemgrp : dizigrp) {
+        QJsonObject verigrp = itemgrp.toObject();
 
+        if(verigrp.value("groupSelect").toBool()){
+            qDebug()<<"seçili gruplar"<<verigrp.value("groupName").toString();
+            PcData::groupListe.append({true, verigrp.value("groupName").toString()});
+        }
+    }
+}
+/**********************************************/
  /*************************************************************************/
  DatabaseHelper *db=new DatabaseHelper(localDir+"persist.json");
  QJsonArray dizi=db->Oku();
@@ -232,6 +247,8 @@ statusbar->addPermanentWidget(sliderWidget(),0);
          }
 
      }
+
+
      pcListeGuncelleSlot("firstload");
 
  }
@@ -264,6 +281,15 @@ void MainWindow::pcListeGuncelleSlot(QString mission)
         delete item;
     }
     //gruplamaya göre liste hazırlanıyor.
+   /* DatabaseHelper dbgroup(localDir + "group.json");
+    QJsonArray dizigroup = dbgroup.Oku();
+    if (dizigroup.count() > 0) {
+        for (const QJsonValue &itemgroup : dizigroup) {
+            QJsonObject verigroup = itemgroup.toObject();
+            qDebug()<<"gruplar"<<verigroup.value("groupName").toString();
+      */
+    qDebug()<<"main seçili gruplar sayısı "<<PcData::groupListe.count();
+
     std::copy_if(onlinePcList.begin(), onlinePcList.end(),
                  std::back_inserter(onlinePcList1),
                  [](const MyPc* mypc) {
