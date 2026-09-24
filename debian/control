@@ -23,7 +23,11 @@ Rules-Requires-Root: no
 
 Package: e-ag
 Architecture: amd64
-Depends: libavcodec59 | libavcodec61 | libavcodec62,
+Depends:  
+	${shlibs:Depends},
+    ${misc:Depends},
+    qt6-svg-plugins | qt6-base-plugins, 
+    libavcodec59 | libavcodec61 | libavcodec62,
 	libavformat59 | libavformat61 | libavformat62,
 	libavutil57 | libavutil59 | libavutil60,
 	libswscale6 | libswscale8 | libswscale9,
