@@ -44,6 +44,21 @@ void MainWindow::selectPc()
     selectAction->setStatusTip(tr("İstemcileri Seçme Yapıldı"));
 
     connect(selectAction, &QAction::triggered, this, [=]() {
+        /******************************************************/
+        // group Ekleme
+        DatabaseHelper dbgroup(localDir + "group.json");
+        QJsonArray dizigroup = dbgroup.Ara("groupName",this->groupname);
+        if (dizigroup.count() == 0) {
+            qDebug()<<"eklenecek grup:"<<this->groupname;
+            QJsonObject obj;
+            obj["groupName"] = this->groupname;
+            obj["groupSelect"] =true;
+            //dbgroup.Sil("groupName",this->groupname);
+            dbgroup.Ekle(obj);
+        }
+
+        /******************************************************/
+
         for (MyPc *pc : onlinePcList) {
             qDebug()<<"Tüm liste seçiliyor";
             pc->multiSelectPc();
