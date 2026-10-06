@@ -45,25 +45,26 @@ void MainWindow::selectPc()
 
     connect(selectAction, &QAction::triggered, this, [=]() {
         /******************************************************/
-        // group Ekleme
+        // group göre seçme işlemi yapılıyor...
         DatabaseHelper dbgroup(localDir + "group.json");
-        QJsonArray dizigroup = dbgroup.Ara("groupName",this->groupname);
-        if (dizigroup.count() == 0) {
-            qDebug()<<"eklenecek grup:"<<this->groupname;
-            QJsonObject obj;
-            obj["groupName"] = this->groupname;
-            obj["groupSelect"] =true;
-            //dbgroup.Sil("groupName",this->groupname);
-            dbgroup.Ekle(obj);
+        QJsonArray dizigroup = dbgroup.Oku();
+        PcData::groupListe.clear();
+        if (dizigroup.count() > 0) {
+            for (const QJsonValue &itemgroup : dizigroup) {
+                QJsonObject verigroup = itemgroup.toObject();
+                    if(verigroup.value("groupSelect").toBool()){
+                        //qDebug()<<"seçili gruplar"<<verigroup.value("groupName").toString();
+                        for (MyPc *pc : onlinePcList) {
+                            if(pc->groupname==verigroup.value("groupName").toString())
+                            {
+                                //qDebug()<<"Tüm liste seçiliyor";
+                                pc->multiSelectPc();
+                            }
+                        }
+                }
+            }
         }
-
         /******************************************************/
-
-        for (MyPc *pc : onlinePcList) {
-            qDebug()<<"Tüm liste seçiliyor";
-            pc->multiSelectPc();
-
-        }
     });
 
     QAction *vncAction = new QAction(QIcon(":/icons/vnc.svg"), tr("&Uzak Masaüstü Bağlantısı"), this);
