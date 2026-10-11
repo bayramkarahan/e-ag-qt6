@@ -1,18 +1,18 @@
-#include "audiocapture.h"
+#include "microphoneaudiocapture.h"
 
 #include <QDebug>
 
-AudioCapture::AudioCapture(QObject *parent)
+MicrofonAudioCapture::MicrofonAudioCapture(QObject *parent)
     : QObject(parent)
 {
 }
 
-AudioCapture::~AudioCapture()
+MicrofonAudioCapture::~MicrofonAudioCapture()
 {
     close();
 }
 
-bool AudioCapture::open(int sampleRate,int channels)
+bool MicrofonAudioCapture::open(int sampleRate,int channels)
 {
     close();
 
@@ -62,7 +62,7 @@ qDebug() << "Capture buffer frames =" << m_source->bufferFrameCount();
     connect(m_device,
             &QIODevice::readyRead,
             this,
-            &AudioCapture::readData);
+            &MicrofonAudioCapture::readData);
 
     m_buffer.clear();
     m_pts = 0;
@@ -72,12 +72,12 @@ qDebug() << "Capture buffer frames =" << m_source->bufferFrameCount();
     return true;
 }
 
-void AudioCapture::setMasterTime(MasterTime *masterTime)
+void MicrofonAudioCapture::setMasterTime(MasterTime *masterTime)
 {
     m_masterTime = masterTime;
 }
 
-void AudioCapture::close()
+void MicrofonAudioCapture::close()
 {
     if(m_source)
     {
@@ -92,7 +92,7 @@ void AudioCapture::close()
     m_pts = 0;
 }
 
-void AudioCapture::readData()
+void MicrofonAudioCapture::readData()
 {
     if(!m_device)
         return;

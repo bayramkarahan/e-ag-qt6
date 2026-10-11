@@ -20,7 +20,7 @@ bool AudioSender::open(int sampleRate,
                        int channels,
                        int bitrate,
                        const QHostAddress &group,
-                       quint16 port)
+                       quint16 port, SenderMode sendermode)
 {
     if(!m_encoder.open(sampleRate,
                        channels,
@@ -30,7 +30,7 @@ bool AudioSender::open(int sampleRate,
     }
 
     if(!m_sender.open(group,
-                      port))
+                      port,sendermode))
     {
         m_encoder.close();
         return false;

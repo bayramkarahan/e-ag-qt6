@@ -2,7 +2,7 @@
 #define MEDIAFILECAPTURE_H
 
 #include "../interfaces/IVideoCapture.h"
-#include "../audio/audioframe.h"
+#include "../audiocapture/audioframe.h"
 #include<QThread>
 #include <QQueue>
 #include<QDebug>

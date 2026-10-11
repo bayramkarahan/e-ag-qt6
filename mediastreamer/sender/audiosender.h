@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include <QHostAddress>
+#include "../common/streamenums.h"
 
-#include "audio/audiocapture.h"
 #include "encoder/audioopusencoder.h"
 #include "network/rtppacketizer.h"
 #include "sender/rtpsender.h"
@@ -25,7 +25,7 @@ public:
               int channels,
               int bitrate,
               const QHostAddress &group,
-              quint16 port);
+              quint16 port, SenderMode sendermode);
     QList<AudioClient> m_clients;
     void close();
 

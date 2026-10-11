@@ -5,9 +5,10 @@
 #include <QQueue>
 #include<QDebug>
 #include<QTimer>
-#include "audio/audioframe.h"
+#include "audiocapture/audioframe.h"
 #include "sync/mediaclock.h"
-#include "common/VideoCaptureSettings.h"
+#include "common/StreamSettings.h"
+
 class AudioScheduler : public QObject
 {
     Q_OBJECT

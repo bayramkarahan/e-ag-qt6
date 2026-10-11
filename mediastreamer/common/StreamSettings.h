@@ -2,6 +2,58 @@
 
 #include "streamenums.h"
 
+struct AudioCaptureSettings
+{
+       AudioSource source = AudioSource::Microphone;
+       int bitrate = 64000;
+       int sampleRate = 48000;
+       int frameSample = 960;
+       int channels = 2;
+};
+
+struct VideoCaptureSettings
+{
+    // Kaynak tipi
+    VideoSource source = VideoSource::Camera;
+    TimeMode timeMode = TimeMode::MasterClock;
+    int bitrate = 4000;
+
+    //==================================================
+    // Camera
+    //==================================================
+
+    QString device = "/dev/video0";
+
+    //==================================================
+    // Screen
+    //==================================================
+
+    int screenIndex = 0;
+    QString windowId;
+
+    //==================================================
+    // Media File
+    //==================================================
+
+    QString fileName;
+    bool loop = false;
+
+    //==================================================
+    // Network (RTSP/HTTP/RTMP vb.)
+    //==================================================
+
+    QString url;
+
+    //==================================================
+    // Ortak Ayarlar
+    //==================================================
+
+    int width  = 640;
+    int height = 480;
+    int fps    = 30;
+};
+
+
 struct StreamSettings
 {
     //----------------------------------------------------
@@ -9,14 +61,10 @@ struct StreamSettings
     //----------------------------------------------------
 
     StreamMode mode = StreamMode::Sender;
-
-    //----------------------------------------------------
-    // Capture
-    //----------------------------------------------------
-
-    CaptureMode captureMode = CaptureMode::AudioVideo;
+    SenderMode sendermode = SenderMode::Unicast;
 
     VideoCaptureSettings video;
+    AudioCaptureSettings audio;
 
     //----------------------------------------------------
     // Preview
@@ -38,16 +86,11 @@ struct StreamSettings
     // Codec
     //----------------------------------------------------
 
-    int videoBitrate = 4000;
 
-    int audioBitrate = 64000;
-
-    int audioSampleRate = 48000;
-    int audioFrameSample = 960;
-    int audioChannels = 2;
 
     int multicastTtl = 1;
 
     QString networkInterface;
 
 };
+

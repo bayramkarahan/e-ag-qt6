@@ -1,5 +1,5 @@
 #include "mediareaderthread.h"
-#include "capture/mediafilecapture.h"
+#include "videocapture/mediafilecapture.h"
 
 #include <QThread>
 

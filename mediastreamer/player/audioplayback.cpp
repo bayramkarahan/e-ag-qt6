@@ -97,13 +97,13 @@ void AudioPlayback::onFrame(const AudioFrame &frame)
 
     qint64 written = m_device->write(frame.data);
 
-    qDebug()
+    /*qDebug()
         << "WRITE" << written
         << "bytesFree" << m_sink->bytesFree()
         << "buffer" << m_sink->bufferSize()
         << "processed" << m_sink->processedUSecs()
         << "elapsed" << m_sink->elapsedUSecs();
-
+*/
     if (written <= 0)
     {
         qDebug() << "AUDIO WRITE FAILED";

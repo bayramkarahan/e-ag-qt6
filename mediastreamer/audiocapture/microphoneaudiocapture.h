@@ -1,5 +1,5 @@
-#ifndef AUDIOCAPTURE_H
-#define AUDIOCAPTURE_H
+#ifndef MICROPHONEAUDIOCAPTURE_H
+#define MICROPHONEAUDIOCAPTURE_H
 
 #include <QObject>
 #include <QAudioSource>
@@ -10,13 +10,13 @@
 #include "sync/mastertime.h"
 #include "audioframe.h"
 
-class AudioCapture : public QObject
+class MicrofonAudioCapture : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit AudioCapture(QObject *parent = nullptr);
-    ~AudioCapture();
+    explicit MicrofonAudioCapture(QObject *parent = nullptr);
+    ~MicrofonAudioCapture();
     void setMasterTime(MasterTime *masterTime);
     bool open(int sampleRate = 48000,
               int channels = 2);

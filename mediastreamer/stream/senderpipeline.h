@@ -4,7 +4,8 @@
 
 #include "thread/capturethread.h"
 
-#include "audio/audiocapture.h"
+#include "../audiocapture/microphoneaudiocapture.h"
+#include "../audiocapture/systemaudiocapture.h"
 #include "player/audioprocessor.h"
 
 #include "sender/videosender.h"
@@ -21,7 +22,7 @@
 
 #include "renderer/videorenderer.h"
 #include "preview/videopreview.h"
-
+#include "../audiocapture/audiomixer.h"
 #include "sync/mastertime.h"
 #include "sync/mediaclock.h"
 #include "sync/videoscheduler.h"
@@ -58,6 +59,7 @@ public:
 
 private:
 
+
     bool openDevices();
     void connectObjects();
     bool audioEnabled() const;
@@ -81,9 +83,10 @@ private:
     MediaClock* m_clock = nullptr;
 
     CaptureThread* m_capture = nullptr;
-    AudioCapture* m_audioCapture = nullptr;
+    MicrofonAudioCapture* m_microphoneAudioCapture = nullptr;
+    SystemAudioCapture* m_systemAudioCapture = nullptr;
     AudioProcessor* m_audioProcessor = nullptr;
-
+    AudioMixer *m_audioMixer = nullptr;
     VideoSender* m_videoSender = nullptr;
     AudioSender* m_audioSender = nullptr;
 

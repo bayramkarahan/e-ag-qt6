@@ -2,17 +2,7 @@
 #define ICAPTURE_H
 #include<qstring.h>
 #include "../common/MediaFrame.h"
-#include "../common/VideoCaptureSettings.h"
-/*struct VideoCaptureSettings
-{
-    QString device="/dev/video0";
-
-    int width=1280;
-
-    int height=720;
-
-    int fps=30;
-};*/
+#include "../common/StreamSettings.h"
 
 class ICapture
 {

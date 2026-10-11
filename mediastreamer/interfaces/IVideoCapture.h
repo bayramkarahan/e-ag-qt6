@@ -1,10 +1,11 @@
 #ifndef IVIDEOCAPTURE_H
 #define IVIDEOCAPTURE_H
 
-#include "../common/VideoCaptureSettings.h"
 #include "common/MediaFrame.h"
 #include "../sync/mastertime.h"
-#include "../audio/audioframe.h"
+#include "../audiocapture/audioframe.h"
+#include "../common/StreamSettings.h"
+
 class IVideoCapture
 {
 public:

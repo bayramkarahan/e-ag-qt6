@@ -8,20 +8,23 @@ TARGET=mediastreamer
 
 PKGCONFIG += x264
 PKGCONFIG += opus
+PKGCONFIG += libpulse libpulse-simple
 
 TEMPLATE = app
 
 SOURCES += \
-    audio/audiocapture.cpp \
-    capture/ffmpegpipewirescreencapture.cpp \
-    capture/ffmpegscreencapture.cpp \
-    capture/mediafilecapture.cpp \
-    capture/mediareaderthread.cpp \
-    capture/pipewirescreencapture.cpp \
-    capture/screencapture.cpp \
-    capture/v4l2buffer.cpp \
-    capture/v4l2capture.cpp \
-    capture/waylandscreencast.cpp \
+    audiocapture/audiomixer.cpp \
+    audiocapture/microphoneaudiocapture.cpp \
+    audiocapture/systemaudiocapture.cpp \
+    videocapture/ffmpegpipewirescreencapture.cpp \
+    videocapture/ffmpegscreencapture.cpp \
+    videocapture/mediafilecapture.cpp \
+    videocapture/mediareaderthread.cpp \
+    videocapture/pipewirescreencapture.cpp \
+    videocapture/screencapture.cpp \
+    videocapture/v4l2buffer.cpp \
+    videocapture/v4l2capture.cpp \
+    videocapture/waylandscreencast.cpp \
     common/camerainforeader.cpp \
     common/commandlineparser.cpp \
     common/mediafileinforeader.cpp \
@@ -47,8 +50,6 @@ SOURCES += \
     session/rtspconnection.cpp \
     session/rtspserver.cpp \
     session/sessiondescription.cpp \
-    stream/mediastreamer.cpp \
-    stream/receiverpipeline.cpp \
     stream/senderpipeline.cpp \
     sync/audioscheduler.cpp \
     sync/mastertime.cpp \
@@ -62,17 +63,19 @@ SOURCES += \
 
 
 HEADERS += \
-    audio/audiocapture.h \
-    audio/audioframe.h \
-    capture/ffmpegpipewirescreencapture.h \
-    capture/ffmpegscreencapture.h \
-    capture/mediafilecapture.h \
-    capture/mediareaderthread.h \
-    capture/pipewirescreencapture.h \
-    capture/screencapture.h \
-    capture/v4l2buffer.h \
-    capture/v4l2capture.h \
-    capture/waylandscreencast.h \
+    audiocapture/audiomixer.h \
+    audiocapture/microphoneaudiocapture.h \
+    audiocapture/audioframe.h \
+    audiocapture/systemaudiocapture.h \
+    videocapture/ffmpegpipewirescreencapture.h \
+    videocapture/ffmpegscreencapture.h \
+    videocapture/mediafilecapture.h \
+    videocapture/mediareaderthread.h \
+    videocapture/pipewirescreencapture.h \
+    videocapture/screencapture.h \
+    videocapture/v4l2buffer.h \
+    videocapture/v4l2capture.h \
+    videocapture/waylandscreencast.h \
     common/EncodedPacket.h \
     common/MediaBuffer.h \
     common/MediaClock.h \
@@ -80,7 +83,6 @@ HEADERS += \
     common/MediaPacket.h \
     common/StreamSettings.h \
     common/VideoBuffer.h \
-    common/VideoCaptureSettings.h \
     common/camerainforeader.h \
     common/commandlineparser.h \
     common/mediafileinforeader.h \
@@ -109,8 +111,6 @@ HEADERS += \
     session/rtspconnection.h \
     session/rtspserver.h \
     session/sessiondescription.h \
-    stream/mediastreamer.h \
-    stream/receiverpipeline.h \
     stream/senderpipeline.h \
     sync/audioscheduler.h \
     sync/mastertime.h \

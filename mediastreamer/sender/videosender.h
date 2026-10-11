@@ -11,7 +11,7 @@
 #include "../sender/rtpsender.h"
 #include "../session/sessiondescription.h"
 #include "../converter/videoframeconverter.h"
-
+#include "../common/streamenums.h"
 struct VideoClient
 {
     QHostAddress address;
@@ -31,7 +31,7 @@ public:
               int fps,
               int bitrate,
               const QHostAddress &group,
-              quint16 port);
+              quint16 port, SenderMode sendermode);
 
     void close();
 QList<VideoClient> m_clients;

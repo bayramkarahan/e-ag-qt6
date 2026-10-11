@@ -9,7 +9,7 @@
 #include<QAudioSink>
 #include<QDateTime>
 #include "sync/mastertime.h"
-#include "audio/audioframe.h"
+#include "audiocapture/audioframe.h"
 #include "sync/mediaclock.h"
 
 class AudioPlayback : public QObject

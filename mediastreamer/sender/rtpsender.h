@@ -8,6 +8,10 @@
 #include "../network/rtppacket.h"
 #include<QThread>
 #include "sync/mastertime.h"
+#include "../common/streamenums.h"
+#include <QNetworkInterface>
+#include <QList>
+
 struct Destination
 {
     QHostAddress address;
@@ -23,7 +27,7 @@ public:
     explicit RtpSender(QObject *parent = nullptr);
     QList<Destination> m_destinations;
     bool open(const QHostAddress &group,
-              quint16 port,
+              quint16 port, SenderMode sendermode,
               int ttl = 1);
 void setMasterTime(MasterTime *masterTime);
     void close();
@@ -37,10 +41,12 @@ public slots:
 private:
 
     QUdpSocket m_socket;
-
+    SenderMode m_sendermode = SenderMode::Unicast;
     QHostAddress m_group;
     MasterTime *m_masterTime = nullptr;
     quint16 m_port = 0;
+    QList<QUdpSocket*> m_multicastSockets;
+    bool openMulticastInterfaces(int ttl);
 };
 
 #endif

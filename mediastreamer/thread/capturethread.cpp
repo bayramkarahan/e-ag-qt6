@@ -32,28 +32,28 @@ bool CaptureThread::open(const VideoCaptureSettings &settings)
     m_mediaFileCapture = nullptr;
     switch(settings.source)
     {
-    case CaptureSource::Camera:
+    case VideoSource::Camera:
         m_capture = new V4L2Capture;
         break;
 
-    case CaptureSource::ScreenQt:
+    case VideoSource::ScreenQt:
         m_capture = new ScreenCapture;
         break;
 
-   case CaptureSource::ScreenFFmpeg:
+   case VideoSource::ScreenFFmpeg:
     {
         m_capture = new FFmpegScreenCapture;
         qDebug()<<"FFmpegScreenCapture:"<<int(settings.source);
         break;
 }
-    case CaptureSource::MediaFile:
+    case VideoSource::MediaFile:
         {//m_capture = new MediaFileCapture;
         auto capture = new MediaFileCapture;
                 m_capture = capture;
                 m_mediaFileCapture = capture;
         break;
 }
-    case CaptureSource::ScreenFFmpegPipeWire:
+    case VideoSource::ScreenFFmpegPipeWire:
         m_capture = new FFmpegPipeWireScreenCapture;
 
         break;

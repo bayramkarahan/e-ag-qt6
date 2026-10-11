@@ -9,53 +9,131 @@ RtpSender::RtpSender(QObject *parent)
 }
 
 bool RtpSender::open(const QHostAddress &group,
-                           quint16 port,
-                           int ttl)
+                     quint16 port,
+                     SenderMode sendermode,
+                     int ttl)
 {
     close();
 
     m_group = group;
     m_port = port;
-/*
-    if(!m_socket.bind(QHostAddress::AnyIPv4, 0,
-                      QUdpSocket::ShareAddress))
-    {
-        qCritical() << "Cannot bind sender:"
-                    << m_socket.errorString();
+    m_sendermode = sendermode;
 
-        return false;
+    if (m_sendermode == SenderMode::Multicast)
+    {
+        return openMulticastInterfaces(ttl);
     }
-*/
+
+    // Unicast
     m_socket.setSocketOption(
         QAbstractSocket::SendBufferSizeSocketOption,
         16 * 1024 * 1024);
 
     qDebug()
-        << "Send buffer ="
+        << "Unicast send buffer ="
         << m_socket.socketOption(
                QAbstractSocket::SendBufferSizeSocketOption);
 
-    m_socket.setSocketOption(QAbstractSocket::MulticastTtlOption, ttl);
-    m_socket.setSocketOption(QAbstractSocket::MulticastLoopbackOption, true);
+    return true;
+}
 
-    /*m_socket.setSocketOption(
-                QAbstractSocket::MulticastLoopbackOption,
-                QVariant(true));
+bool RtpSender::openMulticastInterfaces(int ttl)
+{
+    const auto interfaces = QNetworkInterface::allInterfaces();
 
-    m_socket.setSocketOption(
-                QAbstractSocket::MulticastLoopbackOption,
-                1);*/
+    for (const QNetworkInterface &iface : interfaces)
+    {
+        const auto flags = iface.flags();
 
-    qDebug() << "Multicast sender:"
-             << group.toString()
-             << port;
+        if (!flags.testFlag(QNetworkInterface::IsUp) ||
+            !flags.testFlag(QNetworkInterface::IsRunning) ||
+            flags.testFlag(QNetworkInterface::IsLoopBack) ||
+            !flags.testFlag(QNetworkInterface::CanMulticast))
+        {
+            continue;
+        }
+
+        bool hasIPv4 = false;
+
+        for (const QNetworkAddressEntry &entry : iface.addressEntries())
+        {
+            if (entry.ip().protocol() == QAbstractSocket::IPv4Protocol)
+            {
+                hasIPv4 = true;
+                break;
+            }
+        }
+
+        if (!hasIPv4)
+            continue;
+
+        auto *socket = new QUdpSocket(this);
+
+        // Socket BoundState'e geçmeli
+        if (!socket->bind(QHostAddress::AnyIPv4,
+                          0,
+                          QUdpSocket::ShareAddress))
+        {
+            qWarning() << "Cannot bind multicast socket:"
+                       << iface.name()
+                       << socket->errorString();
+
+            delete socket;
+            continue;
+        }
+
+        socket->setSocketOption(
+            QAbstractSocket::SendBufferSizeSocketOption,
+            16 * 1024 * 1024);
+
+        socket->setSocketOption(
+            QAbstractSocket::MulticastTtlOption,
+            ttl);
+
+        socket->setSocketOption(
+            QAbstractSocket::MulticastLoopbackOption,
+            true);
+
+        // Qt6'da dönüş tipi void
+        socket->setMulticastInterface(iface);
+
+        m_multicastSockets.append(socket);
+
+        qInfo() << "Multicast interface:"
+                << iface.name()
+                << iface.humanReadableName();
+    }
+
+    if (m_multicastSockets.isEmpty())
+    {
+        qCritical() << "No suitable multicast interface found";
+        return false;
+    }
+
+    qInfo() << "Total multicast interfaces:"
+            << m_multicastSockets.size();
 
     return true;
 }
 
 void RtpSender::close()
 {
-    m_socket.close();
+    if (m_sendermode == SenderMode::Multicast)
+    {
+
+
+        for (QUdpSocket *socket : std::as_const(m_multicastSockets))
+        {
+            socket->close();
+            delete socket;
+        }
+
+        m_multicastSockets.clear();
+    }
+    else
+    {
+          m_socket.close();
+    }
 }
 
 void RtpSender::sendPacket(const RTPPacket &packet)
@@ -63,17 +141,7 @@ void RtpSender::sendPacket(const RTPPacket &packet)
 
     if(packet.data.isEmpty())
         return;
-   /*  qDebug()
-        << "RTP SENDER IN"
-        << "seq =" << packet.sequence
-        << "ts =" << packet.timestamp
-        << "pts =" << packet.pts
-        << "size =" << packet.data.size();
-    ///qDebug().noquote()<< packet.data.left(20).toHex(' ');
-   qint64 written =
-            m_socket.writeDatagram(packet.data,
-                                   m_group,
-                                   m_port);*/
+
 
     if(!m_masterTime)
        {
@@ -87,27 +155,34 @@ void RtpSender::sendPacket(const RTPPacket &packet)
        qint64 now = m_masterTime->nowUs();
 
     qint64 getpts =packet.pts;
-   /* */
 
-    for (const auto &d : std::as_const(m_destinations))
-    {
-        qint64 written =m_socket.writeDatagram(packet.data,
-                               d.address,
-                               d.port);
-        /*qDebug()
-                << "UDP SEND"
-                << "pts =" << getpts
-                << "delay =" << (now - getpts)
-                << "thread =" << QThread::currentThread();*/
-       /* qDebug()
-            << "UDP SEND"
-            << "written =" << written
-            << "seq =" << packet.sequence
-            << "ts =" << packet.timestamp
-            << "target =" << d.address
-            << d.port;*/
+       if (m_sendermode == SenderMode::Multicast)
+       {
+           //qCritical()<< "RtpSender: Multicast";
+           for (QUdpSocket *socket : m_multicastSockets)
+           {
+               const qint64 written =
+                   socket->writeDatagram(packet.data, m_group, m_port);
+
+               if (written != packet.data.size())
+               {
+                   qWarning() << "Multicast send failed:"
+                              << socket->errorString()
+                              << "group =" << m_group
+                              << "port =" << m_port;
+               }
+           }
+       }
+       else
+       {
+
+
+        //qCritical()<< "RtpSender: Unicast";
+        for (const auto &d : std::as_const(m_destinations))
+        {
+            qint64 written =m_socket.writeDatagram(packet.data,d.address,d.port);
+        }
     }
-
 }
 void RtpSender::setMasterTime(MasterTime *masterTime)
 {

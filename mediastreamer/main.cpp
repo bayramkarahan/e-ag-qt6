@@ -31,11 +31,11 @@ int main(int argc, char *argv[])
     //settings.videoAddress=QHostAddress("239.10.10.10");
     //settings.videoPort=5004;
 
-    settings.audioSampleRate=48000;
-    settings.audioChannels=2;
-    settings.audioFrameSample=960;
-    settings.audioBitrate=20000;
-    settings.videoBitrate=1000;
+    settings.audio.sampleRate=48000;
+    settings.audio.channels=2;
+    settings.audio.frameSample=960;
+    settings.audio.bitrate=20000;
+    settings.video.bitrate=1000;
 
     settings.audioAddress=settings.videoAddress;
     settings.audioPort=settings.videoPort+2;
@@ -54,6 +54,6 @@ int main(int argc, char *argv[])
     }
 
     sp.start();
-//qCritical() << int(settings.video.source);
+
     return app.exec();
 }

@@ -5,12 +5,22 @@
 #include <QHostAddress>
 #include <QString>
 
-#include "../common/VideoCaptureSettings.h"
+enum class TimeMode
+{
+    MasterClock,
+    FramePts
+};
 
 enum class StreamMode
 {
     Sender,
     Receiver
+};
+
+enum class SenderMode
+{
+    Unicast,
+    Multicast
 };
 
 enum class PreviewMode
@@ -21,11 +31,26 @@ enum class PreviewMode
     Both
 };
 
-enum class CaptureMode
+enum class VideoSource
 {
     None,
-    Video,
-    Audio,
-    AudioVideo
+    Camera,
+    ScreenQt,
+    ScreenFFmpeg,
+    MediaFile,
+    ScreenFFmpegPipeWire,
+    ScreenWayland,
+    ScreenPipeWire,
+    ScreenX11
 };
+
+enum class AudioSource
+{
+    None,
+    Microphone,
+    System,
+    Both,
+    MediaFile
+};
+
 #endif // STREAMENUMS_H

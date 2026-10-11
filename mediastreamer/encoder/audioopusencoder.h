@@ -6,7 +6,7 @@
 
 #include <opus/opus.h>
 
-#include "audio/audioframe.h"
+#include "audiocapture/audioframe.h"
 #include "common/EncodedPacket.h"
 
 class AudioOpusEncoder : public QObject

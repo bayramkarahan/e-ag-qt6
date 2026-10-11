@@ -6,7 +6,7 @@
 #include<QDebug>
 #include<QThread>
 
-#include "../audio/audioframe.h"
+#include "../audiocapture/audioframe.h"
 
 class AudioProcessor : public QObject
 {

@@ -5,7 +5,7 @@
 #include <opus/opus.h>
 
 #include "network/rtppacket.h"
-#include "audio/audioframe.h"
+#include "audiocapture/audioframe.h"
 
 class AudioOpusDecoder : public QObject
 {

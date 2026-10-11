@@ -6,14 +6,15 @@
 
 #include <QAtomicInt>
 
-#include "../capture/v4l2capture.h"
+#include "../videocapture/v4l2capture.h"
 #include "../interfaces/IVideoCapture.h"
-#include "../capture/screencapture.h"
-#include "../capture/ffmpegscreencapture.h"
-#include "../capture/pipewirescreencapture.h"
-#include "../capture/ffmpegpipewirescreencapture.h"
-#include "../capture/mediafilecapture.h"
-#include "../capture/mediareaderthread.h"
+#include "../videocapture/screencapture.h"
+#include "../videocapture/ffmpegscreencapture.h"
+#include "../videocapture/pipewirescreencapture.h"
+#include "../videocapture/ffmpegpipewirescreencapture.h"
+#include "../videocapture/mediafilecapture.h"
+#include "../videocapture/mediareaderthread.h"
+#include "../common/StreamSettings.h"
 
 class CaptureThread : public QObject
 {

@@ -20,11 +20,22 @@ bool CommandLineParser::parse(QApplication &app,
     });
 
     parser.addOption({
-        "source",
-        "file | camera | screen",
-        "source"
+        "sendermode",
+        "unicast | multicast",
+        "sendermode"
     });
 
+    parser.addOption({
+        "videosource",
+        "file | camera | screen | none",
+        "videosource"
+    });
+
+    parser.addOption({
+        "audiosource",
+        "file | microphone | system | both | none",
+        "audiosource"
+    });
     parser.addOption({
         "file",
         "Video file",
@@ -41,12 +52,6 @@ bool CommandLineParser::parse(QApplication &app,
         "screen",
         "Screen index",
         "screen"
-    });
-
-    parser.addOption({
-        "capture",
-        "audio | video | audiovideo",
-        "capture"
     });
 
     parser.addOption({
@@ -86,19 +91,33 @@ bool CommandLineParser::parse(QApplication &app,
     }
 
     //----------------------------------------------------
-    // Capture Mode
+    // SenderMode
     //----------------------------------------------------
 
-    QString capture = parser.value("capture").toLower();
+    QString sendermode = parser.value("sendermode").toLower();
 
-    if (capture == "audio")
-        settings.captureMode = CaptureMode::Audio;
-    else if (capture == "video")
-        settings.captureMode = CaptureMode::Video;
-    else if (capture == "audiovideo" || capture.isEmpty())
-        settings.captureMode = CaptureMode::AudioVideo;
+    if (sendermode == "unicast")
+        settings.sendermode = SenderMode::Unicast;
+    else if (sendermode == "multicast")
+        settings.sendermode = SenderMode::Multicast;
+    else
+        settings.sendermode = SenderMode::Unicast;
+    //----------------------------------------------------
+    // audiosource
+    //----------------------------------------------------
 
+    QString audiosource = parser.value("audiosource").toLower();
 
+    if (audiosource == "file")
+        settings.audio.source = AudioSource::MediaFile;
+    else if (audiosource == "microphone")
+        settings.audio.source = AudioSource::Microphone;
+    else if (audiosource == "system")
+        settings.audio.source = AudioSource::System;
+    else if (audiosource == "both")
+        settings.audio.source = AudioSource::Both;
+    else if (audiosource == "none"||audiosource == "")
+        settings.audio.source = AudioSource::None;
     //----------------------------------------------------
     // Preview
     //----------------------------------------------------
@@ -116,24 +135,28 @@ bool CommandLineParser::parse(QApplication &app,
     // Source
     //----------------------------------------------------
 
-    QString source = parser.value("source").toLower();
+    QString videosource = parser.value("videosource").toLower();
 
-    if (source == "file")
+    if (videosource == "file")
     {
-        settings.video.source = CaptureSource::MediaFile;
+        settings.video.source = VideoSource::MediaFile;
         settings.video.fileName = parser.value("file");
     }
-    else if (source == "camera")
+    else if (videosource == "camera")
     {
-        settings.video.source = CaptureSource::Camera;
+        settings.video.source = VideoSource::Camera;
         settings.video.device = parser.value("device");
     }
-    else if (source == "screen")
+    else if (videosource == "screen")
     {
-        settings.video.source = CaptureSource::ScreenFFmpeg;
+        settings.video.source = VideoSource::ScreenFFmpeg;
         //settings.video.source = CaptureSource::ScreenFFmpegPipeWire;
         settings.video.screenIndex =
                 parser.value("screen").toInt();
+    }
+    else if (videosource == "none"||videosource=="")
+    {
+        settings.video.source = VideoSource::None;
     }
 
     //----------------------------------------------------

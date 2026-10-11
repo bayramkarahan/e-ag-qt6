@@ -44,7 +44,7 @@ bool VideoSender::open(int width,
                        int fps,
                        int bitrate,
                        const QHostAddress &group,
-                       quint16 port)
+                       quint16 port, SenderMode sendermode)
 {
     if(!m_encoder.open(width,
                        height,
@@ -55,7 +55,7 @@ bool VideoSender::open(int width,
     }
 
     if(!m_sender.open(group,
-                      port))
+                      port,sendermode))
     {
         m_encoder.close();
         return false;

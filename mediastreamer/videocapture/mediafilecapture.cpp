@@ -85,6 +85,7 @@ bool MediaFileCapture::open(const VideoCaptureSettings &settings)
     m_firstPts = AV_NOPTS_VALUE;
     m_audioStartUs=0;
     m_videoStartUs=0;
+    m_globalStartPts = AV_NOPTS_VALUE;
     //----------------------------------------------------
     // Dosyayı aç
     //----------------------------------------------------
@@ -303,6 +304,9 @@ bool MediaFileCapture::readNextPacket()
 
     return true;
 }
+
+
+
 /*bool MediaFileCapture::readNextPacket()
 {
     while (true)
@@ -419,6 +423,246 @@ bool MediaFileCapture::readNextPacket()
 }
 
 */
+
+
+void MediaFileCapture::decodeVideoPacket()
+{
+    int ret = avcodec_send_packet(m_videoCodec, m_packet);
+
+    av_packet_unref(m_packet);
+
+    if (ret < 0)
+        return;
+
+    while (true)
+    {
+        ret = avcodec_receive_frame(m_videoCodec, m_frame);
+
+        if (ret == AVERROR(EAGAIN))
+            break;
+
+        if (ret == AVERROR_EOF)
+            break;
+
+        if (ret < 0)
+        {
+            qDebug() << "Video decoder error =" << ret;
+            break;
+        }
+
+        // PTS kontrolü
+        qint64 timestamp = m_frame->best_effort_timestamp;
+
+        if (timestamp == AV_NOPTS_VALUE)
+            timestamp = m_frame->pts;
+
+        if (timestamp == AV_NOPTS_VALUE)
+        {
+            qWarning() << "Video frame has no valid PTS";
+            continue;
+        }
+
+        AVRational tb =
+                m_format->streams[m_videoStream]->time_base;
+
+        qint64 ptsUs = av_rescale_q(
+                    timestamp,
+                    tb,
+                    AVRational{1, 1000000});
+
+        // Ses ve video için ortak başlangıç
+        if (m_globalStartPts == AV_NOPTS_VALUE)
+            m_globalStartPts = ptsUs;
+
+        MediaFrame frame;
+
+        frame.pts = ptsUs - m_globalStartPts;
+
+        auto buffer = QSharedPointer<MediaBuffer>::create();
+
+        AVPixelFormat fmt =
+                static_cast<AVPixelFormat>(m_frame->format);
+
+        int size = av_image_get_buffer_size(
+                    fmt,
+                    m_frame->width,
+                    m_frame->height,
+                    1);
+
+        if (size <= 0)
+            continue;
+
+        buffer->storage.resize(size);
+
+        av_image_fill_arrays(
+                    buffer->plane,
+                    buffer->stride,
+                    reinterpret_cast<uint8_t*>(
+                        buffer->storage.data()),
+                    fmt,
+                    m_frame->width,
+                    m_frame->height,
+                    1);
+
+        av_image_copy(
+                    buffer->plane,
+                    buffer->stride,
+                    const_cast<const uint8_t **>(m_frame->data),
+                    m_frame->linesize,
+                    fmt,
+                    m_frame->width,
+                    m_frame->height);
+
+        buffer->planeCount = av_pix_fmt_count_planes(fmt);
+
+        frame.width  = m_frame->width;
+        frame.height = m_frame->height;
+
+        switch (fmt)
+        {
+        case AV_PIX_FMT_YUV420P:
+            frame.format = PixelFormat::YUV420P;
+            break;
+
+        case AV_PIX_FMT_NV12:
+            frame.format = PixelFormat::NV12;
+            break;
+
+        case AV_PIX_FMT_RGBA:
+            frame.format = PixelFormat::RGBA8888;
+            break;
+
+        case AV_PIX_FMT_RGB24:
+            frame.format = PixelFormat::RGB24;
+            break;
+
+        default:
+            continue;
+        }
+
+        frame.buffer = buffer;
+
+        {
+            QMutexLocker locker(&m_videoMutex);
+
+            while (m_videoQueue.size() >= MAX_VIDEO_QUEUE)
+                m_notFullVideo.wait(&m_videoMutex);
+
+            m_videoQueue.enqueue(frame);
+            m_notEmptyVideo.wakeOne();
+        }
+    }
+}
+
+
+void MediaFileCapture::decodeAudioPacket()
+{
+    int ret = avcodec_send_packet(m_audioCodec, m_packet);
+
+    av_packet_unref(m_packet);
+
+    if (ret < 0)
+        return;
+
+    while (true)
+    {
+        ret = avcodec_receive_frame(m_audioCodec, m_frame);
+
+        if (ret == AVERROR(EAGAIN))
+            break;
+
+        if (ret == AVERROR_EOF)
+        {
+            qDebug() << "Audio decoder EOF";
+            break;
+        }
+
+        if (ret < 0)
+        {
+            qDebug() << "Audio decoder error =" << ret;
+            break;
+        }
+
+        // PTS kontrolü: önce best_effort_timestamp
+        qint64 timestamp = m_frame->best_effort_timestamp;
+
+        if (timestamp == AV_NOPTS_VALUE)
+            timestamp = m_frame->pts;
+
+        if (timestamp == AV_NOPTS_VALUE)
+        {
+            qWarning() << "Audio frame has no valid PTS";
+            continue;
+        }
+
+        AVRational tb =
+                m_format->streams[m_audioStream]->time_base;
+
+        qint64 ptsUs = av_rescale_q(
+                    timestamp,
+                    tb,
+                    AVRational{1, 1000000});
+
+        // Ses ve video için ortak başlangıç
+        if (m_globalStartPts == AV_NOPTS_VALUE)
+            m_globalStartPts = ptsUs;
+
+        AudioFrame frame;
+
+        frame.sampleRate = 48000;
+        frame.channels   = 2;
+        frame.sampleSize = 16;
+
+        int outSamples = av_rescale_rnd(
+                    swr_get_delay(m_swr, m_frame->sample_rate)
+                    + m_frame->nb_samples,
+                    48000,
+                    m_frame->sample_rate,
+                    AV_ROUND_UP);
+
+        frame.data.resize(
+                    outSamples *
+                    frame.channels *
+                    sizeof(qint16));
+
+        uint8_t *dst[] =
+        {
+            reinterpret_cast<uint8_t*>(frame.data.data())
+        };
+
+        int converted = swr_convert(
+                    m_swr,
+                    dst,
+                    outSamples,
+                    (const uint8_t**)m_frame->data,
+                    m_frame->nb_samples);
+
+        if (converted <= 0)
+            continue;
+
+        frame.data.resize(
+                    converted *
+                    frame.channels *
+                    sizeof(qint16));
+
+        frame.pts = ptsUs - m_globalStartPts;
+
+        {
+            QMutexLocker locker(&m_audioMutex);
+
+            while (m_audioQueue.size() >= MAX_AUDIO_QUEUE)
+                m_notFullAudio.wait(&m_audioMutex);
+
+            m_audioQueue.enqueue(frame);
+            m_notEmptyAudio.wakeOne();
+        }
+    }
+}
+
+
+/*
+
+
 
 void MediaFileCapture::decodeVideoPacket()
 {
@@ -537,7 +781,7 @@ void MediaFileCapture::decodeVideoPacket()
             << frame.width
             << frame.height
             << frame.pts;*/
-        {
+    /*    {
             QMutexLocker locker(&m_videoMutex);
 
             while (m_videoQueue.size() >= MAX_VIDEO_QUEUE)
@@ -583,94 +827,9 @@ void MediaFileCapture::decodeAudioPacket()
             break;
         }
        /* qDebug()
+        *
             << "sample format ="
-            << av_get_sample_fmt_name(
-                   (AVSampleFormat)m_frame->format);*/
-      /*  qDebug()
-            << "Audio:"
-            << "format =" << av_get_sample_fmt_name(
-                                 static_cast<AVSampleFormat>(m_frame->format))
-            << "rate =" << m_frame->sample_rate
-            << "channels =" << m_frame->ch_layout.nb_channels
-            << "samples =" << m_frame->nb_samples;*/
-        AudioFrame frame;
-
-        frame.sampleRate = m_frame->sample_rate;
-        frame.channels   = m_frame->ch_layout.nb_channels;
-
-        // Şimdilik planar / packed ayırmadan ham veriyi kopyalayacağız.
-        // AudioProcessor gelince burada dönüşüm yapılacak.
-
-
-        frame.sampleRate = 48000;
-        frame.channels   = 2;
-        frame.sampleSize = 16;
-
-        int outSamples = av_rescale_rnd(
-                swr_get_delay(m_swr,
-                              m_frame->sample_rate)
-                    + m_frame->nb_samples,
-                48000,
-                m_frame->sample_rate,
-                AV_ROUND_UP);
-
-        frame.data.resize(
-                outSamples *
-                frame.channels *
-                sizeof(qint16));
-
-        uint8_t *dst[] =
-        {
-            reinterpret_cast<uint8_t*>(frame.data.data())
-        };
-
-        int converted = swr_convert(
-                m_swr,
-                dst,
-                outSamples,
-                (const uint8_t**)m_frame->data,
-                m_frame->nb_samples);
-
-        if (converted <= 0)
-            continue;
-
-        frame.data.resize(
-                converted *
-                frame.channels *
-                sizeof(qint16));
-
-        AVRational tb =
-                m_format->streams[m_audioStream]->time_base;
-
-        frame.pts = av_rescale_q(
-                m_frame->pts,
-                tb,
-                AVRational{1,1000000});
-
-        if (m_globalStartPts == AV_NOPTS_VALUE)
-            m_globalStartPts = frame.pts;
-
-        frame.pts -= m_globalStartPts;
-
-       /* qDebug()
-                << "AUDIO ENQUEUE"
-                << frame.sampleRate
-                << frame.channels
-                << frame.data.size()
-                << frame.pts;*/
-        {
-            QMutexLocker locker(&m_audioMutex);
-
-            while (m_audioQueue.size() >= MAX_AUDIO_QUEUE)
-                m_notFullAudio.wait(&m_audioMutex);
-
-            m_audioQueue.enqueue(frame);
-
-            m_notEmptyAudio.wakeOne();
-        }
-        //m_audioQueue.enqueue(frame);
-    }
-}
+     */
 
 bool MediaFileCapture::grabNext(MediaFrame &video,
                                 AudioFrame &audio,
