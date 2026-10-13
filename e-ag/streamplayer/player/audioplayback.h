@@ -8,9 +8,8 @@
 #include<QMediaDevices>
 #include<QAudioSink>
 #include<QDateTime>
-#include "../sync/mastertime.h"
 #include "../audio/audioframe.h"
-#include "../sync/mediaclock.h"
+#include "../rstp-sync/mediaclock.h"
 
 class AudioPlayback : public QObject
 {
@@ -22,14 +21,12 @@ public:
     void setClock(MediaClock *clock);
     bool open(int sampleRate = 48000,
               int channels = 2);
-    void setMasterTime(MasterTime *masterTime);
     void close();
 
 public slots:
     void onFrame(const AudioFrame &frame);
 
 private:
-    MasterTime *m_masterTime = nullptr;
     QAudioSink *m_sink = nullptr;
     QIODevice  *m_device = nullptr;
 

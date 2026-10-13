@@ -437,20 +437,25 @@ void MyPc::setKilitTransparanState(bool state){
 void MyPc::setIconControlState(bool state)
 {
     if(state)
-    {qDebug()  <<"çalıştır";
+    {
+        qDebug()  <<"çalıştır";
+       // ./streamplayer --receivermode multicast --videosource
+        //        screen --audiosource none
+
         StreamSettings settings;
         settings.mode = StreamMode::Receiver;
-        settings.captureMode = CaptureMode::Video;
-        settings.videoBitrate = 2000;
+        settings.receivermode=ReceiverMode::Unicast;
+
+        settings.video.source= VideoSource::ScreenFFmpeg;
+        settings.audio.source= AudioSource::None;
+        settings.video.bitrate = 2000;
         settings.video.screenIndex = 0;
 
-        receiverStream = new ReceiverStream(iconstateLabel);
+        receiverStream = new RstpReceiverStream(iconstateLabel);
         if (!receiverStream->open(settings))return;
         receiverStream->start(ip);
          //receiverStream->start("192.168.1.103");
         layout->addWidget(receiverStream->m_openglrenderer,3, 1, 1, 6);
-
-
         //receiverStream->m_openglrenderer->show();
     }else
     {

@@ -6,7 +6,6 @@ OpenGLVideoRenderer::OpenGLVideoRenderer(QWidget *parent)
     : AbstractVideoRenderer(parent)
 {
    // setMinimumSize(640,480);
-    qDebug()<<"OpenGLVideoRenderer";
 }
 OpenGLVideoRenderer::~OpenGLVideoRenderer()
 {
@@ -27,7 +26,7 @@ void OpenGLVideoRenderer::clear()
 
     update();
 }
-/*
+
 void OpenGLVideoRenderer::initializeGL()
 {
     initializeOpenGLFunctions();
@@ -51,29 +50,7 @@ void OpenGLVideoRenderer::initializeGL()
     qDebug() << "Renderer:" << reinterpret_cast<const char*>(glGetString(GL_RENDERER));
     qDebug() << "Version :" << reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }
-*/
-void OpenGLVideoRenderer::initializeGL()
-{
-    //qDebug() << "========== initializeGL =========="<< this;
 
-    initializeOpenGLFunctions();
-
-    glClearColor(0.0f,0.0f,0.0f,1.0f);
-
-    if(!initShaders())
-    {
-        qCritical() << "Shader initialization failed.";
-        return;
-    }
-
-    if(!initGeometry())
-    {
-        qCritical() << "Geometry initialization failed.";
-        return;
-    }
-
-    qDebug() << "OpenGL initialized";
-}
 void OpenGLVideoRenderer::resizeGL(int w,int h)
 {
     glViewport(0,0,w,h);
@@ -137,8 +114,6 @@ void OpenGLVideoRenderer::paintGL()
 }
 bool OpenGLVideoRenderer::initShaders()
 {
-    m_program.removeAllShaders();
-
     static const char *vertexShader = R"(
 
 #version 330 core

@@ -70,6 +70,9 @@ void H264Depacketizer::processNal(const QByteArray &nal,
 }
 void H264Depacketizer::processPacket(const RTPPacket &packet)
 {
+   /* qDebug() << "[DEPACKETIZER] RTP"
+             << "seq =" << packet.sequence
+             << "size =" << packet.data.size();*/
     if(packet.data.isEmpty())
         return;
 
@@ -176,14 +179,14 @@ void H264Depacketizer::processPacket(const RTPPacket &packet)
 
         if(end)
         {
-            qDebug()
+            /*qDebug()
                 << "FU END"
                 << "size"
                 << m_fuBuffer.size()
                 << "pts"
                 << rtpToPts(packet.timestamp)
                 << "marker"
-                << packet.marker;
+                << packet.marker;*/
             /*
             emit nalReady(m_fuBuffer,
                           rtpToPts(packet.timestamp),

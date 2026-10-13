@@ -197,6 +197,7 @@ qDebug() << "hw_frames_ctx =" << m_codecContext->hw_frames_ctx;
     return true;
 }
 
+/*
 void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
                                qint64 pts,
                                bool marker)
@@ -206,7 +207,7 @@ void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
         << "size =" << packet.size()
         << "pts =" << pts
         << "marker =" << marker;*/
-
+/*
     Q_UNUSED(marker);
 
     if (packet.size() < 5)
@@ -220,6 +221,7 @@ void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
 
     switch (nalType)
     {
+
     case 7:     // SPS
         m_sps = packet;
         return;
@@ -250,6 +252,92 @@ void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
     case 1:     // P Frame
         if (!m_started)
             return;
+        decodePacket(packet, pts);
+        return;
+
+    default:
+        return;
+    }
+}
+
+*/
+
+
+void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
+                                  qint64 pts,
+                                  bool marker)
+{
+    Q_UNUSED(marker);
+
+    if (packet.size() < 5)
+        return;
+
+    const uint8_t *p =
+        reinterpret_cast<const uint8_t *>(packet.constData());
+
+    // Annex-B başlangıç kodunu belirle: 00 00 01 veya 00 00 00 01
+    int offset = -1;
+
+    if (p[0] == 0 && p[1] == 0 && p[2] == 1)
+    {
+        offset = 3;
+    }
+    else if (packet.size() >= 5 &&
+             p[0] == 0 && p[1] == 0 &&
+             p[2] == 0 && p[3] == 1)
+    {
+        offset = 4;
+    }
+
+    if (offset < 0 || offset >= packet.size())
+        return;
+
+    const int nalType = p[offset] & 0x1f;
+
+    switch (nalType)
+    {
+    case 7: // SPS
+        m_sps = packet;
+        return;
+
+    case 8: // PPS
+        m_pps = packet;
+        return;
+
+    case 5: // IDR
+    {
+        if (m_sps.isEmpty() || m_pps.isEmpty())
+        {
+            qWarning() << "IDR received without SPS/PPS";
+            return;
+        }
+
+        if (!m_decoderReady)
+        {
+            if (!start())
+                return;
+
+            m_decoderReady = true;
+        }
+
+        // SPS + PPS + IDR tek Annex-B paketi olarak gönderilir.
+        QByteArray accessUnit;
+        accessUnit.reserve(
+            m_sps.size() + m_pps.size() + packet.size());
+
+        accessUnit.append(m_sps);
+        accessUnit.append(m_pps);
+        accessUnit.append(packet);
+
+        decodePacket(accessUnit, pts);
+
+        m_started = true;
+        return;
+    }
+
+    case 1: // P frame
+        if (!m_started)
+            return;
 
         decodePacket(packet, pts);
         return;
@@ -260,48 +348,75 @@ void VaapiZeroCopyDecoder::decode(const QByteArray &packet,
 }
 
 
-
 void VaapiZeroCopyDecoder::decodePacket(const QByteArray &nal,
-                                     qint64 pts)
+                                        qint64 pts)
 {
+    if (!m_codecContext || !m_packet || !m_frame)
+        return;
+
+    if (nal.isEmpty())
+        return;
 
     av_packet_unref(m_packet);
 
-    if (!m_codecContext)
-        return;
+    int ret = av_new_packet(m_packet, nal.size());
+    if (ret < 0)
+    {
+        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+        av_strerror(ret, errbuf, sizeof(errbuf));
 
-    if (av_new_packet(m_packet, nal.size()) < 0)
+        qWarning() << "av_new_packet failed:"
+                   << errbuf
+                   << "size:" << nal.size();
         return;
+    }
 
-    memcpy(m_packet->data,
-           nal.constData(),
-           nal.size());
+    memcpy(m_packet->data, nal.constData(), nal.size());
 
     m_packet->pts = pts;
     m_packet->dts = pts;
 
-    int ret = avcodec_send_packet(m_codecContext, m_packet);
+    // Gelen paketin NAL türünü tanıla.
+    int offset = -1;
+
+    const auto *p =
+        reinterpret_cast<const uint8_t *>(nal.constData());
+
+    if (nal.size() >= 4 &&
+        p[0] == 0 && p[1] == 0 && p[2] == 1)
+    {
+        offset = 3;
+    }
+    else if (nal.size() >= 5 &&
+             p[0] == 0 && p[1] == 0 &&
+             p[2] == 0 && p[3] == 1)
+    {
+        offset = 4;
+    }
+
+    const int nalType =
+        (offset >= 0 && offset < nal.size())
+            ? (p[offset] & 0x1f)
+            : -1;
+
+    ret = avcodec_send_packet(m_codecContext, m_packet);
 
     if (ret < 0)
     {
-        static int errorCount = 0;
+        char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+        av_strerror(ret, errbuf, sizeof(errbuf));
 
-        ++errorCount;
-
-        if (errorCount % 100 == 0)
-        {
-            char err[256];
-            av_strerror(ret, err, sizeof(err));
-
-            qDebug() << "send_packet error:"
-                     << err
-                     << "count:"
-                     << errorCount;
-        }
+        qWarning() << "VAAPI SEND ERROR:"
+                   << errbuf
+                   << "size:" << m_packet->size
+                   << "NAL type:" << nalType
+                   << "first bytes:"
+                   << nal.left(12).toHex()
+                   << "pts:" << pts
+                   << "ret:" << ret;
 
         return;
     }
-
 
     while (true)
     {
@@ -311,97 +426,109 @@ void VaapiZeroCopyDecoder::decodePacket(const QByteArray &nal,
             break;
 
         if (ret == AVERROR_EOF)
-            break;
-
-        if (ret < 0)
         {
-            static int errorCount = 0;
-
-            ++errorCount;
-
-            if (errorCount % 100 == 0)
-            {
-                char err[256];
-                av_strerror(ret, err, sizeof(err));
-
-                qDebug() << "receive_frame error:"
-                         << err
-                         << "count:"
-                         << errorCount;
-            }
-
+            qWarning() << "VAAPI decoder reached EOF";
             break;
         }
 
-      /*  static int frameCount = 0;
+        if (ret < 0)
+        {
+            char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+            av_strerror(ret, errbuf, sizeof(errbuf));
 
-           if (++frameCount % 100 == 0)
-           {
-               qDebug() << "DECODED FRAME"
-                        << frameCount
-                        << "size:"
-                        << m_frame->width
-                        << "x"
-                        << m_frame->height
-                        << "format:"
-                        << m_frame->format;
-           }*/
+            qWarning() << "VAAPI RECEIVE ERROR:"
+                       << errbuf
+                       << "ret:" << ret;
+            break;
+        }
 
+        const bool validFormat =
+            m_frame->format == AV_PIX_FMT_VAAPI;
 
-        av_frame_unref(m_swFrame);
+        const bool validFramesContext =
+            m_frame->hw_frames_ctx != nullptr;
+
+        const bool validSurface =
+            m_frame->data[3] != nullptr;
+
+        if (!validFormat ||
+            !validFramesContext ||
+            !validSurface)
+        {
+            qWarning() << "Invalid VAAPI hardware frame:"
+                       << "format:" << m_frame->format
+                       << "expected:" << AV_PIX_FMT_VAAPI
+                       << "hw_frames_ctx:"
+                       << m_frame->hw_frames_ctx
+                       << "data[3]:" << static_cast<const void *>(
+                              m_frame->data[3])
+                       << "width:" << m_frame->width
+                       << "height:" << m_frame->height;
+
+            av_frame_unref(m_frame);
+            continue;
+        }
+
+        if (!m_hwDevice || !m_hwDevice->data)
+        {
+            qWarning() << "VAAPI device context is null";
+            av_frame_unref(m_frame);
+            continue;
+        }
+
+        auto *device =
+            reinterpret_cast<AVHWDeviceContext *>(
+                m_hwDevice->data);
+
+        auto *va =
+            reinterpret_cast<AVVAAPIDeviceContext *>(
+                device->hwctx);
+
+        if (!va || !va->display)
+        {
+            qWarning() << "VAAPI display is null";
+            av_frame_unref(m_frame);
+            continue;
+        }
 
         QSharedPointer<VaapiHardwareFrame> hw(
             new VaapiHardwareFrame);
 
         hw->frame = av_frame_alloc();
 
-        AVHWDeviceContext *device =
-            (AVHWDeviceContext*)m_hwDevice->data;
+        if (!hw->frame)
+        {
+            qWarning() << "Cannot allocate hardware frame";
+            av_frame_unref(m_frame);
+            break;
+        }
 
-        AVVAAPIDeviceContext *va =
-            (AVVAAPIDeviceContext*)device->hwctx;
+        ret = av_frame_ref(hw->frame, m_frame);
+
+        if (ret < 0)
+        {
+            char errbuf[AV_ERROR_MAX_STRING_SIZE] = {};
+            av_strerror(ret, errbuf, sizeof(errbuf));
+
+            qWarning() << "av_frame_ref failed:"
+                       << errbuf;
+
+            av_frame_free(&hw->frame);
+            av_frame_unref(m_frame);
+            continue;
+        }
 
         hw->display = va->display;
+        hw->surface =
+            static_cast<VASurfaceID>(
+                reinterpret_cast<uintptr_t>(
+                    m_frame->data[3]));
 
-        av_frame_ref(hw->frame, m_frame);
-/***************************/
-        AVFrame *avFrame = hw->frame;
-
-        if (!avFrame->hw_frames_ctx)
-        {
-            qDebug() << "No hw_frames_ctx";
-        }
-        else
-        {
-            VASurfaceID surface =
-                (VASurfaceID)(uintptr_t)avFrame->data[3];
-
-           /// qDebug() << "Surface =" << surface;
-        }
-        /*******************************/
         MediaFrame frame;
-
-        frame.width  = m_frame->width;
+        frame.width = m_frame->width;
         frame.height = m_frame->height;
-        frame.pts    = pts;
-
+        frame.pts = m_frame->pts;
         frame.hardwareFrame = hw;
-/**********************************************/
-       /// AVFrame *avFrame = hw->frame;
-
-        AVHWFramesContext *frames =
-            (AVHWFramesContext*)avFrame->hw_frames_ctx->data;
-
-        AVVAAPIFramesContext *vaFrames =
-            (AVVAAPIFramesContext*)frames->hwctx;
-
-        Q_UNUSED(vaFrames);
-
-        VASurfaceID surface =
-            (VASurfaceID)(uintptr_t)avFrame->data[3];
-        hw->surface = surface;
-        ///qDebug() << "VA Surface =" << surface;
-        /********************************************/
 
         emit frameReady(frame);
 

@@ -42,7 +42,7 @@
 #include<QSvgRenderer>
 #include<QPainter>
 #include <QStyle>
-#include "streamplayer/stream/receiverstream.h"
+#include "streamplayer/stream/rstpreceiverstream.h"
 #include "streamplayer/renderer/AbstractVideoRenderer.h"
 #include<QGridLayout>
 
@@ -217,7 +217,7 @@ bool refreshContinueState=false;
     MulticastReceiver *receiver;
     //QPointer<MulticastReceiver> receiver;
     QImage prevImage;
-     ReceiverStream *receiverStream;
+    RstpReceiverStream *receiverStream;
 
      QGridLayout *layout;
 };

@@ -1,44 +1,36 @@
-#include "receiverstream.h"
-
+#include "rstpreceiverstream.h"
 #include "../decoder/audioopusdecoder.h"
 #include "../decoder/h264depacketizer.h"
-
 #include "../decoder/h264decoder.h"
 #include "../decoder/CpuVideoDecoder.h"
-
 #include "../decoder/AbstractVideoDecoder.h"
 #include "../decoder/videodecoderfactory.h"
-
 #include "../player/audioplayback.h"
-
 #include "../renderer/openglvaapizerocopyrenderer.h"
 #include "../renderer/openglvideorenderer.h"
 #include "../renderer/videorenderer.h"
 #include "../renderer/AbstractVideoRenderer.h"
+#include "../rstp-sync/mediaclock.h"
+#include "../rstp-sync/videoscheduler.h"
+#include "../rstp-sync/audioscheduler.h"
 
-
-#include "../sync/mastertime.h"
-#include "../sync/mediaclock.h"
-#include "../sync/videoscheduler.h"
-#include "../sync/audioscheduler.h"
-
-ReceiverStream::ReceiverStream(QObject *parent)
+RstpReceiverStream::RstpReceiverStream(QObject *parent)
     : QObject(parent)
 {
-  /*  m_controlClient = new ControlClient(this);
+    /*m_controlClient = new ControlClient(this);
 
     connect(m_controlClient,&ControlClient::serverFound,
-        this,&ReceiverStream::onServerFound);
+        this,&RstpReceiverStream::onServerFound);
 
     connect(m_controlClient,&ControlClient::messageReceived,
-        this,&ReceiverStream::onControlMessage);
+        this,&RstpReceiverStream::onControlMessage);
 
-    m_controlClient->start(6001);
-*/
-   // m_controlClient->discoverServer();
+    m_controlClient->start(6001);*/
+
+  //  m_controlClient->discoverServer();
 
 }
-void ReceiverStream::onServerFound(
+void RstpReceiverStream::onServerFound(
     const QHostAddress &address,
     quint16 port)
 {
@@ -64,7 +56,7 @@ void ReceiverStream::onServerFound(
         ControlMessageType::GetStreamInfo);
 }
 
-void ReceiverStream::onControlMessage(
+void RstpReceiverStream::onControlMessage(
     const ControlMessage &message)
 {
     switch (message.type)
@@ -98,18 +90,18 @@ void ReceiverStream::onControlMessage(
 
 
             //settings.video.device="/dev/video2";
-            settings.captureMode = CaptureMode::Video;
+            settings.audio.source= AudioSource::None;
             //settings.previewMode = PreviewMode::Remote;
             //settings.videoAddress=QHostAddress("239.10.10.10");
             //settings.videoPort=5004;
 
 
 
-            settings.audioSampleRate=48000;
-            settings.audioChannels=2;
-            settings.audioFrameSample=960;
-            settings.audioBitrate=20000;
-            settings.videoBitrate=4000;
+            settings.audio.sampleRate=48000;
+            settings.audio.channels=2;
+            settings.audio.frameSample=960;
+            settings.audio.bitrate=20000;
+            settings.video.bitrate=4000;
 
             settings.audioAddress=settings.videoAddress;
             settings.audioPort=settings.videoPort+2;
@@ -135,44 +127,34 @@ void ReceiverStream::onControlMessage(
             break;
     }
 }
-bool ReceiverStream::open(const StreamSettings &settings)
+bool RstpReceiverStream::open(const StreamSettings &settings)
 {
     m_settings = settings;
-/*
-    if(m_settings.captureMode==CaptureMode::Video||
-            m_settings.captureMode==CaptureMode::AudioVideo)
-    {
-        m_videoDecoder = VideoDecoderFactory::create(this);
-        if(!m_videoDecoder->start())
-            return -1;
-        m_videoDecoder->setSettings(m_settings);
 
-        if (m_videoDecoder->type() ==AbstractVideoDecoder::Type::VAAPI)
-        {
-            qDebug() << "Renderer: VAAPI";
-            m_openglrenderer =new OpenGLVaapiZeroCopyRenderer;
-        }
-        else
-        {
-            qDebug() << "Renderer: CPU";
-            m_openglrenderer =new OpenGLVideoRenderer;
-            //m_openglrenderer =new VideoRenderer;
-        }
-    }*/
     return true;
 }
-bool ReceiverStream::start(QString hostIp)
+
+bool RstpReceiverStream::start(QString hostIp)
 {
-    qDebug() << "RUNNING AS RECEIVER";
+    qDebug() << "RUNNING AS RTSP UNICAST RECEIVER";
 
     m_clock = new MediaClock;
 
+    const bool hasVideo =
+        m_settings.video.source != VideoSource::None;
+
+    const bool hasAudio =
+        m_settings.audio.source != AudioSource::None;
+
+    m_videoStarted = false;
+    m_audioStarted = false;
 
     // RTSP
     m_rtspSource = new RtspSource(this);
 
     connect(m_rtspSource,
             &RtspSource::connected,
+            this,
             []()
             {
                 qDebug() << "RTSP Connected";
@@ -180,6 +162,7 @@ bool ReceiverStream::start(QString hostIp)
 
     connect(m_rtspSource,
             &RtspSource::disconnected,
+            this,
             []()
             {
                 qDebug() << "RTSP Disconnected";
@@ -187,137 +170,251 @@ bool ReceiverStream::start(QString hostIp)
 
     connect(m_rtspSource,
             &RtspSource::errorOccurred,
+            this,
             [](const QString &err)
             {
                 qCritical() << err;
             });
 
-    ///video
-    if(m_settings.captureMode==CaptureMode::Video||
-            m_settings.captureMode==CaptureMode::AudioVideo)
+    // ==================================================
+    // VIDEO DECODER + RENDERER
+    // ==================================================
+
+    if (hasVideo)
     {
         m_videoDecoder = VideoDecoderFactory::create(this);
-        if(!m_videoDecoder->start())
-            return -1;
+
+        if (!m_videoDecoder)
+        {
+            qCritical() << "Video decoder creation failed";
+            return false;
+        }
+
         m_videoDecoder->setSettings(m_settings);
 
-        if (m_videoDecoder->type() ==AbstractVideoDecoder::Type::VAAPI)
+        if (!m_videoDecoder->start())
+        {
+            qCritical() << "Video decoder start failed";
+            return false;
+        }
+
+        if (m_videoDecoder->type() ==
+            AbstractVideoDecoder::Type::VAAPI)
         {
             qDebug() << "Renderer: VAAPI";
-            m_openglrenderer =new OpenGLVaapiZeroCopyRenderer;
+            m_openglrenderer = new OpenGLVaapiZeroCopyRenderer;
         }
         else
         {
             qDebug() << "Renderer: CPU";
-            m_openglrenderer =new OpenGLVideoRenderer;
-            //m_openglrenderer =new VideoRenderer;
+            m_openglrenderer = new OpenGLVideoRenderer;
         }
 
-      /* if (m_settings.previewMode != PreviewMode::None)
+        if (m_settings.previewMode == PreviewMode::Normal)
         {
-            m_openglrenderer->resize(m_settings.video.width, m_settings.video.height);
+            m_openglrenderer->resize(
+                m_settings.video.width,
+                m_settings.video.height);
+
             m_openglrenderer->show();
-        }*/
-    }
-
-    if(m_settings.captureMode==CaptureMode::Video)
-    {
-        connect(m_rtspSource,&RtspSource::videoPacket,
-                m_videoDecoder,&AbstractVideoDecoder::decode,
-                Qt::QueuedConnection);
-
-        connect(m_videoDecoder,&AbstractVideoDecoder::frameReady,
-                m_openglrenderer,&AbstractVideoRenderer::onFrame,
-                Qt::QueuedConnection);
-    }
-
-    if(m_settings.captureMode==CaptureMode::AudioVideo)
-    {
-        connect(m_rtspSource,&RtspSource::videoPacket,
-                m_videoDecoder,&AbstractVideoDecoder::decode,
-                Qt::QueuedConnection);
-
-        m_videoScheduler = new VideoScheduler(m_clock);
-        m_videoScheduler->open(m_settings.video);
-        connect(m_videoScheduler,&VideoScheduler::firstFrameReceived,this,[this](qint64 pts)
+        }
+        else if (m_settings.previewMode == PreviewMode::FullScreen)
         {
-            if (m_videoStarted) return;
-            m_videoStarted = true;
-            m_firstVideoPts = pts;
-            qDebug() << "RECEIVER VIDEO FIRST PTS =" << pts;
-            tryStartPlayback();
-        });
+            const QList<QScreen *> screens =
+                QGuiApplication::screens();
 
-        connect(m_videoDecoder,&AbstractVideoDecoder::frameReady,
-                m_videoScheduler,&VideoScheduler::enqueue,
-                Qt::QueuedConnection);
+            if (m_settings.video.screenIndex < 0 ||
+                m_settings.video.screenIndex >= screens.size())
+            {
+                qWarning() << "Invalid screen index:"
+                           << m_settings.video.screenIndex;
 
-        connect(m_videoScheduler,&VideoScheduler::frameReady,
-                m_openglrenderer,&AbstractVideoRenderer::onFrame,
-                Qt::QueuedConnection);
+                return false;
+            }
+
+            QScreen *screen =
+                screens.at(m_settings.video.screenIndex);
+
+            const QRect geometry = screen->geometry();
+
+            qDebug() << "Fullscreen screen:"
+                     << m_settings.video.screenIndex
+                     << geometry;
+
+            m_openglrenderer->setWindowFlags(
+                Qt::FramelessWindowHint |
+                Qt::WindowStaysOnTopHint |
+                Qt::X11BypassWindowManagerHint);
+
+            m_openglrenderer->setGeometry(geometry);
+            m_openglrenderer->show();
+            m_openglrenderer->raise();
+        }
     }
-    ///ses
-    if(m_settings.captureMode==CaptureMode::Audio||
-            m_settings.captureMode==CaptureMode::AudioVideo)
+
+    // ==================================================
+    // AUDIO DECODER + PLAYBACK
+    // ==================================================
+
+    if (hasAudio)
     {
         m_playback = new AudioPlayback;
-        if (!m_playback->open(m_settings.audioSampleRate,
-                              m_settings.audioChannels))
+
+        if (!m_playback->open(
+                m_settings.audio.sampleRate,
+                m_settings.audio.channels))
+        {
+            qCritical() << "Audio playback open failed";
             return false;
+        }
+
         m_playback->setClock(m_clock);
+
         m_audioDecoder = new AudioOpusDecoder(this);
 
-        if (!m_audioDecoder->open(m_settings.audioSampleRate,
-                                  m_settings.audioChannels))
-            return false;
-    }
-
-    if(m_settings.captureMode==CaptureMode::Audio)
-    {
-        connect(m_rtspSource,&RtspSource::audioPacket,
-                m_audioDecoder,&AudioOpusDecoder::decode,
-                Qt::QueuedConnection);
-
-        connect(m_audioDecoder,&AudioOpusDecoder::frameReady,
-                m_playback,&AudioPlayback::onFrame,
-                Qt::QueuedConnection);
-    }
-    if(m_settings.captureMode==CaptureMode::AudioVideo)
-    {
-        m_audioScheduler = new AudioScheduler(m_clock);
-        m_audioScheduler->open(m_settings.video);
-        connect(m_audioScheduler,&AudioScheduler::firstFrameReceived,this,[this](qint64 pts)
+        if (!m_audioDecoder->open(
+                m_settings.audio.sampleRate,
+                m_settings.audio.channels))
         {
-            if (m_audioStarted) return;
-            m_audioStarted = true;
-            m_firstAudioPts = pts;
-            qDebug() << "RECEIVER AUDIO FIRST PTS =" << pts;
-            tryStartPlayback();
-        });
-
-        connect(m_rtspSource,&RtspSource::audioPacket,
-                m_audioDecoder,&AudioOpusDecoder::decode,
-                Qt::QueuedConnection);
-
-        connect(m_audioDecoder,&AudioOpusDecoder::frameReady,
-                m_audioScheduler,&AudioScheduler::enqueue,
-                Qt::QueuedConnection);
-
-        connect(m_audioScheduler,&AudioScheduler::frameReady,
-                m_playback,&AudioPlayback::onFrame,
-                Qt::QueuedConnection);
+            qCritical() << "Audio decoder open failed";
+            return false;
+        }
     }
 
-    QString url="rtsp://"+hostIp+":8554/stream";
+    // ==================================================
+    // VIDEO CONNECTIONS
+    // ==================================================
 
-    m_rtspSource->open(url,m_settings);
+    if (hasVideo)
+    {
+        connect(m_rtspSource,
+                &RtspSource::videoPacket,
+                m_videoDecoder,
+                &AbstractVideoDecoder::decode,
+                Qt::QueuedConnection);
+
+        if (hasAudio)
+        {
+            // Audio + Video: scheduler üzerinden oynatma
+            m_videoScheduler = new VideoScheduler(m_clock);
+
+            m_videoScheduler->open(m_settings.video);
+
+            connect(m_videoDecoder,
+                    &AbstractVideoDecoder::frameReady,
+                    m_videoScheduler,
+                    &VideoScheduler::enqueue,
+                    Qt::QueuedConnection);
+
+            connect(m_videoScheduler,
+                    &VideoScheduler::frameReady,
+                    m_openglrenderer,
+                    &AbstractVideoRenderer::onFrame,
+                    Qt::QueuedConnection);
+
+            connect(m_videoScheduler,
+                    &VideoScheduler::firstFrameReceived,
+                    this,
+                    [this](qint64 pts)
+                    {
+                        if (m_videoStarted)
+                            return;
+
+                        m_videoStarted = true;
+                        m_firstVideoPts = pts;
+
+                        qDebug()
+                            << "RECEIVER VIDEO FIRST PTS ="
+                            << pts;
+
+                        tryStartPlayback();
+                    });
+        }
+        else
+        {
+            // Yalnızca video: doğrudan renderer
+            connect(m_videoDecoder,
+                    &AbstractVideoDecoder::frameReady,
+                    m_openglrenderer,
+                    &AbstractVideoRenderer::onFrame,
+                    Qt::QueuedConnection);
+        }
+    }
+
+    // ==================================================
+    // AUDIO CONNECTIONS
+    // ==================================================
+
+    if (hasAudio)
+    {
+        connect(m_rtspSource,
+                &RtspSource::audioPacket,
+                m_audioDecoder,
+                &AudioOpusDecoder::decodeRstp,
+                Qt::QueuedConnection);
+
+        if (hasVideo)
+        {
+            // Audio + Video: scheduler üzerinden oynatma
+            m_audioScheduler = new AudioScheduler(m_clock);
+
+            m_audioScheduler->open(m_settings.video);
+
+            connect(m_audioDecoder,
+                    &AudioOpusDecoder::frameReady,
+                    m_audioScheduler,
+                    &AudioScheduler::enqueue,
+                    Qt::QueuedConnection);
+
+            connect(m_audioScheduler,
+                    &AudioScheduler::frameReady,
+                    m_playback,
+                    &AudioPlayback::onFrame,
+                    Qt::QueuedConnection);
+
+            connect(m_audioScheduler,
+                    &AudioScheduler::firstFrameReceived,
+                    this,
+                    [this](qint64 pts)
+                    {
+                        if (m_audioStarted)
+                            return;
+
+                        m_audioStarted = true;
+                        m_firstAudioPts = pts;
+
+                        qDebug()
+                            << "RECEIVER AUDIO FIRST PTS ="
+                            << pts;
+
+                        tryStartPlayback();
+                    });
+        }
+        else
+        {
+            // Yalnızca ses: doğrudan playback
+            connect(m_audioDecoder,
+                    &AudioOpusDecoder::frameReady,
+                    m_playback,
+                    &AudioPlayback::onFrame,
+                    Qt::QueuedConnection);
+        }
+    }
+
+    // ==================================================
+    // RTSP START
+    // ==================================================
+
+    const QString url =
+        "rtsp://" + hostIp + ":8554/stream";
+
+    m_rtspSource->open(url, m_settings);
     m_rtspSource->start();
-
 
     return true;
 }
 
-ReceiverStream::~ReceiverStream()
+RstpReceiverStream::~RstpReceiverStream()
 {
   //  qDebug() << "========== ReceiverStream DESTRUCTOR ==========";
 
@@ -339,7 +436,7 @@ ReceiverStream::~ReceiverStream()
 }
 
 
-void ReceiverStream::stop()
+void RstpReceiverStream::stop()
 {
    /// qDebug() << "========== ReceiverStream STOP ==========";
 
@@ -490,7 +587,8 @@ void ReceiverStream::stop()
   ///  qDebug() << "========== ReceiverStream STOPPED ==========";
 }
 
-void ReceiverStream::tryStartPlayback()
+
+void RstpReceiverStream::tryStartPlayback()
 {
     if (!m_audioStarted && !m_videoStarted)
         return;

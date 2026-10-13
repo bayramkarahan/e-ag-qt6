@@ -59,7 +59,8 @@ void RtspWorker::process()
 
     av_dict_set(&options, "rtsp_transport", "udp", 0);
     av_dict_set(&options, "stimeout", "5000000", 0);
-
+   // av_dict_set(&options, "rtsp_transport", "tcp", 0);
+   // av_dict_set(&options, "timeout", "5000000", 0);
     qDebug() << "Opening RTSP:" << m_url;
 
     if (avformat_open_input(&m_formatContext,
@@ -153,6 +154,34 @@ void RtspWorker::process()
     emit disconnected();
 }
 
+/*
+void RtspWorker::processVideoPacket(const AVPacket &packet)
+{
+    if (!m_formatContext || m_videoStream < 0)
+        return;
+
+    AVStream *st = m_formatContext->streams[m_videoStream];
+
+    qint64 pts = AV_NOPTS_VALUE;
+
+    if (packet.pts != AV_NOPTS_VALUE) {
+        pts = av_rescale_q(
+            packet.pts,
+            st->time_base,
+            AVRational{1, 1000000});
+    }
+
+    QByteArray data(
+        reinterpret_cast<const char *>(packet.data),
+        packet.size);
+
+    // NAL'lere bölmeden, FFmpeg paketinin tamamını gönder.
+    emit videoPacket(data, pts, packet.flags & AV_PKT_FLAG_KEY);
+}
+*/
+
+
+
 void RtspWorker::processVideoPacket(const AVPacket &packet)
 {
 
@@ -214,24 +243,17 @@ void RtspWorker::processVideoPacket(const AVPacket &packet)
         int offset = (p[2] == 1) ? 3 : 4;
 
         int type = p[offset] & 0x1f;
+/*
+        static quint64 nalCount = 0;
+        ++nalCount;
 
-        /*qDebug()
-            << "SEND NAL"
-            << type
-            << nal.size();
-        qDebug() << nal.left(16).toHex(' ');
-        qDebug() << nal.right(16).toHex(' ');*/
-        // Sadece P frameleri seyrekleştir
-       /* if (type == 1 &&
-            m_settings.video.fps > 0 &&
-            m_sourceFps > m_settings.video.fps)
-        {
-            int skip = qMax(1,
-                            qRound(m_sourceFps /
-                                   m_settings.video.fps));
-
-            if ((m_frameCounter++ % skip) != 0)
-                return;
+        if (type == 5 || type == 7 || type == 8 || type == 9 ||
+            nalCount % 100 == 0) {
+            qDebug() << "RTSP NAL"
+                     << "count:" << nalCount
+                     << "type:" << type
+                     << "size:" << nal.size()
+                     << "pts:" << pts;
         }*/
 
        emit videoPacket(nal, pts, true);

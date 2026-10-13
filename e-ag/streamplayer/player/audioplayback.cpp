@@ -112,10 +112,6 @@ void AudioPlayback::onFrame(const AudioFrame &frame)
 
      }
 }
-void AudioPlayback::setMasterTime(MasterTime *masterTime)
-{
-    m_masterTime = masterTime;
-}
 
 void AudioPlayback::setClock(MediaClock *clock)
 {

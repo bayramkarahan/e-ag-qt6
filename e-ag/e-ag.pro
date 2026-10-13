@@ -44,25 +44,36 @@ SOURCES += \
     streamplayer/decoder/audioopusdecoder.cpp \
     streamplayer/decoder/h264decoder.cpp \
     streamplayer/decoder/h264depacketizer.cpp \
-    streamplayer/renderer/openglvaapizerocopyrenderer.cpp \
     streamplayer/decoder/vaapivideodecoder.cpp \
     streamplayer/decoder/vaapizerocopydecoder.cpp \
     streamplayer/decoder/videodecoderfactory.cpp \
     streamplayer/encoder/audioopusencoder.cpp \
+    streamplayer/network/rtpjitterbuffer.cpp \
     streamplayer/player/audioplayback.cpp \
     streamplayer/player/audioprocessor.cpp \
-    streamplayer/player/rtspsource.cpp \
-    streamplayer/player/rtspworker.cpp \
+    streamplayer/player/rtpaudioplayback.cpp \
+    streamplayer/player/rtpaudioprocessor.cpp \
     streamplayer/preview/openglvideopreview.cpp \
     streamplayer/preview/videopreview.cpp \
+    streamplayer/receiver/rtpreceiver.cpp \
+    streamplayer/receiver/rtpsource.cpp \
+    streamplayer/receiver/rtpworker.cpp \
+    streamplayer/receiver/rtspsource.cpp \
+    streamplayer/receiver/rtspworker.cpp \
+    streamplayer/renderer/openglvaapizerocopyrenderer.cpp \
     streamplayer/renderer/openglvideorenderer.cpp \
     streamplayer/renderer/testvideowidget.cpp \
     streamplayer/renderer/videorenderer.cpp \
-    streamplayer/stream/receiverstream.cpp \
-    streamplayer/sync/audioscheduler.cpp \
-    streamplayer/sync/mastertime.cpp \
-    streamplayer/sync/mediaclock.cpp \
-    streamplayer/sync/videoscheduler.cpp \
+    streamplayer/rstp-sync/audioscheduler.cpp \
+    streamplayer/rstp-sync/mediaclock.cpp \
+    streamplayer/rstp-sync/videoscheduler.cpp \
+    streamplayer/rtp-sync/rtpaudioscheduler.cpp \
+    streamplayer/rtp-sync/rtpmediaclock.cpp \
+    streamplayer/rtp-sync/rtpvideoscheduler.cpp \
+    streamplayer/session/rtspconnection.cpp \
+    streamplayer/session/sessiondescription.cpp \
+    streamplayer/stream/rstpreceiverstream.cpp \
+    streamplayer/stream/rtpreceiverstream.cpp \
     streamplayer/udpmesageservice/controlchannel.cpp \
     streamplayer/udpmesageservice/controlclient.cpp \
     streamplayer/udpmesageservice/controlmessage.cpp \
@@ -111,7 +122,6 @@ HEADERS += \
     streamplayer/common/MediaPacket.h \
     streamplayer/common/StreamSettings.h \
     streamplayer/common/VideoBuffer.h \
-    streamplayer/common/VideoCaptureSettings.h \
     streamplayer/common/camerainforeader.h \
     streamplayer/common/commandlineparser.h \
     streamplayer/common/hardwareframe.h \
@@ -130,23 +140,34 @@ HEADERS += \
     streamplayer/encoder/audioopusencoder.h \
     streamplayer/interfaces/ICapture.h \
     streamplayer/interfaces/IVideoCapture.h \
+    streamplayer/network/rtpjitterbuffer.h \
     streamplayer/network/rtppacket.h \
     streamplayer/player/audioplayback.h \
     streamplayer/player/audioprocessor.h \
-    streamplayer/player/rtspsource.h \
-    streamplayer/player/rtspworker.h \
+    streamplayer/player/rtpaudioplayback.h \
+    streamplayer/player/rtpaudioprocessor.h \
     streamplayer/preview/openglvideopreview.h \
     streamplayer/preview/videopreview.h \
+    streamplayer/receiver/rtpreceiver.h \
+    streamplayer/receiver/rtpsource.h \
+    streamplayer/receiver/rtpworker.h \
+    streamplayer/receiver/rtspsource.h \
+    streamplayer/receiver/rtspworker.h \
     streamplayer/renderer/AbstractVideoRenderer.h \
     streamplayer/renderer/openglvaapizerocopyrenderer.h \
     streamplayer/renderer/openglvideorenderer.h \
     streamplayer/renderer/testvideowidget.h \
     streamplayer/renderer/videorenderer.h \
-    streamplayer/stream/receiverstream.h \
-    streamplayer/sync/audioscheduler.h \
-    streamplayer/sync/mastertime.h \
-    streamplayer/sync/mediaclock.h \
-    streamplayer/sync/videoscheduler.h \
+    streamplayer/rstp-sync/audioscheduler.h \
+    streamplayer/rstp-sync/mediaclock.h \
+    streamplayer/rstp-sync/videoscheduler.h \
+    streamplayer/rtp-sync/rtpaudioscheduler.h \
+    streamplayer/rtp-sync/rtpmediaclock.h \
+    streamplayer/rtp-sync/rtpvideoscheduler.h \
+    streamplayer/session/rtspconnection.h \
+    streamplayer/session/sessiondescription.h \
+    streamplayer/stream/rstpreceiverstream.h \
+    streamplayer/stream/rtpreceiverstream.h \
     streamplayer/udpmesageservice/controlchannel.h \
     streamplayer/udpmesageservice/controlclient.h \
     streamplayer/udpmesageservice/controlmessage.h \

@@ -21,15 +21,16 @@ public:
     void close();
 
 public slots:
-    /*void decode(const RTPPacket &packet);*/
-    void decode(const QByteArray &data,
-                qint64 pts);
+    void decodeRtp(const RTPPacket &packet);
+    void decodeRstp(const QByteArray &data,qint64 pts);
 signals:
     void frameReady(const AudioFrame &frame);
 
 private:
     OpusDecoder *m_decoder = nullptr;
 
+  qint64  m_firstRtpTimestamp = 0;
+  bool    m_haveFirstRtpTimestamp = false;
     int m_sampleRate = 48000;
     int m_channels = 2;
     bool m_started = false;

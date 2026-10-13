@@ -2,11 +2,10 @@
 
 #include <QObject>
 #include <QHostAddress>
-
-#include "../common/VideoCaptureSettings.h"
+#include<QScreen>
 #include "../common/StreamSettings.h"
-#include "../player/rtspsource.h"
-#include "../player/rtspworker.h"
+#include "../receiver/rtspsource.h"
+#include "../receiver/rtspworker.h"
 #include "../udpmesageservice/controlclient.h"
 class RTPReceiver;
 class H264Depacketizer;
@@ -25,18 +24,19 @@ class AudioScheduler;
 class AbstractVideoDecoder;
 class CpuVideoDecoder;
 class AbstractVideoRenderer;
-class ReceiverStream : public QObject
+class RstpReceiverStream : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit ReceiverStream(QObject *parent = nullptr);
- ~ReceiverStream();
+    explicit RstpReceiverStream(QObject *parent = nullptr);
+    ~RstpReceiverStream();
+    AbstractVideoRenderer*     m_openglrenderer = nullptr;
     bool open(const StreamSettings &settings);
     bool start(QString hostIp);
     void stop();
     void tryStartPlayback();
-    AbstractVideoRenderer*     m_openglrenderer = nullptr;
+
     void onServerFound(
         const QHostAddress &address,
         quint16 port);

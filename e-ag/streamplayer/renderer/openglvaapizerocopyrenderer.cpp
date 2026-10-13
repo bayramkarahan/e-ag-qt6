@@ -8,11 +8,10 @@ extern "C"
 #include <libavutil/frame.h>
 }
 
-OpenGLVaapiZeroCopyRenderer::
-OpenGLVaapiZeroCopyRenderer(QWidget *parent)
+OpenGLVaapiZeroCopyRenderer::OpenGLVaapiZeroCopyRenderer(QWidget *parent)
     : AbstractVideoRenderer(parent)
 {
-qDebug()<<"OpenGLVaapiZeroCopyRenderer";
+
 }
 
 void OpenGLVaapiZeroCopyRenderer::initializeGL()
@@ -202,7 +201,24 @@ void OpenGLVaapiZeroCopyRenderer::initializeGL()
                  << m_shader->log();
     }
 }
+/*
+void OpenGLVaapiZeroCopyRenderer::setFrame(
+    const MediaFrame &frame)
+{
+    QMutexLocker locker(&m_mutex);
 
+    m_frame = frame;
+
+   /* static int count = 0;
+
+    if (++count % 30 == 0)
+    {
+        qDebug() << "SET FRAME"
+                 << "hardware =" << (m_frame.hardwareFrame != nullptr);
+    }*/
+
+ /*   update();
+}*/
 
 void OpenGLVaapiZeroCopyRenderer::onFrame(const MediaFrame &frame)
 {
@@ -603,3 +619,231 @@ bool OpenGLVaapiZeroCopyRenderer::importSurface(
     return true;
 }
 
+/*
+bool OpenGLVaapiZeroCopyRenderer::importSurface(
+    VaapiHardwareFrame *hw)
+{
+   /// qDebug() << "importSurface entered";
+
+    if (!hw)
+        return false;
+
+    if (hw->surface == VA_INVALID_SURFACE)
+    {
+        qDebug() << "Surface invalid";
+        return false;
+    }
+
+    VADRMPRIMESurfaceDescriptor desc;
+    memset(&desc, 0, sizeof(desc));
+
+    VAStatus st = vaExportSurfaceHandle(
+        hw->display,
+        hw->surface,
+        VA_SURFACE_ATTRIB_MEM_TYPE_DRM_PRIME_2,
+        VA_EXPORT_SURFACE_READ_ONLY |
+        VA_EXPORT_SURFACE_SEPARATE_LAYERS,
+        &desc);
+
+    if (st != VA_STATUS_SUCCESS)
+    {
+        qDebug()
+            << "Export failed:"
+            << vaErrorStr(st)
+            << "(" << st << ")";
+
+        return false;
+    }
+
+    if (desc.num_layers < 2)
+    {
+       /// qDebug()<< "Expected NV12 with 2 layers, got"<< desc.num_layers;
+
+        return false;
+    }
+
+    m_videoWidth = hw->frame->width;
+    m_videoHeight = hw->frame->height;
+
+
+    // --------------------------------------------------
+    // Önce eski EGLImage'ları temizle
+    // --------------------------------------------------
+
+    if (m_yImage != EGL_NO_IMAGE_KHR)
+    {
+        m_destroyImage(
+            m_eglDisplay,
+            m_yImage);
+
+        m_yImage = EGL_NO_IMAGE_KHR;
+    }
+
+    if (m_uvImage != EGL_NO_IMAGE_KHR)
+    {
+        m_destroyImage(
+            m_eglDisplay,
+            m_uvImage);
+
+        m_uvImage = EGL_NO_IMAGE_KHR;
+    }
+
+
+    // --------------------------------------------------
+    // Y plane
+    // --------------------------------------------------
+
+    const auto &yLayer = desc.layers[0];
+
+    uint32_t yObject =
+        yLayer.object_index[0];
+
+    EGLint yAttrs[] =
+    {
+        EGL_WIDTH,
+        m_videoWidth,
+
+        EGL_HEIGHT,
+        m_videoHeight,
+
+        EGL_LINUX_DRM_FOURCC_EXT,
+        static_cast<EGLint>(
+            yLayer.drm_format),
+
+        EGL_DMA_BUF_PLANE0_FD_EXT,
+        desc.objects[yObject].fd,
+
+        EGL_DMA_BUF_PLANE0_OFFSET_EXT,
+        static_cast<EGLint>(
+            yLayer.offset[0]),
+
+        EGL_DMA_BUF_PLANE0_PITCH_EXT,
+        static_cast<EGLint>(
+            yLayer.pitch[0]),
+
+        EGL_NONE
+    };
+
+
+    m_yImage =
+        m_createImage(
+            m_eglDisplay,
+            EGL_NO_CONTEXT,
+            EGL_LINUX_DMA_BUF_EXT,
+            nullptr,
+            yAttrs);
+  /*  qDebug()
+        << "Y IMAGE"
+        << "surface =" << hw->surface
+        << "fd =" << desc.objects[yObject].fd
+        << "image =" << m_yImage;*/
+  /*  if (m_yImage == EGL_NO_IMAGE_KHR)
+    {
+        qDebug()
+            << "Y EGLImage creation failed:"
+            << Qt::hex
+            << eglGetError();
+
+        return false;
+    }
+
+
+    // --------------------------------------------------
+    // UV plane
+    // --------------------------------------------------
+
+    const auto &uvLayer = desc.layers[1];
+
+    uint32_t uvObject =
+        uvLayer.object_index[0];
+
+    EGLint uvAttrs[] =
+    {
+        EGL_WIDTH,
+        m_videoWidth / 2,
+
+        EGL_HEIGHT,
+        m_videoHeight / 2,
+
+        EGL_LINUX_DRM_FOURCC_EXT,
+        static_cast<EGLint>(
+            uvLayer.drm_format),
+
+        EGL_DMA_BUF_PLANE0_FD_EXT,
+        desc.objects[uvObject].fd,
+
+        EGL_DMA_BUF_PLANE0_OFFSET_EXT,
+        static_cast<EGLint>(
+            uvLayer.offset[0]),
+
+        EGL_DMA_BUF_PLANE0_PITCH_EXT,
+        static_cast<EGLint>(
+            uvLayer.pitch[0]),
+
+        EGL_NONE
+    };
+
+
+    m_uvImage =
+        m_createImage(
+            m_eglDisplay,
+            EGL_NO_CONTEXT,
+            EGL_LINUX_DMA_BUF_EXT,
+            nullptr,
+            uvAttrs);
+   /* qDebug()
+        << "UV IMAGE"
+        << "surface =" << hw->surface
+        << "fd =" << desc.objects[uvObject].fd
+        << "image =" << m_uvImage;*/
+ /*   if (m_uvImage == EGL_NO_IMAGE_KHR)
+    {
+        qDebug()
+            << "UV EGLImage creation failed:"
+            << Qt::hex
+            << eglGetError();
+
+        m_destroyImage(
+            m_eglDisplay,
+            m_yImage);
+
+        m_yImage = EGL_NO_IMAGE_KHR;
+
+        return false;
+    }
+
+
+    // --------------------------------------------------
+    // Y EGLImage -> Y texture
+    // --------------------------------------------------
+
+    glBindTexture(
+        GL_TEXTURE_2D,
+        m_yTexture);
+
+    m_imageTargetTexture(
+        GL_TEXTURE_2D,
+        m_yImage);
+
+
+    // --------------------------------------------------
+    // UV EGLImage -> UV texture
+    // --------------------------------------------------
+
+    glBindTexture(
+        GL_TEXTURE_2D,
+        m_uvTexture);
+
+    m_imageTargetTexture(
+        GL_TEXTURE_2D,
+        m_uvImage);
+
+
+    glBindTexture(
+        GL_TEXTURE_2D,
+        0);
+
+
+    return true;
+}
+*/

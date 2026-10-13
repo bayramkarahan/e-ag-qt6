@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "../renderer/openglvideorenderer.h"
-#include "../sync/mediaclock.h"
+#include "../rstp-sync/mediaclock.h"
 
 class OpenGLVideoPreview : public QObject
 {

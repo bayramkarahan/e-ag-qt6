@@ -9,21 +9,29 @@ bool CommandLineParser::parse(QApplication &app,
 {
     QCommandLineParser parser;
 
-    parser.setApplicationDescription("MediaStreamer");
+    parser.setApplicationDescription("streamplayer");
     parser.addHelpOption();
     parser.addVersionOption();
 
+
     parser.addOption({
-        "mode",
-        "sender | receiver",
-        "mode"
+        "receivermode",
+        "unicast | multicast",
+        "receivermode"
     });
 
     parser.addOption({
-        "source",
-        "file | camera | screen",
-        "source"
+        "videosource",
+        "file | camera | screen | none",
+        "videosource"
     });
+
+    parser.addOption({
+        "audiosource",
+        "file | microphone | system | both | none",
+        "audiosource"
+    });
+
 
     parser.addOption({
         "file",
@@ -44,14 +52,8 @@ bool CommandLineParser::parse(QApplication &app,
     });
 
     parser.addOption({
-        "capture",
-        "audio | video | av",
-        "capture"
-    });
-
-    parser.addOption({
         "preview",
-        "none | local | remote",
+        "none | normal | fullscreen",
         "preview"
     });
 
@@ -62,6 +64,12 @@ bool CommandLineParser::parse(QApplication &app,
     });
 
     parser.addOption({
+           "serveraddress",
+           "local | server",
+           "address"
+       });
+
+    parser.addOption({
         "video-port",
         "Video RTP port",
         "port"
@@ -70,33 +78,38 @@ bool CommandLineParser::parse(QApplication &app,
     parser.process(app);
 
     //----------------------------------------------------
-    // Mode
+    // ReceiverMode
     //----------------------------------------------------
 
-    QString mode = parser.value("mode").toLower();
+    QString receivermode = parser.value("receivermode").toLower();
 
-    if (mode == "sender")
-        settings.mode = StreamMode::Sender;
-    else if (mode == "receiver")
-        settings.mode = StreamMode::Receiver;
+    if (receivermode == "unicast")
+        settings.receivermode = ReceiverMode::Unicast;
+    else if (receivermode == "multicast")
+        settings.receivermode = ReceiverMode::Multicast;
     else
     {
-        qCritical() << "Invalid mode.";
-        parser.showHelp(1);
+        //qCritical() << "set receivermode Multicast";
+        settings.receivermode = ReceiverMode::Multicast;
+        ///parser.showHelp(1);
     }
 
     //----------------------------------------------------
-    // Capture Mode
+    // audiosource
     //----------------------------------------------------
 
-    QString capture = parser.value("capture").toLower();
+    QString audiosource = parser.value("audiosource").toLower();
 
-    if (capture == "audio")
-        settings.captureMode = CaptureMode::Audio;
-    else if (capture == "video")
-        settings.captureMode = CaptureMode::Video;
-    else if (capture == "av" || capture.isEmpty())
-        settings.captureMode = CaptureMode::AudioVideo;
+    if (audiosource == "file")
+        settings.audio.source = AudioSource::MediaFile;
+    else if (audiosource == "microphone")
+        settings.audio.source = AudioSource::Microphone;
+    else if (audiosource == "system")
+        settings.audio.source = AudioSource::System;
+    else if (audiosource == "both")
+        settings.audio.source = AudioSource::Both;
+    else if (audiosource == "none"||audiosource == "")
+        settings.audio.source = AudioSource::None;
 
     //----------------------------------------------------
     // Preview
@@ -106,32 +119,63 @@ bool CommandLineParser::parse(QApplication &app,
 
     if (preview == "none")
         settings.previewMode = PreviewMode::None;
-    else if (preview == "remote")
-        settings.previewMode = PreviewMode::Remote;
-    else if (preview == "local" || preview.isEmpty())
-        settings.previewMode = PreviewMode::Local;
+    else if (preview == "fullscreen")
+        settings.previewMode = PreviewMode::FullScreen;
+    else if (preview == "normal" || preview.isEmpty())
+        settings.previewMode = PreviewMode::Normal;
 
     //----------------------------------------------------
-    // Source
+    // videosource
     //----------------------------------------------------
 
-    QString source = parser.value("source").toLower();
+    QString videosource = parser.value("videosource").toLower();
 
-    if (source == "file")
+    if (videosource == "file")
     {
-        settings.video.source = CaptureSource::MediaFile;
+        settings.video.source = VideoSource::MediaFile;
         settings.video.fileName = parser.value("file");
     }
-    else if (source == "camera")
+    else if (videosource == "camera")
     {
-        settings.video.source = CaptureSource::Camera;
+        settings.video.source = VideoSource::Camera;
         settings.video.device = parser.value("device");
     }
-    else if (source == "screen")
+    else if (videosource == "screen")
     {
-        settings.video.source = CaptureSource::ScreenFFmpeg;
+        settings.video.source = VideoSource::ScreenFFmpeg;
+        //settings.video.source = CaptureSource::ScreenFFmpegPipeWire;
         settings.video.screenIndex =
                 parser.value("screen").toInt();
+    }
+    else if (videosource == "none"||videosource=="")
+    {
+        settings.video.source = VideoSource::None;
+    }
+
+    //----------------------------------------------------
+    // Server Address
+    //----------------------------------------------------
+
+    QString serverAddress = parser.value("serveraddress").trimmed();
+
+    if (serverAddress.isEmpty() ||
+        serverAddress.toLower() == "local")
+    {
+        settings.serverAddress ="127.0.0.1";
+    }
+    else
+    {
+        QHostAddress address(serverAddress);
+
+        if (address.isNull())
+        {
+            qCritical() << "Invalid server address:"
+                        << serverAddress;
+
+            return false;
+        }
+
+        settings.serverAddress = serverAddress;
     }
 
     //----------------------------------------------------

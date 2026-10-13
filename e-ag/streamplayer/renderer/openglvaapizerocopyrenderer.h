@@ -22,8 +22,7 @@ extern "C" {
 #include "AbstractVideoRenderer.h"
 
 
-class OpenGLVaapiZeroCopyRenderer :
-    public AbstractVideoRenderer,
+class OpenGLVaapiZeroCopyRenderer :public AbstractVideoRenderer,
     protected QOpenGLFunctions_3_3_Core
 {
     Q_OBJECT

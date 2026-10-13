@@ -27,7 +27,7 @@ void VideoPreview::onFrame(const MediaFrame &frame)
     m_renderer->setImage(image);
 }
 
-void VideoPreview::setMediaClock(MediaClock *masterTime)
+void VideoPreview::setMediaClock(RtpMediaClock *masterTime)
 {
     m_clock = masterTime;
 }

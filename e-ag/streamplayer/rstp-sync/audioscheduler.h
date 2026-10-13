@@ -6,8 +6,8 @@
 #include<QDebug>
 #include<QTimer>
 #include "../audio/audioframe.h"
-#include "../sync/mediaclock.h"
-#include "../common/VideoCaptureSettings.h"
+#include "../rstp-sync/mediaclock.h"
+#include "../common/StreamSettings.h"
 class AudioScheduler : public QObject
 {
     Q_OBJECT
