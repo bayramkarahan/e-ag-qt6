@@ -95,6 +95,7 @@ void MainWindow::slotEkranIzle()
             sendJson["mainmessagetype"] = "x11command";
             sendJson["submessagetype"] ="x11command" ;
             sendJson["mission"] = "mediastreamer --mode sender --sendermode unicast --audiosource none --preview none --videosource screen --screen 0 ";
+            //sendJson["mission"] = "mediastreamer --mode sender --capture video --preview none --source screen --screen 0 ";
             sendJson["missionmessage"]="";
             sendJson["messagevisible"]="0";
             sendJson["server_address"] = onlinePcList[i]->netProfil.serverAddress;

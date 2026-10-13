@@ -210,7 +210,7 @@ QWidget* MainWindow::rdpWidget()
 
         /************************************************************/
         system("pkill mediastreamer");
-        QString kmt10="mediastreamer --mode sender --capture video --preview none --source screen --screen 0 &";
+        QString kmt10="mediastreamer --mode sender --sendermode multicast --audiosource none --preview none --videosource screen --screen 0 &";
         system(kmt10.toStdString().c_str());
 
         //QString kmt="/usr/bin/serverscreen "+ekranScale1->currentText()+" "+newIp+" &";
@@ -218,7 +218,7 @@ QWidget* MainWindow::rdpWidget()
         QThread::sleep(1); // saniye cinsinden
         udpSendData("x11command","x11command","pkill streamplayer","",false);
         QThread::sleep(1); // saniye cinsinden
-        udpSendData("x11command","x11command","streamplayer --capture video --preview fullscreen --serveraddress "+interfaceList[0].ip,"",false);
+        udpSendData("x11command","x11command","streamplayer --receivermode multicast --audiosource none --videosource screen --preview fullscreen --serveraddress "+interfaceList[0].ip,"",false);
 
         //tabwid->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px; background-color:#afa1a1;");
         vncPc->setEnabled(false);

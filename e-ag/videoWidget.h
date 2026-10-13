@@ -94,7 +94,7 @@ QWidget* MainWindow::videoWidget()
             videoYayinButton->setStyleSheet("QToolButton { background-color: rgba(0, 255, 0, 1.0); }");
             system("pkill mediastreamer");
             ///system("clientcamera&");
-            QString kmt10="mediastreamer --mode sender --preview none  --capture audiovideo --source file --file "+commandFileLE->text()+"&";
+            QString kmt10="mediastreamer --mode sender --sendermode multicast --preview none  --audiosource microphone --videosource file --file "+commandFileLE->text()+"&";
             system(kmt10.toStdString().c_str());
         }
       });
@@ -138,7 +138,7 @@ QWidget* MainWindow::videoWidget()
         liveStreamButton->setStyleSheet("QToolButton { background-color: rgba(0, 255, 0, 1.0); }");
         qDebug()<<"camera yayın start";
         system("pkill mediastreamer");
-        QString kmt10="mediastreamer --mode sender --preview none --source camera --device "+kamera->currentText()+"&";
+        QString kmt10="mediastreamer --mode sender --sendermode multicast --preview none --audiosource microphone --videosource camera --device "+kamera->currentText()+"&";
         system(kmt10.toStdString().c_str());
         mesajSlot("Seçili Pc'ye Komut Gönderildi.");
     });
@@ -202,7 +202,7 @@ QWidget* MainWindow::videoWidget()
             qDebug()<<"akışı paylaş"<<streamState;
             udpSendData("x11command","x11command","pkill streamplayer","",false);
             system("sleep 2");
-            udpSendData("x11command","x11command","streamplayer","",false);
+            udpSendData("x11command","x11command","streamplayer --receivermode multicast --videosource screen --audiosource microphone ","",false);
 
             //streamState=false;
        //}
