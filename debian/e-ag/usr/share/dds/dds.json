@@ -1,0 +1,10 @@
+[
+    {
+        "getToOther": true,
+        "receiver": true,
+        "role": "receiver",
+        "root": false,
+        "sendToReceiver": false,
+        "sendToSender": false
+    }
+]
