@@ -1,0 +1,1971 @@
+dpkg-buildpackage: info: source package e-ag
+dpkg-buildpackage: info: source version 2.9.9.5
+dpkg-buildpackage: info: source distribution unstable
+dpkg-buildpackage: info: source changed by Bayram KARAHAN <bayramk@gmail.com>
+ dpkg-source --before-build .
+dpkg-buildpackage: info: host architecture amd64
+ debian/rules clean
+dh clean
+   dh_auto_clean
+	make -j4 distclean
+make[1]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+cd e-ag/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag/e-ag.pro ) && make -f Makefile distclean
+cd e-ag-tray/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/e-ag-tray.pro ) && make -f Makefile distclean
+cd e-ag-networkprofil/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/e-ag-networkprofil.pro ) && make -f Makefile distclean
+cd scd-client/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/scd-client/scd-client.pro ) && make -f Makefile distclean
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/scd-client'
+Makefile:378: warning: overriding recipe for target 'install_target'
+Makefile:368: warning: ignoring old recipe for target 'install_target'
+Makefile:383: warning: overriding recipe for target 'uninstall_target'
+Makefile:373: warning: ignoring old recipe for target 'uninstall_target'
+Makefile:389: warning: overriding recipe for target 'install_target'
+Makefile:378: warning: ignoring old recipe for target 'install_target'
+Makefile:394: warning: overriding recipe for target 'uninstall_target'
+Makefile:383: warning: ignoring old recipe for target 'uninstall_target'
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag'
+Makefile:1747: warning: overriding recipe for target 'install_target'
+Makefile:1737: warning: ignoring old recipe for target 'install_target'
+Makefile:1752: warning: overriding recipe for target 'uninstall_target'
+Makefile:1742: warning: ignoring old recipe for target 'uninstall_target'
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil'
+Makefile:422: warning: overriding recipe for target 'install_target'
+Makefile:412: warning: ignoring old recipe for target 'install_target'
+Makefile:427: warning: overriding recipe for target 'uninstall_target'
+Makefile:417: warning: ignoring old recipe for target 'uninstall_target'
+rm -f moc_predefs.h
+rm -f qrc_resources.cpp
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray'
+rm -f qrc_resources.cpp
+rm -f moc_scdimgclient.cpp
+rm -f moc_predefs.h
+rm -f moc_predefs.h
+rm -f moc_predefs.h
+rm -f moc_ipwatcher.cpp moc_networkprofil.cpp moc_singleinstance.cpp
+rm -f main.o scdimgclient.o moc_scdimgclient.o
+rm -f moc_MyCommand.cpp moc_VideoDecodeThread.cpp moc_VideoPlayer.cpp moc_filetransferclient.cpp moc_mainwindow.cpp moc_multicast_receiver.cpp moc_multicastaddressdialog.cpp moc_mypc.cpp moc_rubberband.cpp moc_scdimgclient.cpp moc_scdimgserver.cpp moc_scdimgserverthread.cpp moc_AbstractVideoDecoder.cpp moc_CpuVideoDecoder.cpp moc_audioopusdecoder.cpp moc_h264decoder.cpp moc_h264depacketizer.cpp moc_vaapivideodecoder.cpp moc_vaapizerocopydecoder.cpp moc_audioopusencoder.cpp moc_rtpjitterbuffer.cpp moc_audioplayback.cpp moc_audioprocessor.cpp moc_rtpaudioplayback.cpp moc_rtpaudioprocessor.cpp moc_openglvideopreview.cpp moc_videopreview.cpp moc_rtpreceiver.cpp moc_rtpsource.cpp moc_rtpworker.cpp moc_rtspsource.cpp moc_rtspworker.cpp moc_AbstractVideoRenderer.cpp moc_openglvaapizerocopyrenderer.cpp moc_openglvideorenderer.cpp moc_testvideowidget.cpp moc_videorenderer.cpp moc_audioscheduler.cpp moc_mediaclock.cpp moc_videoscheduler.cpp moc_rtpaudioscheduler.cpp moc_rtpmediaclock.cpp moc_rtpvideoscheduler.cpp moc_rtspconnection.cpp moc_sessiondescription.cpp moc_rstpreceiverstream.cpp moc_rtpreceiverstream.cpp moc_controlchannel.cpp moc_controlclient.cpp moc_controlserver.cpp moc_userprivilegehelper.cpp
+rm -f moc_commanrunner.cpp moc_mainwindow.cpp moc_singleinstance.cpp moc_userprivilegehelper.cpp
+rm -f ipwatcher.o main.o networkprofil.o singleinstance.o moc_ipwatcher.o moc_networkprofil.o moc_singleinstance.o
+rm -f *~ core *.core
+rm -f filetransferclient.o main.o mainwindow.o multicast_receiver.o multicastaddressdialog.o mypc.o pcdata.o rubberband.o scdimgclient.o scdimgserver.o scdimgserverthread.o camerainforeader.o commandlineparser.o mediafileinforeader.o videoconverter.o CpuVideoDecoder.o audioopusdecoder.o h264decoder.o h264depacketizer.o vaapivideodecoder.o vaapizerocopydecoder.o videodecoderfactory.o audioopusencoder.o rtpjitterbuffer.o audioplayback.o audioprocessor.o rtpaudioplayback.o rtpaudioprocessor.o openglvideopreview.o videopreview.o rtpreceiver.o rtpsource.o rtpworker.o rtspsource.o rtspworker.o openglvaapizerocopyrenderer.o openglvideorenderer.o testvideowidget.o videorenderer.o audioscheduler.o mediaclock.o videoscheduler.o rtpaudioscheduler.o rtpmediaclock.o rtpvideoscheduler.o rtspconnection.o sessiondescription.o rstpreceiverstream.o rtpreceiverstream.o controlchannel.o controlclient.o controlmessage.o controlserver.o userpassword.o userprivilegehelper.o qrc_resources.o moc_MyCommand.o moc_VideoDecodeThread.o moc_VideoPlayer.o moc_filetransferclient.o moc_mainwindow.o moc_multicast_receiver.o moc_multicastaddressdialog.o moc_mypc.o moc_rubberband.o moc_scdimgclient.o moc_scdimgserver.o moc_scdimgserverthread.o moc_AbstractVideoDecoder.o moc_CpuVideoDecoder.o moc_audioopusdecoder.o moc_h264decoder.o moc_h264depacketizer.o moc_vaapivideodecoder.o moc_vaapizerocopydecoder.o moc_audioopusencoder.o moc_rtpjitterbuffer.o moc_audioplayback.o moc_audioprocessor.o moc_rtpaudioplayback.o moc_rtpaudioprocessor.o moc_openglvideopreview.o moc_videopreview.o moc_rtpreceiver.o moc_rtpsource.o moc_rtpworker.o moc_rtspsource.o moc_rtspworker.o moc_AbstractVideoRenderer.o moc_openglvaapizerocopyrenderer.o moc_openglvideorenderer.o moc_testvideowidget.o moc_videorenderer.o moc_audioscheduler.o moc_mediaclock.o moc_videoscheduler.o moc_rtpaudioscheduler.o moc_rtpmediaclock.o moc_rtpvideoscheduler.o moc_rtspconnection.o moc_sessiondescription.o moc_rstpreceiverstream.o moc_rtpreceiverstream.o moc_controlchannel.o moc_controlclient.o moc_controlserver.o moc_userprivilegehelper.o
+rm -f main.o mainwindow.o singleinstance.o userprivilegehelper.o qrc_resources.o moc_commanrunner.o moc_mainwindow.o moc_singleinstance.o moc_userprivilegehelper.o
+rm -f *~ core *.core
+rm -f *~ core *.core
+rm -f *~ core *.core
+rm -f scd-client 
+rm -f e-ag-networkprofil 
+rm -f Makefile
+rm -f e-ag-tray 
+rm -f Makefile
+rm -f e-ag 
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil'
+rm -f Makefile
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/scd-client'
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray'
+rm -f Makefile
+cd servercamera/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/servercamera/servercamera.pro ) && make -f Makefile distclean
+cd serverscreen/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/serverscreen/serverscreen.pro ) && make -f Makefile distclean
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag'
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/serverscreen'
+Makefile:375: warning: overriding recipe for target 'install_target'
+Makefile:365: warning: ignoring old recipe for target 'install_target'
+Makefile:380: warning: overriding recipe for target 'uninstall_target'
+Makefile:370: warning: ignoring old recipe for target 'uninstall_target'
+cd clientcamera/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/clientcamera/clientcamera.pro ) && make -f Makefile distclean
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/servercamera'
+Makefile:392: warning: overriding recipe for target 'install_target'
+Makefile:382: warning: ignoring old recipe for target 'install_target'
+Makefile:397: warning: overriding recipe for target 'uninstall_target'
+Makefile:387: warning: ignoring old recipe for target 'uninstall_target'
+cd mediastreamer/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/mediastreamer/mediastreamer.pro ) && make -f Makefile distclean
+rm -f moc_predefs.h
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/clientcamera'
+Makefile:388: warning: overriding recipe for target 'install_target'
+Makefile:378: warning: ignoring old recipe for target 'install_target'
+Makefile:393: warning: overriding recipe for target 'uninstall_target'
+Makefile:383: warning: ignoring old recipe for target 'uninstall_target'
+rm -f moc_mainwindow.cpp
+rm -f main.o mainwindow.o moc_mainwindow.o
+rm -f moc_predefs.h
+rm -f main.o
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/mediastreamer'
+rm -f moc_predefs.h
+rm -f *~ core *.core
+rm -f moc_audiomixer.cpp moc_microphoneaudiocapture.cpp moc_systemaudiocapture.cpp moc_mediareaderthread.cpp moc_waylandscreencast.cpp moc_audioopusdecoder.cpp moc_h264decoder.cpp moc_h264depacketizer.cpp moc_audioopusencoder.cpp moc_h264encoder.cpp moc_rtpjitterbuffer.cpp moc_rtppacketizer.cpp moc_audioplayback.cpp moc_audioprocessor.cpp moc_videopreview.cpp moc_rtpreceiver.cpp moc_videorenderer.cpp moc_audiosender.cpp moc_rtpsender.cpp moc_videosender.cpp moc_httpserver.cpp moc_rtspconnection.cpp moc_rtspserver.cpp moc_sessiondescription.cpp moc_senderpipeline.cpp moc_audioscheduler.cpp moc_mastertime.cpp moc_mediaclock.cpp moc_videoscheduler.cpp moc_capturethread.cpp moc_controlchannel.cpp moc_controlclient.cpp moc_controlserver.cpp
+rm -f *~ core *.core
+rm -f audiomixer.o microphoneaudiocapture.o systemaudiocapture.o ffmpegpipewirescreencapture.o ffmpegscreencapture.o mediafilecapture.o mediareaderthread.o pipewirescreencapture.o screencapture.o v4l2buffer.o v4l2capture.o waylandscreencast.o camerainforeader.o commandlineparser.o mediafileinforeader.o videoconverter.o videoframeconverter.o audioopusdecoder.o h264decoder.o h264depacketizer.o audioopusencoder.o h264encoder.o main.o rtpjitterbuffer.o rtppacketizer.o audioplayback.o audioprocessor.o videopreview.o rtpreceiver.o videorenderer.o audiosender.o rtpsender.o videosender.o httpserver.o rtspconnection.o rtspserver.o sessiondescription.o senderpipeline.o audioscheduler.o mastertime.o mediaclock.o videoscheduler.o capturethread.o controlchannel.o controlclient.o controlmessage.o controlserver.o moc_audiomixer.o moc_microphoneaudiocapture.o moc_systemaudiocapture.o moc_mediareaderthread.o moc_waylandscreencast.o moc_audioopusdecoder.o moc_h264decoder.o moc_h264depacketizer.o moc_audioopusencoder.o moc_h264encoder.o moc_rtpjitterbuffer.o moc_rtppacketizer.o moc_audioplayback.o moc_audioprocessor.o moc_videopreview.o moc_rtpreceiver.o moc_videorenderer.o moc_audiosender.o moc_rtpsender.o moc_videosender.o moc_httpserver.o moc_rtspconnection.o moc_rtspserver.o moc_sessiondescription.o moc_senderpipeline.o moc_audioscheduler.o moc_mastertime.o moc_mediaclock.o moc_videoscheduler.o moc_capturethread.o moc_controlchannel.o moc_controlclient.o moc_controlserver.o
+rm -f serverscreen 
+rm -f moc_predefs.h
+rm -f Makefile
+rm -f *~ core *.core
+rm -f servercamera 
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/serverscreen'
+rm -f moc_vlcwidget.cpp
+rm -f main.o vlcwidget.o moc_vlcwidget.o
+cd dds/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/dds/dds.pro ) && make -f Makefile distclean
+rm -f Makefile
+rm -f mediastreamer 
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/servercamera'
+rm -f Makefile
+rm -f *~ core *.core
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/mediastreamer'
+rm -f clientcamera 
+rm -f Makefile
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds'
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/clientcamera'
+cd dds-service/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-service/dds-service.pro ) && make -f Makefile distclean
+cd dds-conf/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-conf/dds-conf.pro ) && make -f Makefile distclean
+cd dds-monitor/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-monitor/dds-monitor.pro ) && make -f Makefile distclean
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-service'
+rm -f moc_predefs.h
+rm -f moc_discoverymanager.cpp moc_filereceiver.cpp moc_filesender.cpp moc_monitorserver.cpp moc_normbandwidthestimator.cpp moc_normnetworkprobe.cpp moc_normreceiver.cpp moc_normreceiverworker.cpp moc_normsender.cpp moc_normsenderworker.cpp moc_transfermanager.cpp moc_udppacketrouter.cpp moc_ddsservice.cpp moc_userprivilegehelper.cpp
+rm -f discoverymanager.o filereceiver.o filesender.o main.o monitorserver.o normbandwidthestimator.o normnetworkprobe.o normreceiver.o normreceiverworker.o normsender.o normsenderworker.o transfermanager.o udppacketrouter.o ddsservice.o userprivilegehelper.o moc_discoverymanager.o moc_filereceiver.o moc_filesender.o moc_monitorserver.o moc_normbandwidthestimator.o moc_normnetworkprobe.o moc_normreceiver.o moc_normreceiverworker.o moc_normsender.o moc_normsenderworker.o moc_transfermanager.o moc_udppacketrouter.o moc_ddsservice.o moc_userprivilegehelper.o
+rm -f *~ core *.core
+rm -f dds-service 
+rm -f Makefile
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-conf'
+rm -f moc_predefs.h
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-monitor'
+rm -f qrc_icons.cpp
+rm -f moc_predefs.h
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-service'
+rm -f moc_monitorclient.cpp moc_roledialog.cpp moc_userprivilegehelper.cpp
+rm -f main.o
+rm -f main.o monitorclient.o roledialog.o userprivilegehelper.o qrc_icons.o moc_monitorclient.o moc_roledialog.o moc_userprivilegehelper.o
+rm -f *~ core *.core
+rm -f *~ core *.core
+rm -f dds-conf 
+rm -f dds-monitor 
+rm -f Makefile
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-conf'
+rm -f Makefile
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds/dds-monitor'
+rm -f Makefile
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/dds'
+rm -f Makefile
+rm -f .qmake.stash
+make[1]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+   dh_clean
+ debian/rules binary
+dh binary
+   dh_update_autotools_config
+   dh_autoreconf
+   debian/rules override_dh_auto_configure
+make[1]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+/usr/lib/qt6/bin/qmake6 -makefile
+Info: creating stash file /home/etapadmin/Masaüstü/e-ag-qt6/.qmake.stash
+make[1]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+   debian/rules override_dh_auto_build
+make[1]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+dh_auto_build --buildsystem=qmake
+	make -j4
+make[2]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+cd e-ag/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag/e-ag.pro ) && make -f Makefile 
+cd e-ag-tray/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/e-ag-tray.pro ) && make -f Makefile 
+cd e-ag-networkprofil/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/e-ag-networkprofil.pro ) && make -f Makefile 
+cd scd-client/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/scd-client/scd-client.pro ) && make -f Makefile 
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/scd-client'
+Makefile:378: warning: overriding recipe for target 'install_target'
+Makefile:368: warning: ignoring old recipe for target 'install_target'
+Makefile:383: warning: overriding recipe for target 'uninstall_target'
+Makefile:373: warning: ignoring old recipe for target 'uninstall_target'
+Makefile:389: warning: overriding recipe for target 'install_target'
+Makefile:378: warning: ignoring old recipe for target 'install_target'
+Makefile:394: warning: overriding recipe for target 'uninstall_target'
+Makefile:383: warning: ignoring old recipe for target 'uninstall_target'
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I../../lib/protocol/ -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o main.o main.cpp
+sh: 1: cd: can't cd to /home/etapadmin/Masa�st�/e-ag-qt6/e-ag-tray
+WARNING: icon.path is not defined: install target not created
+
+WARNING: auto_start.path is not defined: install target not created
+
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray'
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o main.o main.cpp
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil'
+Makefile:422: warning: overriding recipe for target 'install_target'
+Makefile:412: warning: ignoring old recipe for target 'install_target'
+Makefile:427: warning: overriding recipe for target 'uninstall_target'
+Makefile:417: warning: ignoring old recipe for target 'uninstall_target'
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o ipwatcher.o ipwatcher.cpp
+sh: 1: cd: can't cd to /home/etapadmin/Masa�st�/e-ag-qt6/e-ag
+WARNING: langen.path is not defined: install target not created
+
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag'
+Makefile:1747: warning: overriding recipe for target 'install_target'
+Makefile:1737: warning: ignoring old recipe for target 'install_target'
+Makefile:1752: warning: overriding recipe for target 'uninstall_target'
+Makefile:1742: warning: ignoring old recipe for target 'uninstall_target'
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DX264_API_IMPORTS -D_REENTRANT -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/include/pipewire-0.3 -I/usr/include/spa-0.2 -I/usr/include/opus -I/usr/include/libdrm -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt6/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtSvg -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o filetransferclient.o filetransferclient.cpp
+main.cpp: In function ‘void onFinished(int, QString)’:
+main.cpp:23:37: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+   23 | void onFinished(int status, QString errMsg)
+      |                             ~~~~~~~~^~~~~~
+main.cpp: In function ‘void onConnect(QString, QString, quint16)’:
+main.cpp:34:38: warning: unused parameter ‘host’ [-Wunused-parameter]
+   34 | void onConnect(QString mess, QString host, quint16 port)
+      |                              ~~~~~~~~^~~~
+main.cpp:34:52: warning: unused parameter ‘port’ [-Wunused-parameter]
+   34 | void onConnect(QString mess, QString host, quint16 port)
+      |                                            ~~~~~~~~^~~~
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DX264_API_IMPORTS -D_REENTRANT -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/include/pipewire-0.3 -I/usr/include/spa-0.2 -I/usr/include/opus -I/usr/include/libdrm -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt6/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtSvg -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o main.o main.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o main.o main.cpp
+In file included from mainwindow.h:28,
+                 from main.cpp:20:
+./ekran.h: In member function ‘void Ekran::ekranKomutMesaj(QString, QString)’:
+./ekran.h:45:35: warning: unused parameter ‘baslik’ [-Wunused-parameter]
+   45 |      void ekranKomutMesaj(QString baslik,QString mesaj)
+      |                           ~~~~~~~~^~~~~~
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I../../lib/protocol/ -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o scdimgclient.o scdimgclient.cpp
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o mainwindow.o mainwindow.cpp
+scdimgclient.cpp: In member function ‘void SCDImgClient::onReadyRead()’:
+scdimgclient.cpp:466:30: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  466 |                        fwrite(buffer.constData(),1,static_cast<size_t>(buffer.size()),stdout);
+      |                        ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+scdimgclient.cpp:468:22: note: here
+  468 |                      case DS_TO_BUFFER:
+      |                      ^~~~
+scdimgclient.cpp:452:13: warning: this statement may fall through [-Wimplicit-fallthrough=]
+  452 |             }
+      |             ^
+scdimgclient.cpp:454:13: note: here
+  454 |             case WAITINGFORDATA:  // read data (file sent from server)
+      |             ^~~~
+scdimgclient.cpp: In member function ‘void SCDImgClient::onConnected()’:
+scdimgclient.cpp:343:4: warning: ‘ret’ may be used uninitialized [-Wmaybe-uninitialized]
+  343 |    if (!ret)
+      |    ^~
+scdimgclient.cpp:320:8: note: ‘ret’ was declared here
+  320 |    int ret;
+      |        ^~~
+g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+/usr/lib/qt6/libexec/moc -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/scd-client/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/scd-client -I/home/etapadmin/Masaüstü/lib/protocol -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include scdimgclient.h -o moc_scdimgclient.cpp
+In file included from mainwindow.h:28,
+                 from mainwindow.cpp:21:
+./ekran.h: In member function ‘void Ekran::ekranKomutMesaj(QString, QString)’:
+./ekran.h:45:35: warning: unused parameter ‘baslik’ [-Wunused-parameter]
+   45 |      void ekranKomutMesaj(QString baslik,QString mesaj)
+      |                           ~~~~~~~~^~~~~~
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I../../lib/protocol/ -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_scdimgclient.o moc_scdimgclient.cpp
+main.cpp: In function ‘int main(int, char**)’:
+main.cpp:83:21: warning: ignoring return value of ‘bool QTranslator::load(const QString&, const QString&, const QString&, const QString&)’, declared with attribute ‘nodiscard’ [-Wunused-result]
+   83 |     translator->load(localDir+"translations/"+language+".qm");
+      |     ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QTranslator:1,
+                 from main.cpp:32:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtranslator.h:33:24: note: declared here
+   33 |     [[nodiscard]] bool load(const QString & filename,
+      |                        ^~~~
+In file included from mainwindow.cpp:45:
+./Database.h: In member function ‘void DatabaseHelper::Find()’:
+./Database.h:133:13: warning: unused variable ‘genislik’ [-Wunused-variable]
+  133 |         int genislik = ayarlar.value("pencereGenisligi", 640).toInt(); // Varsayılan değer 640
+      |             ^~~~~~~~
+./Database.h:134:15: warning: variable ‘boyut’ set but not used [-Wunused-but-set-variable]
+  134 |         QSize boyut = ayarlar.value("pencereBoyutu").toSize();
+      |               ^~~~~
+mainwindow.cpp: In member function ‘QMenu* MainWindow::createMenu()’:
+mainwindow.cpp:189:10: warning: unused variable ‘restoreAction’ [-Wunused-variable]
+  189 |     auto restoreAction = new QAction(tr("&Ayarlar"), this);
+      |          ^~~~~~~~~~~~~
+main.cpp: In function ‘int main(int, char**)’:
+main.cpp:36:25: warning: unused variable ‘cl’ [-Wunused-variable]
+   36 |         NewtworkProfil *cl=new NewtworkProfil();
+      |                         ^~
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DX264_API_IMPORTS -D_REENTRANT -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/include/pipewire-0.3 -I/usr/include/spa-0.2 -I/usr/include/opus -I/usr/include/libdrm -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt6/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtSvg -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o mainwindow.o mainwindow.cpp
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o singleinstance.o singleinstance.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o networkprofil.o networkprofil.cpp
+In file included from mainwindow.cpp:47:
+./filecopyWidget.h:458:9: warning: "/*" within comment [-Wcomment]
+  458 |         /*connect(transfer, &FileTransferClient::finished,
+      |          
+g++ -Wl,-O1 -o scd-client  main.o scdimgclient.o moc_scdimgclient.o   /usr/lib/x86_64-linux-gnu/libQt6Network.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread   
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/scd-client'
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_DEPRECATED_WARNINGS -DX264_API_IMPORTS -D_REENTRANT -DQT_NO_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_SVG_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/include/pipewire-0.3 -I/usr/include/spa-0.2 -I/usr/include/opus -I/usr/include/libdrm -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtPrintSupport -I/usr/include/x86_64-linux-gnu/qt6/QtMultimediaWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtSvg -I/usr/include/x86_64-linux-gnu/qt6/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o multicast_receiver.o multicast_receiver.cpp
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o userprivilegehelper.o userprivilegehelper.cpp
+In file included from networkprofil.cpp:7:
+./Database.h: In member function ‘void DatabaseHelper::Find()’:
+./Database.h:139:13: warning: unused variable ‘genislik’ [-Wunused-variable]
+  139 |         int genislik = ayarlar.value("pencereGenisligi", 640).toInt(); // Varsayılan değer 640
+      |             ^~~~~~~~
+./Database.h:140:15: warning: variable ‘boyut’ set but not used [-Wunused-but-set-variable]
+  140 |         QSize boyut = ayarlar.value("pencereBoyutu").toSize();
+      |               ^~~~~
+cd servercamera/ && ( test -e Makefile || /usr/lib/qt6/bin/qmake6 -o Makefile /home/etapadmin/Masaüstü/e-ag-qt6/servercamera/servercamera.pro ) && make -f Makefile 
+make[3]: Entering directory '/home/etapadmin/Masaüstü/e-ag-qt6/servercamera'
+Makefile:392: warning: overriding recipe for target 'install_target'
+Makefile:382: warning: ignoring old recipe for target 'install_target'
+Makefile:397: warning: overriding recipe for target 'uninstall_target'
+Makefile:387: warning: ignoring old recipe for target 'uninstall_target'
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o main.o main.cpp
+In file included from mainwindow.cpp:29:
+./menu.h: In member function ‘void MainWindow::pcMenu(bool)’:
+./menu.h:503:10: warning: variable ‘wolState’ set but not used [-Wunused-but-set-variable]
+  503 |     bool wolState=false;
+      |          ^~~~~~~~
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o singleinstance.o singleinstance.cpp
+/usr/lib/qt6/libexec/rcc -name resources resources.qrc -o qrc_resources.cpp
+g++ -pipe -O2 -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o qrc_resources.o qrc_resources.cpp
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include commanrunner.h -o moc_commanrunner.cpp
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include singleinstance.h -o moc_singleinstance.cpp
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include userprivilegehelper.h -o moc_userprivilegehelper.cpp
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_commanrunner.o moc_commanrunner.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o mainwindow.o mainwindow.cpp
+In file included from mainwindow.cpp:36:
+./tcpudp.h: In member function ‘void MainWindow::clientCommandState(const QJsonObject&, QString)’:
+./tcpudp.h:270:42: error: no match for ‘operator<<’ (operand types are ‘QString’ and ‘QString’)
+  270 |         json["command_detail"].toString()<<
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+      |                                        |
+      |                                        QString
+  271 |         json["command_status"].toString();
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+      |                                        |
+      |                                        QString
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qmetatype.h:14,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h:18,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qmainwindow.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QMainWindow:1,
+                 from mainwindow.h:23,
+                 from mainwindow.cpp:20:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:384:21: note: candidate: ‘template<class Enum> QDataStream& operator<<(QDataStream&, QFlags<T>)’
+  384 | inline QDataStream &operator<<(QDataStream &s, QFlags<Enum> e)
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:384:21: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘QFlags<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:398:1: note: candidate: ‘template<class T> std::enable_if_t<std::is_enum<_Tp>::value, QDataStream&> operator<<(QDataStream&, const T&)’
+  398 | operator<<(QDataStream &s, const T &t)
+      | ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:398:1: note:   template argument deduction/substitution failed:
+./tcpudp.h:270:40: note:   cannot convert ‘QJsonValue::toString() const()’ (type ‘QString’) to type ‘QDataStream&’
+  270 |         json["command_detail"].toString()<<
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:415:63: note: candidate: ‘template<class T> QDataStreamIfHasOStreamOperatorsContainer<QList<T>, T> operator<<(QDataStream&, const QList<T>&)’
+  415 | inline QDataStreamIfHasOStreamOperatorsContainer<QList<T>, T> operator<<(QDataStream &s, const QList<T> &v)
+      |                                                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:415:63: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QList<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:427:62: note: candidate: ‘template<class T> QDataStreamIfHasOStreamOperatorsContainer<QSet<T>, T> operator<<(QDataStream&, const QSet<T>&)’
+  427 | inline QDataStreamIfHasOStreamOperatorsContainer<QSet<T>, T> operator<<(QDataStream &s, const QSet<T> &set)
+      |                                                              ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:427:62: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QSet<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:440:73: note: candidate: ‘template<class Key, class T> QDataStreamIfHasOStreamOperatorsContainer<QHash<Key, T>, Key, T> operator<<(QDataStream&, const QHash<Key, T>&)’
+  440 | inline QDataStreamIfHasOStreamOperatorsContainer<QHash<Key, T>, Key, T> operator<<(QDataStream &s, const QHash<Key, T> &hash)
+      |                                                                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:440:73: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QHash<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:452:78: note: candidate: ‘template<class Key, class T> QDataStreamIfHasOStreamOperatorsContainer<QMultiHash<Key, T>, Key, T> operator<<(QDataStream&, const QMultiHash<Key, T>&)’
+  452 | inline QDataStreamIfHasOStreamOperatorsContainer<QMultiHash<Key, T>, Key, T> operator<<(QDataStream &s, const QMultiHash<Key, T> &hash)
+      |                                                                              ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:452:78: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMultiHash<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:464:72: note: candidate: ‘template<class Key, class T> QDataStreamIfHasOStreamOperatorsContainer<QMap<Key, T>, Key, T> operator<<(QDataStream&, const QMap<Key, T>&)’
+  464 | inline QDataStreamIfHasOStreamOperatorsContainer<QMap<Key, T>, Key, T> operator<<(QDataStream &s, const QMap<Key, T> &map)
+      |                                                                        ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:464:72: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMap<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:476:77: note: candidate: ‘template<class Key, class T> QDataStreamIfHasOStreamOperatorsContainer<QMultiMap<Key, T>, Key, T> operator<<(QDataStream&, const QMultiMap<Key, T>&)’
+  476 | inline QDataStreamIfHasOStreamOperatorsContainer<QMultiMap<Key, T>, Key, T> operator<<(QDataStream &s, const QMultiMap<Key, T> &map)
+      |                                                                             ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:476:77: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMultiMap<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:489:49: note: candidate: ‘template<class T1, class T2> QDataStreamIfHasOStreamOperators<T1, T2> operator<<(QDataStream&, const std::pair<_T1, _T2>&)’
+  489 | inline QDataStreamIfHasOStreamOperators<T1, T2> operator<<(QDataStream& s, const std::pair<T1, T2> &p)
+      |                                                 ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:489:49: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::pair<_T1, _T2>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:11,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:13,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:11:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:217:53: note: candidate: ‘template<class T> QDebugIfHasDebugStreamContainer<QList<T>, T> operator<<(QDebug, const QList<T>&)’
+  217 | inline QDebugIfHasDebugStreamContainer<QList<T>, T> operator<<(QDebug debug, const QList<T> &vec)
+      |                                                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:217:53: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QList<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:223:34: note: candidate: ‘template<class T, long long int P> QDebugIfHasDebugStream<T> operator<<(QDebug, const QVarLengthArray<T, Prealloc>&)’
+  223 | inline QDebugIfHasDebugStream<T> operator<<(QDebug debug, const QVarLengthArray<T, P> &vec)
+      |                                  ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:223:34: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QVarLengthArray<T, Prealloc>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:229:34: note: candidate: ‘template<class T, class Alloc> QDebugIfHasDebugStream<T> operator<<(QDebug, const std::vector<_Tp, _Alloc>&)’
+  229 | inline QDebugIfHasDebugStream<T> operator<<(QDebug debug, const std::vector<T, Alloc> &vec)
+      |                                  ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:229:34: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::vector<_Tp, _Alloc>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:235:34: note: candidate: ‘template<class T, class Alloc> QDebugIfHasDebugStream<T> operator<<(QDebug, const std::__cxx11::list<_Tp, _Alloc>&)’
+  235 | inline QDebugIfHasDebugStream<T> operator<<(QDebug debug, const std::list<T, Alloc> &vec)
+      |                                  ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:235:34: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::__cxx11::list<_Tp, _Alloc>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:241:39: note: candidate: ‘template<class Key, class T, class Compare, class Alloc> QDebugIfHasDebugStream<Key, T> operator<<(QDebug, const std::map<_Key, _Tp, _Compare, _Allocator>&)’
+  241 | inline QDebugIfHasDebugStream<Key, T> operator<<(QDebug debug, const std::map<Key, T, Compare, Alloc> &map)
+      |                                       ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:241:39: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::map<_Key, _Tp, _Compare, _Allocator>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:247:39: note: candidate: ‘template<class Key, class T, class Compare, class Alloc> QDebugIfHasDebugStream<Key, T> operator<<(QDebug, const std::multimap<_Key, _Tp, _Compare, _Allocator>&)’
+  247 | inline QDebugIfHasDebugStream<Key, T> operator<<(QDebug debug, const std::multimap<Key, T, Compare, Alloc> &map)
+      |                                       ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:247:39: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::multimap<_Key, _Tp, _Compare, _Allocator>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:253:62: note: candidate: ‘template<class Key, class T> QDebugIfHasDebugStreamContainer<QMap<Key, T>, Key, T> operator<<(QDebug, const QMap<Key, T>&)’
+  253 | inline QDebugIfHasDebugStreamContainer<QMap<Key, T>, Key, T> operator<<(QDebug debug, const QMap<Key, T> &map)
+      |                                                              ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:253:62: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMap<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:259:67: note: candidate: ‘template<class Key, class T> QDebugIfHasDebugStreamContainer<QMultiMap<Key, T>, Key, T> operator<<(QDebug, const QMultiMap<Key, T>&)’
+  259 | inline QDebugIfHasDebugStreamContainer<QMultiMap<Key, T>, Key, T> operator<<(QDebug debug, const QMultiMap<Key, T> &map)
+      |                                                                   ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:259:67: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMultiMap<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:265:63: note: candidate: ‘template<class Key, class T> QDebugIfHasDebugStreamContainer<QHash<Key, T>, Key, T> operator<<(QDebug, const QHash<Key, T>&)’
+  265 | inline QDebugIfHasDebugStreamContainer<QHash<Key, T>, Key, T> operator<<(QDebug debug, const QHash<Key, T> &hash)
+      |                                                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:265:63: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QHash<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:271:68: note: candidate: ‘template<class Key, class T> QDebugIfHasDebugStreamContainer<QMultiHash<Key, T>, Key, T> operator<<(QDebug, const QMultiHash<Key, T>&)’
+  271 | inline QDebugIfHasDebugStreamContainer<QMultiHash<Key, T>, Key, T> operator<<(QDebug debug, const QMultiHash<Key, T> &hash)
+      |                                                                    ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:271:68: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QMultiHash<Key, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:277:39: note: candidate: ‘template<class T1, class T2> QDebugIfHasDebugStream<Key, T> operator<<(QDebug, const std::pair<_T1, _T2>&)’
+  277 | inline QDebugIfHasDebugStream<T1, T2> operator<<(QDebug debug, const std::pair<T1, T2> &pair)
+      |                                       ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:277:39: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const std::pair<_T1, _T2>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:285:52: note: candidate: ‘template<class T> QDebugIfHasDebugStreamContainer<QSet<T>, T> operator<<(QDebug, const QSet<T>&)’
+  285 | inline QDebugIfHasDebugStreamContainer<QSet<T>, T> operator<<(QDebug debug, const QSet<T> &set)
+      |                                                    ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:285:52: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QSet<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:291:34: note: candidate: ‘template<class T> QDebugIfHasDebugStream<T> operator<<(QDebug, const QContiguousCache<T>&)’
+  291 | inline QDebugIfHasDebugStream<T> operator<<(QDebug debug, const QContiguousCache<T> &cache)
+      |                                  ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:291:34: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QContiguousCache<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:350:15: note: candidate: ‘template<class T> QDebug operator<<(QDebug, const QSharedPointer<T>&)’
+  350 | inline QDebug operator<<(QDebug debug, const QSharedPointer<T> &ptr)
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:350:15: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QSharedPointer<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:360:15: note: candidate: ‘template<class T, class Tag> QDebug operator<<(QDebug, const QTaggedPointer<T, Tag>&)’
+  360 | inline QDebug operator<<(QDebug debug, const QTaggedPointer<T, Tag> &ptr)
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:360:15: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QTaggedPointer<T, Tag>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:394:1: note: candidate: ‘template<class T> typename std::enable_if<QtPrivate::IsQEnumHelper<T>::Value, QDebug>::type operator<<(QDebug, T)’
+  394 | operator<<(QDebug dbg, T value)
+      | ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:394:1: note:   template argument deduction/substitution failed:
+./tcpudp.h:270:40: note:   cannot convert ‘QJsonValue::toString() const()’ (type ‘QString’) to type ‘QDebug’
+  270 |         json["command_detail"].toString()<<
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:406:15: note: candidate: ‘template<class T, class A, class B, class C, class D> QDebug operator<<(QDebug, T)’
+  406 | inline QDebug operator<<(QDebug dbg, T value)
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:406:15: note:   template argument deduction/substitution failed:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:402:10: error: no type named ‘type’ in ‘struct std::enable_if<false, void>’
+  402 |          typename A = typename std::enable_if<std::is_enum<T>::value, void>::type,
+      |          ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:440:15: note: candidate: ‘template<class T> QDebug operator<<(QDebug, const QFlags<T>&)’
+  440 | inline QDebug operator<<(QDebug debug, const QFlags<T> &flags)
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:440:15: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QFlags<T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:38,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgetsDepends:4,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:3,
+                 from mainwindow.cpp:34:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qgenericmatrix.h:303:8: note: candidate: ‘template<int N, int M, class T> QDebug operator<<(QDebug, const QGenericMatrix<N, M, T>&)’
+  303 | QDebug operator<<(QDebug dbg, const QGenericMatrix<N, M, T> &m)
+      |        ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qgenericmatrix.h:303:8: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QGenericMatrix<N, M, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qgenericmatrix.h:323:14: note: candidate: ‘template<int N, int M, class T> QDataStream& operator<<(QDataStream&, const QGenericMatrix<N, M, T>&)’
+  323 | QDataStream &operator<<(QDataStream &stream, const QGenericMatrix<N, M, T> &matrix)
+      |              ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qgenericmatrix.h:323:14: note:   template argument deduction/substitution failed:
+./tcpudp.h:271:41: note:   ‘QString’ is not derived from ‘const QGenericMatrix<N, M, T>’
+  271 |         json["command_status"].toString();
+      |                                         ^
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qstring.h:14,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qhashfunctions.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qlist.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/QList:1,
+                 from mainwindow.h:22:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qchar.h:617:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, QChar)’
+  617 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QChar);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qchar.h:617:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  617 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QChar);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qstringview.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qchar.h:651:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbytearray.h:579:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QByteArray&)’
+  579 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QByteArray &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbytearray.h:579:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  579 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QByteArray &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qstring.h:1512:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QString&)’
+ 1512 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QString &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qstring.h:1512:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+ 1512 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QString &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:549:21: note: candidate: ‘QDataStream& operator<<(QDataStream&, QKeyCombination)’
+  549 | inline QDataStream &operator<<(QDataStream &s, QKeyCombination combination)
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:549:45: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  549 | inline QDataStream &operator<<(QDataStream &s, QKeyCombination combination)
+      |                                ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h:491:22: note: candidate: ‘QDebug operator<<(QDebug, const QObject*)’
+  491 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QObject *);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qobject.h:491:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  491 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QObject *);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:89:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QMargins&)’
+   89 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QMargins &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:89:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   89 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QMargins &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:261:22: note: candidate: ‘QDebug operator<<(QDebug, const QMargins&)’
+  261 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QMargins &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:261:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  261 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QMargins &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:339:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QMarginsF&)’
+  339 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QMarginsF &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:339:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  339 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QMarginsF &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:495:22: note: candidate: ‘QDebug operator<<(QDebug, const QMarginsF&)’
+  495 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QMarginsF &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmargins.h:495:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  495 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QMarginsF &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:9:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h:176:38: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QKeySequence&)’
+  176 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &in, const QKeySequence &ks);
+      |                                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h:21:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   21 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &in, const QKeySequence &ks);
+      |                                      ~~~~~~~~~~~~~^~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h:190:21: note: candidate: ‘QDebug operator<<(QDebug, const QKeySequence&)’
+  190 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QKeySequence &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qkeysequence.h:190:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  190 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QKeySequence &);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:11:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:102:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QSize&)’
+  102 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QSize &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:102:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  102 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QSize &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:197:22: note: candidate: ‘QDebug operator<<(QDebug, const QSize&)’
+  197 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QSize &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:197:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  197 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QSize &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:292:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QSizeF&)’
+  292 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QSizeF &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:292:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  292 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QSizeF &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:393:22: note: candidate: ‘QDebug operator<<(QDebug, const QSizeF&)’
+  393 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QSizeF &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qsize.h:393:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  393 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QSizeF &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpaintdevice.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:105:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPoint&)’
+  105 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QPoint &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:105:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  105 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QPoint &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:200:22: note: candidate: ‘QDebug operator<<(QDebug, const QPoint&)’
+  200 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QPoint &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:200:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  200 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QPoint &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:304:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPointF&)’
+  304 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QPointF &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:304:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  304 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QPointF &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:395:22: note: candidate: ‘QDebug operator<<(QDebug, const QPointF&)’
+  395 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QPointF &p);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qpoint.h:395:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  395 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QPointF &p);
+      |                                 ~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:141:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QRect&)’
+  141 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QRect &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:141:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  141 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QRect &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:473:22: note: candidate: ‘QDebug operator<<(QDebug, const QRect&)’
+  473 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QRect &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:473:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  473 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QRect &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:602:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QRectF&)’
+  602 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QRectF &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:602:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  602 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QRectF &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:890:22: note: candidate: ‘QDebug operator<<(QDebug, const QRectF&)’
+  890 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QRectF &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qrect.h:890:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  890 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QRectF &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:9:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h:23:21: note: candidate: ‘QDebug operator<<(QDebug, const QColor&)’
+   23 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QColor &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h:23:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   23 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QColor &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h:261:38: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QColor&)’
+  261 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QColor &);
+      |                                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolor.h:26:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   26 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QColor &);
+      |                                      ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h:12,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:13:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:66:21: note: candidate: ‘QDebug operator<<(QDebug, const QPolygon&)’
+   66 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPolygon &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:66:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   66 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPolygon &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:73:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPolygon&)’
+   73 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &stream, const QPolygon &polygon);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:73:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   73 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &stream, const QPolygon &polygon);
+      |                                      ~~~~~~~~~~~~~^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:133:21: note: candidate: ‘QDebug operator<<(QDebug, const QPolygonF&)’
+  133 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPolygonF &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:133:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  133 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPolygonF &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:140:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPolygonF&)’
+  140 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &stream, const QPolygonF &array);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpolygon.h:140:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  140 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &stream, const QPolygonF &array);
+      |                                      ~~~~~~~~~~~~~^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:8:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h:136:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QRegion&)’
+  136 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QRegion &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h:107:49: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  107 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QRegion &);
+      |                                                 ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h:141:21: note: candidate: ‘QDebug operator<<(QDebug, const QRegion&)’
+  141 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QRegion &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qregion.h:141:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  141 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QRegion &);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:170:22: note: candidate: ‘QDebug operator<<(QDebug, const QLine&)’
+  170 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QLine &p);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:170:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  170 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QLine &p);
+      |                                 ~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:174:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QLine&)’
+  174 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLine &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:174:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  174 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLine &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:395:22: note: candidate: ‘QDebug operator<<(QDebug, const QLineF&)’
+  395 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QLineF &p);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:395:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  395 | Q_CORE_EXPORT QDebug operator<<(QDebug d, const QLineF &p);
+      |                                 ~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:399:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QLineF&)’
+  399 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLineF &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qline.h:399:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  399 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLineF &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:313:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QTransform&)’
+  313 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QTransform &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:313:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  313 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QTransform &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:318:21: note: candidate: ‘QDebug operator<<(QDebug, const QTransform&)’
+  318 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTransform &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtransform.h:318:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  318 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTransform &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h:326:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QImage&)’
+  326 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QImage &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h:326:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  326 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QImage &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h:331:21: note: candidate: ‘QDebug operator<<(QDebug, const QImage&)’
+  331 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QImage &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qimage.h:331:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  331 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QImage &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:176:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPixmap&)’
+  176 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPixmap &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:176:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  176 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPixmap &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:181:21: note: candidate: ‘QDebug operator<<(QDebug, const QPixmap&)’
+  181 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPixmap &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpixmap.h:181:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  181 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPixmap &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:113:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QIcon&)’
+  113 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QIcon &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:101:49: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  101 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QIcon &);
+      |                                                 ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:118:21: note: candidate: ‘QDebug operator<<(QDebug, const QIcon&)’
+  118 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QIcon &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qicon.h:118:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  118 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QIcon &);
+      |                                ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:9:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtextstream.h:192:21: note: candidate: ‘QTextStream& operator<<(QTextStream&, QTextStreamFunction)’
+  192 | inline QTextStream &operator<<(QTextStream &s, QTextStreamFunction f)
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtextstream.h:192:45: note:   no known conversion for argument 1 from ‘QString’ to ‘QTextStream&’
+  192 | inline QTextStream &operator<<(QTextStream &s, QTextStreamFunction f)
+      |                                ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtextstream.h:195:21: note: candidate: ‘QTextStream& operator<<(QTextStream&, QTextStreamManipulator)’
+  195 | inline QTextStream &operator<<(QTextStream &s, QTextStreamManipulator m)
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtextstream.h:195:45: note:   no known conversion for argument 1 from ‘QString’ to ‘QTextStream&’
+  195 | inline QTextStream &operator<<(QTextStream &s, QTextStreamManipulator m)
+      |                                ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:447:15: note: candidate: ‘QDebug operator<<(QDebug, QKeyCombination)’
+  447 | inline QDebug operator<<(QDebug debug, QKeyCombination combination)
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdebug.h:447:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  447 | inline QDebug operator<<(QDebug debug, QKeyCombination combination)
+      |                          ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:560:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QVariant&)’
+  560 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &s, const QVariant &p);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:560:52: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  560 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &s, const QVariant &p);
+      |                                       ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:574:21: note: candidate: ‘QDataStream& operator<<(QDataStream&, QVariant::Type)’
+  574 | inline QDataStream &operator<<(QDataStream &s, const QVariant::Type p)
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:574:45: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  574 | inline QDataStream &operator<<(QDataStream &s, const QVariant::Type p)
+      |                                ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:622:22: note: candidate: ‘QDebug operator<<(QDebug, QVariant::Type)’
+  622 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QVariant::Type);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qvariant.h:622:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  622 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QVariant::Type);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:242:21: note: candidate: ‘QDebug operator<<(QDebug, const QAction*)’
+  242 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QAction *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:242:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  242 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QAction *);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpalette.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:13:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h:104:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QBrush&)’
+  104 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QBrush &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h:104:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  104 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QBrush &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h:109:21: note: candidate: ‘QDebug operator<<(QDebug, const QBrush&)’
+  109 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QBrush &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qbrush.h:109:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  109 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QBrush &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpalette.h:155:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPalette&)’
+  155 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &ds, const QPalette &p);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpalette.h:138:62: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  138 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &s, const QPalette &p);
+      |                                                 ~~~~~~~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpalette.h:160:21: note: candidate: ‘QDebug operator<<(QDebug, const QPalette&)’
+  160 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPalette &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpalette.h:160:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  160 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPalette &);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:14:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h:317:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QFont&)’
+  317 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QFont &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h:279:49: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  279 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QFont &);
+      |                                                 ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h:322:21: note: candidate: ‘QDebug operator<<(QDebug, const QFont&)’
+  322 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QFont &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h:284:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  284 |     friend Q_GUI_EXPORT QDebug operator<<(QDebug, const QFont &);
+      |                                           ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:17:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qsizepolicy.h:168:31: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QSizePolicy&)’
+  168 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &, const QSizePolicy &);
+      |                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qsizepolicy.h:108:53: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  108 |     friend Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &, const QSizePolicy &);
+      |                                                     ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qsizepolicy.h:173:25: note: candidate: ‘QDebug operator<<(QDebug, const QSizePolicy&)’
+  173 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug dbg, const QSizePolicy &);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qsizepolicy.h:173:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  173 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug dbg, const QSizePolicy &);
+      |                                    ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:20:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h:94:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QCursor&)’
+   94 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &outS, const QCursor &cursor);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h:94:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   94 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &outS, const QCursor &cursor);
+      |                                      ~~~~~~~~~~~~~^~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h:99:21: note: candidate: ‘QDebug operator<<(QDebug, const QCursor&)’
+   99 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QCursor &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcursor.h:99:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   99 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QCursor &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:918:25: note: candidate: ‘QDebug operator<<(QDebug, const QWidget*)’
+  918 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QWidget *);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qwidget.h:918:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  918 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QWidget *);
+      |                                    ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemview.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtableview.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QTableWidget:1,
+                 from mainwindow.h:24:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h:166:22: note: candidate: ‘QDebug operator<<(QDebug, const QModelIndex&)’
+  166 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QModelIndex &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h:166:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  166 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QModelIndex &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h:222:22: note: candidate: ‘QDebug operator<<(QDebug, const QPersistentModelIndex&)’
+  222 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QPersistentModelIndex &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h:212:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  212 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QPersistentModelIndex &);
+      |                                            ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemview.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qitemselectionmodel.h:200:22: note: candidate: ‘QDebug operator<<(QDebug, const QItemSelectionRange&)’
+  200 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QItemSelectionRange &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qitemselectionmodel.h:200:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  200 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QItemSelectionRange &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemdelegate.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractitemview.h:11:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h:1137:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QLocale&)’
+ 1137 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLocale &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h:1137:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+ 1137 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QLocale &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h:1142:22: note: candidate: ‘QDebug operator<<(QDebug, const QLocale&)’
+ 1142 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QLocale &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h:1142:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+ 1142 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QLocale &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qvalidator.h:12,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qabstractspinbox.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:11:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:161:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QRegularExpression&)’
+  161 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &out, const QRegularExpression &re);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:161:52: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  161 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &out, const QRegularExpression &re);
+      |                                       ~~~~~~~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:166:22: note: candidate: ‘QDebug operator<<(QDebug, const QRegularExpression&)’
+  166 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QRegularExpression &re);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:166:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  166 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QRegularExpression &re);
+      |                                 ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:167:22: note: candidate: ‘QDebug operator<<(QDebug, QRegularExpression::PatternOptions)’
+  167 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QRegularExpression::PatternOptions patternOptions);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:167:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  167 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QRegularExpression::PatternOptions patternOptions);
+      |                                 ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:238:22: note: candidate: ‘QDebug operator<<(QDebug, const QRegularExpressionMatch&)’
+  238 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QRegularExpressionMatch &match);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h:238:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  238 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QRegularExpressionMatch &match);
+      |                                 ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:747:25: note: candidate: ‘QDebug operator<<(QDebug, const QStyleOption::OptionType&)’
+  747 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QStyleOption::OptionType &optionType);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:747:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  747 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QStyleOption::OptionType &optionType);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:748:25: note: candidate: ‘QDebug operator<<(QDebug, const QStyleOption&)’
+  748 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QStyleOption &option);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstyleoption.h:748:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  748 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QStyleOption &option);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h:185:31: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QTableWidgetItem&)’
+  185 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QTableWidgetItem &item);
+      |                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtablewidget.h:185:55: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  185 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QTableWidgetItem &item);
+      |                                          ~~~~~~~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlabel.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QLabel:1,
+                 from mainwindow.h:29:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qiodevice.h:143:22: note: candidate: ‘QDebug operator<<(QDebug, QIODeviceBase::OpenMode)’
+  143 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QIODevice::OpenMode modes);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qiodevice.h:143:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  143 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QIODevice::OpenMode modes);
+      |                                 ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h:80:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPicture&)’
+   80 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPicture &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpicture.h:50:62: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   50 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &in, const QPicture &p);
+      |                                                 ~~~~~~~~~~~~~^~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextdocument.h:13,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlabel.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h:313:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QUrl&)’
+  313 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QUrl &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h:313:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  313 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QUrl &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h:318:22: note: candidate: ‘QDebug operator<<(QDebug, const QUrl&)’
+  318 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QUrl &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qurl.h:318:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  318 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QUrl &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextcursor.h:11,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlineedit.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QLineEdit:1,
+                 from mainwindow.h:30:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpen.h:84:38: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPen&)’
+   84 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPen &);
+      |                                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpen.h:20:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   20 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPen &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpen.h:97:21: note: candidate: ‘QDebug operator<<(QDebug, const QPen&)’
+   97 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPen &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpen.h:97:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   97 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPen &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h:41:21: note: candidate: ‘QDebug operator<<(QDebug, const QTextLength&)’
+   41 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTextLength &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h:41:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   41 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTextLength &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h:86:21: note: candidate: ‘QDebug operator<<(QDebug, const QTextFormat&)’
+   86 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTextFormat &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qtextformat.h:86:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   86 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QTextFormat &);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qfileinfo.h:11,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qdir.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qfiledialog.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QFileDialog:1,
+                 from mainwindow.h:32:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:531:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, QDate)’
+  531 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QDate);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:179:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  179 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QDate);
+      |                                                  ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:533:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, QTime)’
+  533 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QTime);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:245:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  245 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, QTime);
+      |                                                  ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:535:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QDateTime&)’
+  535 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QDateTime &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:520:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  520 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QDateTime &);
+      |                                                  ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:540:22: note: candidate: ‘QDebug operator<<(QDebug, QDate)’
+  540 | Q_CORE_EXPORT QDebug operator<<(QDebug, QDate);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:540:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  540 | Q_CORE_EXPORT QDebug operator<<(QDebug, QDate);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:541:22: note: candidate: ‘QDebug operator<<(QDebug, QTime)’
+  541 | Q_CORE_EXPORT QDebug operator<<(QDebug, QTime);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:541:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  541 | Q_CORE_EXPORT QDebug operator<<(QDebug, QTime);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:542:22: note: candidate: ‘QDebug operator<<(QDebug, const QDateTime&)’
+  542 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QDateTime &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatetime.h:525:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  525 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QDateTime &);
+      |                                            ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qfileinfo.h:175:22: note: candidate: ‘QDebug operator<<(QDebug, const QFileInfo&)’
+  175 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QFileInfo &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qfileinfo.h:175:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  175 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QFileInfo &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdir.h:244:22: note: candidate: ‘QDebug operator<<(QDebug, QDir::Filters)’
+  244 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QDir::Filters filters);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdir.h:244:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  244 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, QDir::Filters filters);
+      |                                 ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdir.h:245:22: note: candidate: ‘QDebug operator<<(QDebug, const QDir&)’
+  245 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QDir &dir);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdir.h:245:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  245 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QDir &dir);
+      |                                 ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtNetwork/qtcpserver.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtNetwork/QTcpServer:1,
+                 from mainwindow.h:37:
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qabstractsocket.h:231:25: note: candidate: ‘QDebug operator<<(QDebug, QAbstractSocket::SocketError)’
+  231 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QAbstractSocket::SocketError);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qabstractsocket.h:231:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  231 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QAbstractSocket::SocketError);
+      |                                    ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qabstractsocket.h:232:25: note: candidate: ‘QDebug operator<<(QDebug, QAbstractSocket::SocketState)’
+  232 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QAbstractSocket::SocketState);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qabstractsocket.h:232:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  232 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QAbstractSocket::SocketState);
+      |                                    ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtNetwork/qtcpserver.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qhostaddress.h:148:25: note: candidate: ‘QDebug operator<<(QDebug, const QHostAddress&)’
+  148 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, const QHostAddress &);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qhostaddress.h:148:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  148 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, const QHostAddress &);
+      |                                    ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qhostaddress.h:152:31: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QHostAddress&)’
+  152 | Q_NETWORK_EXPORT QDataStream &operator<<(QDataStream &, const QHostAddress &);
+      |                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qhostaddress.h:152:42: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  152 | Q_NETWORK_EXPORT QDataStream &operator<<(QDataStream &, const QHostAddress &);
+      |                                          ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qvector2d.h:5,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h:17,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtextlayout.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qabstracttextdocumentlayout.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qplaintextedit.h:15,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QPlainTextEdit:1,
+                 from mainwindow.h:41:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:644:21: note: candidate: ‘QDebug operator<<(QDebug, QVector2D)’
+  644 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector2D vector);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:644:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  644 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector2D vector);
+      |                                ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:648:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, QVector2D)’
+  648 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector2D );
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:648:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  648 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector2D );
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:850:21: note: candidate: ‘QDebug operator<<(QDebug, QVector3D)’
+  850 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector3D vector);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:850:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  850 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector3D vector);
+      |                                ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:854:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, QVector3D)’
+  854 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector3D );
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:854:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  854 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector3D );
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:1046:21: note: candidate: ‘QDebug operator<<(QDebug, QVector4D)’
+ 1046 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector4D vector);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:1046:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+ 1046 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, QVector4D vector);
+      |                                ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:1050:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, QVector4D)’
+ 1050 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector4D );
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qvectornd.h:1050:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+ 1050 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, QVector4D );
+      |                                      ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:9:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen.h:145:21: note: candidate: ‘QDebug operator<<(QDebug, const QScreen*)’
+  145 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QScreen *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qscreen.h:145:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  145 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QScreen *);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h:96:21: note: candidate: ‘QDebug operator<<(QDebug, const QInputDevice*)’
+   96 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QInputDevice *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qinputdevice.h:96:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   96 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QInputDevice *);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h:121:21: note: candidate: ‘QDebug operator<<(QDebug, const QPointingDevice*)’
+  121 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPointingDevice *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpointingdevice.h:121:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  121 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPointingDevice *);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:135:21: note: candidate: ‘QDebug operator<<(QDebug, const QEventPoint*)’
+  135 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEventPoint *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:135:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  135 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEventPoint *);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:136:21: note: candidate: ‘QDebug operator<<(QDebug, const QEventPoint&)’
+  136 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEventPoint &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qeventpoint.h:136:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  136 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEventPoint &);
+      |                                ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h:899:21: note: candidate: ‘QDebug operator<<(QDebug, const QEvent*)’
+  899 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEvent *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qevent.h:899:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  899 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QEvent *);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:11,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtMultimedia/QMediaPlayer:1,
+                 from ./mypc.h:36,
+                 from mainwindow.h:45:
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:34:28: note: candidate: ‘QDebug operator<<(QDebug, QAudio::Error)’
+   34 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::Error error);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:34:46: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   34 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::Error error);
+      |                                       ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:35:28: note: candidate: ‘QDebug operator<<(QDebug, QAudio::State)’
+   35 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::State state);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:35:46: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   35 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::State state);
+      |                                       ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:36:28: note: candidate: ‘QDebug operator<<(QDebug, QAudio::VolumeScale)’
+   36 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::VolumeScale role);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qaudio.h:36:46: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   36 | Q_MULTIMEDIA_EXPORT QDebug operator<<(QDebug dbg, QAudio::VolumeScale role);
+      |                                       ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:15: note: candidate: ‘QDebug operator<<(QDebug, QMediaPlayer::PlaybackState)’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:191:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  191 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, PlaybackState)
+      | ^~~~~~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |                          ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:191:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  191 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, PlaybackState)
+      | ^~~~~~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:15: note: candidate: ‘QDebug operator<<(QDebug, QMediaPlayer::MediaStatus)’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:192:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  192 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, MediaStatus)
+      | ^~~~~~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |                          ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:192:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  192 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, MediaStatus)
+      | ^~~~~~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:15: note: candidate: ‘QDebug operator<<(QDebug, QMediaPlayer::Error)’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:193:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  193 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, Error)
+      | ^~~~~~~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaenumdebug.h:25:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   25 | inline QDebug operator<<(QDebug dbg, Class::Enum value) \
+      |                          ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtMultimedia/qmediaplayer.h:193:1: note: in expansion of macro ‘Q_MEDIA_ENUM_DEBUG’
+  193 | Q_MEDIA_ENUM_DEBUG(QMediaPlayer, Error)
+      | ^~~~~~~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonvalue.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qjsondocument.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/QJsonDocument:1,
+                 from ./Database.h:5,
+                 from ./mypc.h:38:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:94:22: note: candidate: ‘QDebug operator<<(QDebug, QCborSimpleType)’
+   94 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborSimpleType st);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:94:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   94 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborSimpleType st);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:95:22: note: candidate: ‘QDebug operator<<(QDebug, QCborKnownTags)’
+   95 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborKnownTags tg);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:95:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   95 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborKnownTags tg);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:96:22: note: candidate: ‘QDebug operator<<(QDebug, QCborTag)’
+   96 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborTag tg);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:96:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   96 | Q_CORE_EXPORT QDebug operator<<(QDebug, QCborTag tg);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:100:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, QCborSimpleType)’
+  100 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &ds, QCborSimpleType st);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborcommon.h:100:52: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  100 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &ds, QCborSimpleType st);
+      |                                       ~~~~~~~~~~~~~^~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:16:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/quuid.h:170:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QUuid&)’
+  170 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QUuid &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/quuid.h:170:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  170 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QUuid &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/quuid.h:175:22: note: candidate: ‘QDebug operator<<(QDebug, const QUuid&)’
+  175 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QUuid &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/quuid.h:175:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  175 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QUuid &);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:589:22: note: candidate: ‘QDebug operator<<(QDebug, const QCborValue&)’
+  589 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborValue &v);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:589:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  589 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborValue &v);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:594:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QCborValue&)’
+  594 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborValue &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborvalue.h:594:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  594 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborValue &);
+      |                                       ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonvalue.h:300:22: note: candidate: ‘QDebug operator<<(QDebug, const QJsonValue&)’
+  300 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonValue &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonvalue.h:105:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  105 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonValue &);
+      |                                            ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonvalue.h:304:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QJsonValue&)’
+  304 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonValue &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonvalue.h:106:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  106 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonValue &);
+      |                                                  ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsondocument.h:120:22: note: candidate: ‘QDebug operator<<(QDebug, const QJsonDocument&)’
+  120 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonDocument &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsondocument.h:110:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  110 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonDocument &);
+      |                                            ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsondocument.h:124:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QJsonDocument&)’
+  124 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonDocument &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsondocument.h:124:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  124 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonDocument &);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QJsonObject:1,
+                 from ./Database.h:6:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonobject.h:281:22: note: candidate: ‘QDebug operator<<(QDebug, const QJsonObject&)’
+  281 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonObject &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonobject.h:245:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  245 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonObject &);
+      |                                            ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonobject.h:285:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QJsonObject&)’
+  285 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonObject &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonobject.h:285:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  285 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonObject &);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QJsonArray:1,
+                 from ./Database.h:7:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonarray.h:245:22: note: candidate: ‘QDebug operator<<(QDebug, const QJsonArray&)’
+  245 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonArray &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonarray.h:226:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  226 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QJsonArray &);
+      |                                            ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonarray.h:249:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QJsonArray&)’
+  249 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonArray &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qjsonarray.h:249:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  249 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QJsonArray &);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QSurfaceFormat:1,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets/qopenglwidget.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtOpenGLWidgets/QOpenGLWidget:1,
+                 from ./streamplayer/renderer/AbstractVideoRenderer.h:4,
+                 from ./mypc.h:46:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qsurfaceformat.h:142:21: note: candidate: ‘QDebug operator<<(QDebug, const QSurfaceFormat&)’
+  142 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QSurfaceFormat &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qsurfaceformat.h:137:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  137 |     friend Q_GUI_EXPORT QDebug operator<<(QDebug, const QSurfaceFormat &);
+      |                                           ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpagelayout.h:12,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpagedpaintdevice.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtPrintSupport/qprinter.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtPrintSupport/QPrinter:1,
+                 from mainwindow.h:52:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpagesize.h:266:21: note: candidate: ‘QDebug operator<<(QDebug, const QPageSize&)’
+  266 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageSize &pageSize);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpagesize.h:266:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  266 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageSize &pageSize);
+      |                                ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpagelayout.h:111:21: note: candidate: ‘QDebug operator<<(QDebug, const QPageLayout&)’
+  111 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageLayout &pageLayout);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpagelayout.h:111:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  111 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageLayout &pageLayout);
+      |                                ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qpagedpaintdevice.h:10:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpageranges.h:74:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPageRanges&)’
+   74 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPageRanges &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpageranges.h:74:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   74 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPageRanges &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpageranges.h:79:21: note: candidate: ‘QDebug operator<<(QDebug, const QPageRanges&)’
+   79 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageRanges &pageRanges);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpageranges.h:79:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   79 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QPageRanges &pageRanges);
+      |                                ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtNetwork/QLocalSocket:1,
+                 from mainwindow.h:70:
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qlocalsocket.h:127:25: note: candidate: ‘QDebug operator<<(QDebug, QLocalSocket::LocalSocketError)’
+  127 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QLocalSocket::LocalSocketError);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qlocalsocket.h:127:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  127 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QLocalSocket::LocalSocketError);
+      |                                    ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qlocalsocket.h:128:25: note: candidate: ‘QDebug operator<<(QDebug, QLocalSocket::LocalSocketState)’
+  128 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QLocalSocket::LocalSocketState);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qlocalsocket.h:128:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  128 | Q_NETWORK_EXPORT QDebug operator<<(QDebug, QLocalSocket::LocalSocketState);
+      |                                    ^~~~~~
+In file included from mainwindow.cpp:23:
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qnetworkinterface.h:143:25: note: candidate: ‘QDebug operator<<(QDebug, const QNetworkAddressEntry&)’
+  143 | Q_NETWORK_EXPORT QDebug operator<<(QDebug debug, const QNetworkAddressEntry &entry);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qnetworkinterface.h:143:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  143 | Q_NETWORK_EXPORT QDebug operator<<(QDebug debug, const QNetworkAddressEntry &entry);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qnetworkinterface.h:144:25: note: candidate: ‘QDebug operator<<(QDebug, const QNetworkInterface&)’
+  144 | Q_NETWORK_EXPORT QDebug operator<<(QDebug debug, const QNetworkInterface &networkInterface);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtNetwork/qnetworkinterface.h:144:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  144 | Q_NETWORK_EXPORT QDebug operator<<(QDebug debug, const QNetworkInterface &networkInterface);
+      |                                    ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:33,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgetsDepends:3:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbitarray.h:126:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QBitArray&)’
+  126 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QBitArray &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbitarray.h:15:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   15 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QBitArray &);
+      |                                                  ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbitarray.h:131:22: note: candidate: ‘QDebug operator<<(QDebug, const QBitArray&)’
+  131 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QBitArray &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qbitarray.h:131:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  131 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QBitArray &);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:42:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborarray.h:281:22: note: candidate: ‘QDebug operator<<(QDebug, const QCborArray&)’
+  281 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborArray &a);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborarray.h:281:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  281 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborArray &a);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborarray.h:286:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QCborArray&)’
+  286 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborArray &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcborarray.h:286:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  286 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborArray &);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:44:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcbormap.h:347:22: note: candidate: ‘QDebug operator<<(QDebug, const QCborMap&)’
+  347 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborMap &m);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcbormap.h:347:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  347 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QCborMap &m);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcbormap.h:352:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QCborMap&)’
+  352 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborMap &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qcbormap.h:352:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  352 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QCborMap &);
+      |                                       ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:79:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h:88:22: note: candidate: ‘QDebug operator<<(QDebug, const QEasingCurve&)’
+   88 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QEasingCurve &item);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h:78:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   78 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QEasingCurve &item);
+      |                                            ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h:92:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QEasingCurve&)’
+   92 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QEasingCurve &);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qeasingcurve.h:81:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   81 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &, const QEasingCurve &);
+      |                                                  ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qlibraryinfo.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:133:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:22:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QVersionNumber&)’
+   22 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &out, const QVersionNumber &version);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:22:52: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+   22 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &out, const QVersionNumber &version);
+      |                                       ~~~~~~~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:307:22: note: candidate: ‘QDebug operator<<(QDebug, const QVersionNumber&)’
+  307 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QVersionNumber &version);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:307:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  307 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QVersionNumber &version);
+      |                                 ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:314:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QTypeRevision&)’
+  314 | Q_CORE_EXPORT QDataStream& operator<<(QDataStream &out, const QTypeRevision &revision);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:314:52: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  314 | Q_CORE_EXPORT QDataStream& operator<<(QDataStream &out, const QTypeRevision &revision);
+      |                                       ~~~~~~~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:458:22: note: candidate: ‘QDebug operator<<(QDebug, const QTypeRevision&)’
+  458 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QTypeRevision &revision);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qversionnumber.h:458:33: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  458 | Q_CORE_EXPORT QDebug operator<<(QDebug, const QTypeRevision &revision);
+      |                                 ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/qmimedatabase.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:148:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmimetype.h:95:22: note: candidate: ‘QDebug operator<<(QDebug, const QMimeType&)’
+   95 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QMimeType &mime);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmimetype.h:95:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   95 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QMimeType &mime);
+      |                                 ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:160:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qoperatingsystemversion.h:247:22: note: candidate: ‘QDebug operator<<(QDebug, const QOperatingSystemVersion&)’
+  247 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QOperatingSystemVersion &ov);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qoperatingsystemversion.h:247:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  247 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QOperatingSystemVersion &ov);
+      |                                 ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:224:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qstorageinfo.h:82:22: note: candidate: ‘QDebug operator<<(QDebug, const QStorageInfo&)’
+   82 | Q_CORE_EXPORT QDebug operator<<(QDebug debug, const QStorageInfo &);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qstorageinfo.h:72:44: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+   72 |     friend Q_CORE_EXPORT QDebug operator<<(QDebug, const QStorageInfo &);
+      |                                            ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtCore/QtCore:257:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtimezone.h:159:28: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QTimeZone&)’
+  159 | Q_CORE_EXPORT QDataStream &operator<<(QDataStream &ds, const QTimeZone &tz);
+      |                            ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtimezone.h:147:63: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  147 |     friend Q_CORE_EXPORT QDataStream &operator<<(QDataStream &ds, const QTimeZone &tz);
+      |                                                  ~~~~~~~~~~~~~^~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtimezone.h:164:22: note: candidate: ‘QDebug operator<<(QDebug, const QTimeZone&)’
+  164 | Q_CORE_EXPORT QDebug operator<<(QDebug dbg, const QTimeZone &tz);
+      |                      ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtimezone.h:164:40: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  164 | Q_CORE_EXPORT QDebug operator<<(QDebug dbg, const QTimeZone &tz);
+      |                                 ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:7:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaccessible.h:586:21: note: candidate: ‘QDebug operator<<(QDebug, const QAccessibleInterface*)’
+  586 | Q_GUI_EXPORT QDebug operator<<(QDebug d, const QAccessibleInterface *iface);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaccessible.h:586:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  586 | Q_GUI_EXPORT QDebug operator<<(QDebug d, const QAccessibleInterface *iface);
+      |                                ~~~~~~~^
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaccessible.h:587:21: note: candidate: ‘QDebug operator<<(QDebug, const QAccessibleEvent&)’
+  587 | Q_GUI_EXPORT QDebug operator<<(QDebug d, const QAccessibleEvent &ev);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qaccessible.h:587:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  587 | Q_GUI_EXPORT QDebug operator<<(QDebug d, const QAccessibleEvent &ev);
+      |                                ~~~~~~~^
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qbackingstore.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:17:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qwindow.h:380:21: note: candidate: ‘QDebug operator<<(QDebug, const QWindow*)’
+  380 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QWindow *);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qwindow.h:380:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  380 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QWindow *);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:22:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolorspace.h:133:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QColorSpace&)’
+  133 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QColorSpace &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolorspace.h:133:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  133 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QColorSpace &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolorspace.h:138:21: note: candidate: ‘QDebug operator<<(QDebug, const QColorSpace&)’
+  138 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QColorSpace &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qcolorspace.h:125:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  125 |     friend Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QColorSpace &colorSpace);
+      |                                           ~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/qmatrix4x4.h:10,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:55:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qquaternion.h:348:21: note: candidate: ‘QDebug operator<<(QDebug, const QQuaternion&)’
+  348 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QQuaternion &q);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qquaternion.h:348:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  348 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QQuaternion &q);
+      |                                ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qquaternion.h:352:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QQuaternion&)’
+  352 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QQuaternion &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qquaternion.h:352:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  352 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QQuaternion &);
+      |                                      ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qmatrix4x4.h:1060:21: note: candidate: ‘QDebug operator<<(QDebug, const QMatrix4x4&)’
+ 1060 | Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QMatrix4x4 &m);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qmatrix4x4.h:154:50: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  154 |     friend Q_GUI_EXPORT QDebug operator<<(QDebug dbg, const QMatrix4x4 &m);
+      |                                           ~~~~~~~^~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qmatrix4x4.h:1064:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QMatrix4x4&)’
+ 1064 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QMatrix4x4 &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qmatrix4x4.h:1064:38: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+ 1064 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QMatrix4x4 &);
+      |                                      ^~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:61:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qopenglcontext.h:150:21: note: candidate: ‘QDebug operator<<(QDebug, const QOpenGLContext*)’
+  150 | Q_GUI_EXPORT QDebug operator<<(QDebug debug, const QOpenGLContext *ctx);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qopenglcontext.h:150:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  150 | Q_GUI_EXPORT QDebug operator<<(QDebug debug, const QOpenGLContext *ctx);
+      |                                ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qopenglcontext.h:151:21: note: candidate: ‘QDebug operator<<(QDebug, const QOpenGLContextGroup*)’
+  151 | Q_GUI_EXPORT QDebug operator<<(QDebug debug, const QOpenGLContextGroup *cg);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qopenglcontext.h:151:39: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  151 | Q_GUI_EXPORT QDebug operator<<(QDebug debug, const QOpenGLContextGroup *cg);
+      |                                ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:72:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpainterpath.h:191:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QPainterPath&)’
+  191 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPainterPath &);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpainterpath.h:182:49: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  182 |     friend Q_GUI_EXPORT QDataStream &operator<<(QDataStream &, const QPainterPath &);
+      |                                                 ^~~~~~~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpainterpath.h:304:21: note: candidate: ‘QDebug operator<<(QDebug, const QPainterPath&)’
+  304 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPainterPath &);
+      |                     ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qpainterpath.h:304:32: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  304 | Q_GUI_EXPORT QDebug operator<<(QDebug, const QPainterPath &);
+      |                                ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtGui/QtGui:95:
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qstandarditemmodel.h:409:27: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QStandardItem&)’
+  409 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &out, const QStandardItem &item);
+      |                           ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtGui/qstandarditemmodel.h:409:51: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  409 | Q_GUI_EXPORT QDataStream &operator<<(QDataStream &out, const QStandardItem &item);
+      |                                      ~~~~~~~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:90:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgesture.h:288:25: note: candidate: ‘QDebug operator<<(QDebug, const QGesture*)’
+  288 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGesture *);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgesture.h:288:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  288 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGesture *);
+      |                                    ^~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgesture.h:289:25: note: candidate: ‘QDebug operator<<(QDebug, const QGestureEvent*)’
+  289 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGestureEvent *);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgesture.h:289:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  289 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGestureEvent *);
+      |                                    ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsanchorlayout.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:93:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:987:25: note: candidate: ‘QDebug operator<<(QDebug, const QGraphicsItem*)’
+  987 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QGraphicsItem *item);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:987:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  987 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QGraphicsItem *item);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:988:25: note: candidate: ‘QDebug operator<<(QDebug, const QGraphicsObject*)’
+  988 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QGraphicsObject *item);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:988:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  988 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, const QGraphicsObject *item);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:989:25: note: candidate: ‘QDebug operator<<(QDebug, QGraphicsItem::GraphicsItemChange)’
+  989 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemChange change);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:989:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  989 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemChange change);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:990:25: note: candidate: ‘QDebug operator<<(QDebug, QGraphicsItem::GraphicsItemFlag)’
+  990 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemFlag flag);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:990:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  990 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemFlag flag);
+      |                                    ~~~~~~~^~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:991:25: note: candidate: ‘QDebug operator<<(QDebug, QGraphicsItem::GraphicsItemFlags)’
+  991 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemFlags flags);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicsitem.h:991:43: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  991 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug debug, QGraphicsItem::GraphicsItemFlags flags);
+      |                                    ~~~~~~~^~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:123:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicssceneevent.h:297:25: note: candidate: ‘QDebug operator<<(QDebug, const QGraphicsSceneEvent*)’
+  297 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGraphicsSceneEvent *);
+      |                         ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qgraphicssceneevent.h:297:36: note:   no known conversion for argument 1 from ‘QString’ to ‘QDebug’
+  297 | Q_WIDGETS_EXPORT QDebug operator<<(QDebug, const QGraphicsSceneEvent *);
+      |                                    ^~~~~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:168:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlistwidget.h:157:31: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QListWidgetItem&)’
+  157 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QListWidgetItem &item);
+      |                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qlistwidget.h:157:55: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  157 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QListWidgetItem &item);
+      |                                          ~~~~~~~~~~~~~^~~
+In file included from /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QtWidgets:286:
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreewidget.h:219:31: note: candidate: ‘QDataStream& operator<<(QDataStream&, const QTreeWidgetItem&)’
+  219 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QTreeWidgetItem &item);
+      |                               ^~~~~~~~
+/usr/include/x86_64-linux-gnu/qt6/QtWidgets/qtreewidget.h:219:55: note:   no known conversion for argument 1 from ‘QString’ to ‘QDataStream&’
+  219 | Q_WIDGETS_EXPORT QDataStream &operator<<(QDataStream &out, const QTreeWidgetItem &item);
+      |                                          ~~~~~~~~~~~~~^~~
+./tcpudp.h:266:69: warning: unused parameter ‘ipAddress’ [-Wunused-parameter]
+  266 | void MainWindow::clientCommandState(const QJsonObject &json,QString ipAddress)
+      |                                                             ~~~~~~~~^~~~~~~~~
+./tcpudp.h: In member function ‘void MainWindow::fileReceiveProcess(const QJsonObject&, QString)’:
+./tcpudp.h:290:69: warning: unused parameter ‘ipAddress’ [-Wunused-parameter]
+  290 | void MainWindow::fileReceiveProcess(const QJsonObject &json,QString ipAddress)
+      |                                                             ~~~~~~~~^~~~~~~~~
+./tcpudp.h: In member function ‘void MainWindow::pcCloseSignalSlot(QString, QString)’:
+./tcpudp.h:398:44: warning: unused parameter ‘ip’ [-Wunused-parameter]
+  398 | void MainWindow::pcCloseSignalSlot(QString ip,QString mac)
+      |                                    ~~~~~~~~^~
+./tcpudp.h: In member function ‘void MainWindow::slotPcSil(int, QString, QString)’:
+./tcpudp.h:483:47: warning: unused parameter ‘_mac’ [-Wunused-parameter]
+  483 | void MainWindow::slotPcSil(int _index,QString _mac,QString _ip)
+      |                                       ~~~~~~~~^~~~
+./tcpudp.h:483:60: warning: unused parameter ‘_ip’ [-Wunused-parameter]
+  483 | void MainWindow::slotPcSil(int _index,QString _mac,QString _ip)
+      |                                                    ~~~~~~~~^~~
+In file included from mainwindow.cpp:38:
+./funtion.h: In member function ‘bool MainWindow::killProcessByName(const QString&)’:
+./funtion.h:65:1: warning: no return statement in function returning non-void [-Wreturn-type]
+   65 | }
+      | ^
+./funtion.h:38:51: warning: unused parameter ‘processName’ [-Wunused-parameter]
+   38 | bool MainWindow::killProcessByName(const QString &processName) {
+      |                                    ~~~~~~~~~~~~~~~^~~~~~~~~~~
+In file included from mainwindow.cpp:40:
+./lockWidget.h: In member function ‘QWidget* MainWindow::kilittransparanWidget()’:
+./lockWidget.h:18:9: warning: unused variable ‘x’ [-Wunused-variable]
+   18 |     int x = (screenGeometry.width() - sor->width())/2;
+      |         ^
+./lockWidget.h:19:9: warning: unused variable ‘y’ [-Wunused-variable]
+   19 |     int y = (screenGeometry.height() - sor->height()) / 2;
+      |         ^
+./lockWidget.h:67:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   67 |     auto widget = new QWidget;
+      |          ^~~~~~
+./lockWidget.h: In member function ‘QWidget* MainWindow::kilitWidget()’:
+./lockWidget.h:96:9: warning: unused variable ‘x’ [-Wunused-variable]
+   96 |     int x = (screenGeometry.width() - sor->width())/2;
+      |         ^
+./lockWidget.h:97:9: warning: unused variable ‘y’ [-Wunused-variable]
+   97 |     int y = (screenGeometry.height() - sor->height()) / 2;
+      |         ^
+./lockWidget.h:150:10: warning: unused variable ‘widget’ [-Wunused-variable]
+  150 |     auto widget = new QWidget;
+      |          ^~~~~~
+In file included from mainwindow.cpp:41:
+./volumeWidget.h: In member function ‘QWidget* MainWindow::volumeWidget()’:
+./volumeWidget.h:5:9: warning: unused variable ‘e’ [-Wunused-variable]
+    5 |     int e=en;
+      |         ^
+./volumeWidget.h:17:9: warning: unused variable ‘x’ [-Wunused-variable]
+   17 |     int x = (screenGeometry.width() - sor->width())/2;
+      |         ^
+./volumeWidget.h:18:9: warning: unused variable ‘y’ [-Wunused-variable]
+   18 |     int y = (screenGeometry.height() - sor->height()) / 2;
+      |         ^
+./volumeWidget.h:48:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   48 |     auto widget = new QWidget;
+      |          ^~~~~~
+In file included from mainwindow.cpp:42:
+./powerrebootWidget.h: In member function ‘QWidget* MainWindow::poweroffrebootWidget()’:
+./powerrebootWidget.h:67:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   67 |     auto widget = new QWidget;
+      |          ^~~~~~
+In file included from mainwindow.cpp:43:
+./loginLogoutWidget.h: In member function ‘QWidget* MainWindow::logoutWidget()’:
+./loginLogoutWidget.h:71:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   71 |     auto widget = new QWidget;
+      |          ^~~~~~
+In file included from mainwindow.cpp:44:
+./screenViewWidget.h: In member function ‘QWidget* MainWindow::ekranWidget()’:
+./screenViewWidget.h:64:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   64 |     auto widget = new QWidget;
+      |          ^~~~~~
+g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+In file included from mainwindow.cpp:45:
+./vncrdpWidget.h: In member function ‘QWidget* MainWindow::rdpWidget()’:
+./vncrdpWidget.h:359:10: warning: unused variable ‘widget’ [-Wunused-variable]
+  359 |     auto widget = new QWidget;
+      |          ^~~~~~
+./vncrdpWidget.h: In member function ‘void MainWindow::slotVnc(QString)’:
+./vncrdpWidget.h:424:130: warning: unknown escape sequence: '\-'
+  424 |     komut.append("nohup ssvncviewer -scale ").append(QString::number(deger)).append(" ").append(pcIp->text()).append(":"+display+" \-passwd \/usr\/bin\/x11vncpasswd &");
+      |                                                                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./vncrdpWidget.h:424:130: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:424:130: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:424:130: warning: unknown escape sequence: '\/'
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ipwatcher.h -o moc_ipwatcher.cpp
+./vncrdpWidget.h: In member function ‘void MainWindow::slotVncFlip(QString, QString)’:
+./vncrdpWidget.h:464:58: warning: unknown escape sequence: '\-'
+  464 |             komut.append("/usr/bin/vncviewer "+viewState+" \-fullscreen ").append(onlinePcList[i]->netProfil.serverAddress).append(":5901 \-passwd \/usr\/bin\/x11vncpasswd ");
+      |                                                          ^~~~~~~~~~~~~~~~
+./vncrdpWidget.h:464:132: warning: unknown escape sequence: '\-'
+  464 |             komut.append("/usr/bin/vncviewer "+viewState+" \-fullscreen ").append(onlinePcList[i]->netProfil.serverAddress).append(":5901 \-passwd \/usr\/bin\/x11vncpasswd ");
+      |                                                                                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./vncrdpWidget.h:464:132: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:464:132: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:464:132: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h: In member function ‘void MainWindow::slotVncFlipAll(QString, QString)’:
+./vncrdpWidget.h:524:95: warning: unknown escape sequence: '\-'
+  524 |         kmt.append("vncviewer "+viewState+" -fullscreen ").append(interfaceList[k].ip).append(":5901 \-passwd \/usr\/bin\/x11vncpasswd");
+      |                                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./vncrdpWidget.h:524:95: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:524:95: warning: unknown escape sequence: '\/'
+./vncrdpWidget.h:524:95: warning: unknown escape sequence: '\/'
+In file included from mainwindow.cpp:49:
+./languageWidget.h: In member function ‘QWidget* MainWindow::languageWidget()’:
+./languageWidget.h:9:9: warning: unused variable ‘yukseklik’ [-Wunused-variable]
+    9 |     int yukseklik=e*12;
+      |         ^~~~~~~~~
+./languageWidget.h:52:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   52 |     auto widget = new QWidget;
+      |          ^~~~~~
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include networkprofil.h -o moc_networkprofil.cpp
+In file included from mainwindow.cpp:52:
+./sliderWidget.h: In member function ‘void MainWindow::updateSlider(int)’:
+./sliderWidget.h:65:12: warning: unused variable ‘nheight’ [-Wunused-variable]
+   65 |     double nheight=en*20*val/100;
+      |            ^~~~~~~
+./sliderWidget.h:66:9: warning: unused variable ‘columnSayisi’ [-Wunused-variable]
+   66 |     int columnSayisi=hostListe->width()/(nwidth+en*4);
+      |         ^~~~~~~~~~~~
+In file included from mainwindow.cpp:53:
+./baseWidget.h: In member function ‘QWidget* MainWindow::baseWidget()’:
+./baseWidget.h:9:9: warning: unused variable ‘b’ [-Wunused-variable]
+    9 |     int b=boy;
+      |         ^
+./baseWidget.h:285:9: warning: unused variable ‘x’ [-Wunused-variable]
+  285 |     int x = (screen.width() - w->sizeHint().width()) / 2;
+      |         ^
+./baseWidget.h:286:9: warning: unused variable ‘y’ [-Wunused-variable]
+  286 |     int y = (screen.height() - w->sizeHint().height()) / 2;
+      |         ^
+In file included from mainwindow.cpp:54:
+./groupWidget.h: In member function ‘QWidget* MainWindow::groupWidget(QWidget*)’:
+./groupWidget.h:8:9: warning: unused variable ‘b’ [-Wunused-variable]
+    8 |     int b = boy;
+      |         ^
+./groupWidget.h:19:9: warning: unused variable ‘sr’ [-Wunused-variable]
+   19 |     int sr=0;
+      |         ^~
+In file included from mainwindow.cpp:56:
+./keyboardmouseWidget.h: In member function ‘QWidget* MainWindow::keyboardmouseWidget()’:
+./keyboardmouseWidget.h:5:9: warning: unused variable ‘e’ [-Wunused-variable]
+    5 |     int e=en;
+      |         ^
+./keyboardmouseWidget.h:17:9: warning: unused variable ‘x’ [-Wunused-variable]
+   17 |     int x = (screenGeometry.width() - sor->width())/2;
+      |         ^
+./keyboardmouseWidget.h:18:9: warning: unused variable ‘y’ [-Wunused-variable]
+   18 |     int y = (screenGeometry.height() - sor->height()) / 2;
+      |         ^
+./keyboardmouseWidget.h:50:10: warning: unused variable ‘widget’ [-Wunused-variable]
+   50 |     auto widget = new QWidget;
+      |          ^~~~~~
+In file included from mainwindow.cpp:57:
+./deviceWidget.h: In member function ‘QWidget* MainWindow::deviceWidget()’:
+./deviceWidget.h:18:9: warning: unused variable ‘x’ [-Wunused-variable]
+   18 |     int x = (screenGeometry.width() - sor->width()) / 2;
+      |         ^
+./deviceWidget.h:19:9: warning: unused variable ‘y’ [-Wunused-variable]
+   19 |     int y = (screenGeometry.height() - sor->height()) / 2;
+      |         ^
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include singleinstance.h -o moc_singleinstance.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_ipwatcher.o moc_ipwatcher.cpp
+mainwindow.cpp: In member function ‘void MainWindow::pcSettingUpdateSignalSlot(QString, QString)’:
+mainwindow.cpp:381:52: warning: unused parameter ‘_mac’ [-Wunused-parameter]
+  381 | void MainWindow::pcSettingUpdateSignalSlot(QString _mac,QString mission)
+      |                                            ~~~~~~~~^~~~
+mainwindow.cpp: In member function ‘void MainWindow::pcScreenViewSignalSlot(QString, QString)’:
+mainwindow.cpp:389:62: warning: unused parameter ‘_ip’ [-Wunused-parameter]
+  389 | void MainWindow::pcScreenViewSignalSlot(QString _mac,QString _ip)
+      |                                                      ~~~~~~~~^~~
+mainwindow.cpp: In member function ‘virtual void MainWindow::mouseReleaseEvent(QMouseEvent*)’:
+mainwindow.cpp:691:49: warning: unused parameter ‘event’ [-Wunused-parameter]
+  691 | void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+      |                                    ~~~~~~~~~~~~~^~~~~
+mainwindow.cpp: In member function ‘virtual void MainWindow::resizeEvent(QResizeEvent*)’:
+mainwindow.cpp:786:44: warning: unused parameter ‘event’ [-Wunused-parameter]
+  786 | void MainWindow::resizeEvent(QResizeEvent *event)
+      |                              ~~~~~~~~~~~~~~^~~~~
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_mainwindow.o moc_mainwindow.cpp
+g++ -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp
+/usr/lib/qt6/libexec/moc -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB --include /home/etapadmin/Masaüstü/e-ag-qt6/servercamera/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/home/etapadmin/Masaüstü/e-ag-qt6/servercamera -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/12 -I/usr/include/x86_64-linux-gnu/c++/12 -I/usr/include/c++/12/backward -I/usr/lib/gcc/x86_64-linux-gnu/12/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtMultimedia -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_mainwindow.o moc_mainwindow.cpp
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_networkprofil.o moc_networkprofil.cpp
+mainwindow.h: In member function ‘bool MainWindow::pcAcikMi()’:
+mainwindow.h:145:6: warning: control reaches end of non-void function [-Wreturn-type]
+  145 |      }
+      |      ^
+make[3]: *** [Makefile:1239: mainwindow.o] Error 1
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag'
+make[2]: *** [Makefile:55: sub-e-ag-make_first] Error 2
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_singleinstance.o moc_singleinstance.cpp
+make[2]: *** Bitmemiş işler için bekliyor....
+In file included from mainwindow.h:28,
+                 from moc_mainwindow.cpp:10:
+./ekran.h: In member function ‘void Ekran::ekranKomutMesaj(QString, QString)’:
+./ekran.h:45:35: warning: unused parameter ‘baslik’ [-Wunused-parameter]
+   45 |      void ekranKomutMesaj(QString baslik,QString mesaj)
+      |                           ~~~~~~~~^~~~~~
+g++ -c -pipe -O2 -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_singleinstance.o moc_singleinstance.cpp
+g++ -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu -o servercamera  main.o mainwindow.o moc_mainwindow.o   /usr/lib/x86_64-linux-gnu/libQt6Multimedia.so /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Network.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
+g++ -c -pipe -O2 -Wall -Wextra -fPIC -D_REENTRANT -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -I. -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtNetwork -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -o moc_userprivilegehelper.o moc_userprivilegehelper.cpp
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/servercamera'
+g++ -Wl,-O1 -o e-ag-networkprofil  ipwatcher.o main.o networkprofil.o singleinstance.o moc_ipwatcher.o moc_networkprofil.o moc_singleinstance.o   /usr/lib/x86_64-linux-gnu/libQt6Network.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread   
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-networkprofil'
+g++ -Wl,-O1 -Wl,-rpath-link,/usr/lib/x86_64-linux-gnu -o e-ag-tray  main.o mainwindow.o singleinstance.o userprivilegehelper.o qrc_resources.o moc_commanrunner.o moc_mainwindow.o moc_singleinstance.o moc_userprivilegehelper.o   /usr/lib/x86_64-linux-gnu/libQt6Widgets.so /usr/lib/x86_64-linux-gnu/libQt6Gui.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Network.so /usr/lib/x86_64-linux-gnu/libQt6Core.so -lpthread -lGLX -lOpenGL   
+make[3]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6/e-ag-tray'
+make[2]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+dh_auto_build: error: make -j4 returned exit code 2
+make[1]: *** [debian/rules:13: override_dh_auto_build] Error 25
+make[1]: Leaving directory '/home/etapadmin/Masaüstü/e-ag-qt6'
+make: *** [debian/rules:7: binary] Error 2
+dpkg-buildpackage: error: debian/rules binary subprocess returned exit status 2

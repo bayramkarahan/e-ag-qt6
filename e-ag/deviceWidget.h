@@ -55,7 +55,7 @@ QWidget* MainWindow::deviceWidget()
     offWifiPc->setIconSize(QSize(b*10,yukseklik*1.3));
     connect(offWifiPc, &QToolButton::clicked, [=]() {
         if (pcMac->text() == "") { mesajSlot("Pc Seçiniz"); return; }
-        udpSendData("consolecommand","consolecommand","rfkill block wifi","",true);
+        udpSendData("consolecommand","consolecommand","sh -c 'printf \"[keyfile]\nunmanaged-devices=type:wifi\n\" > /etc/NetworkManager/conf.d/disable-wifi.conf' && nmcli radio wifi off && rfkill block wifi && systemctl restart NetworkManager","wifi off",true);
     });
 
     /**************************************************/
@@ -68,7 +68,7 @@ QWidget* MainWindow::deviceWidget()
     onWifiPc->setText(tr("Wifi Aktif"));
     connect(onWifiPc, &QToolButton::clicked, [=]() {
         if (pcMac->text() == "") { mesajSlot(tr("Pc Seçiniz")); return; }
-        udpSendData("consolecommand","consolecommand","rfkill block wifi","",true);
+        udpSendData("consolecommand","consolecommand","rm -f /etc/NetworkManager/conf.d/disable-wifi.conf && rfkill unblock wifi && systemctl restart NetworkManager && nmcli radio wifi on","wifi on",true);
     });
 
     /**************************************************/

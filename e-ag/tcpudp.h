@@ -266,9 +266,9 @@ void MainWindow::clientConfUpdate(const QJsonObject &json,QString ipAddress)
 void MainWindow::clientCommandState(const QJsonObject &json,QString ipAddress)
 {
 
-    qDebug()<<"komut çıktısı"<<json["command"].toString()<<
-        json["command_detail"].toString()<<
-        json["command_status"].toString();
+    ///qDebug()<<"komut çıktısı"<<json["command"].toString()<<
+     //   json["command_detail"].toString()<<
+      //  json["command_status"].toString();
 
     QString mac = json["mac_address"].toString();
    // QString ip  = json["ip_address"].toString();
