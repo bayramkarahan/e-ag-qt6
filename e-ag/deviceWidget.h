@@ -46,6 +46,32 @@ QWidget* MainWindow::deviceWidget()
     });
 
     /**************************************************/
+    QToolButton *offWifiPc = new QToolButton();
+    offWifiPc->setIcon(QIcon(":/icons/wifi-off.svg"));
+    offWifiPc->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    offWifiPc->setFixedSize(e*18,yukseklik*2);
+    offWifiPc->setAutoRaise(true);
+    offWifiPc->setText(tr("Wifi Pasif"));
+    offWifiPc->setIconSize(QSize(b*10,yukseklik*1.3));
+    connect(offWifiPc, &QToolButton::clicked, [=]() {
+        if (pcMac->text() == "") { mesajSlot("Pc Seçiniz"); return; }
+        udpSendData("consolecommand","consolecommand","rfkill block wifi","",true);
+    });
+
+    /**************************************************/
+    QToolButton *onWifiPc = new QToolButton();
+    onWifiPc->setIcon(QIcon(":/icons/wifi-on.svg"));
+    onWifiPc->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    onWifiPc->setFixedSize(e*18,yukseklik*2);
+    onWifiPc->setIconSize(QSize(b*10,yukseklik*1.3));
+    onWifiPc->setAutoRaise(true);
+    onWifiPc->setText(tr("Wifi Aktif"));
+    connect(onWifiPc, &QToolButton::clicked, [=]() {
+        if (pcMac->text() == "") { mesajSlot(tr("Pc Seçiniz")); return; }
+        udpSendData("consolecommand","consolecommand","rfkill block wifi","",true);
+    });
+
+    /**************************************************/
     QToolButton *keyboardoff = new QToolButton();
     keyboardoff->setIcon(QIcon(":/icons/keyboardoff.svg"));
     keyboardoff->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
@@ -238,6 +264,10 @@ QWidget* MainWindow::deviceWidget()
 
     layout->addWidget(offVolumePc,      0, 4, Qt::AlignCenter);
     layout->addWidget(onVolumePc,       0, 5, Qt::AlignCenter);
+
+    layout->addWidget(offWifiPc,      0, 6, Qt::AlignCenter);
+    layout->addWidget(onWifiPc,       0, 7, Qt::AlignCenter);
+
     layout->addWidget(stopInternetButton,0, 8, Qt::AlignCenter);
     layout->addWidget(openInternetButton,0, 9, Qt::AlignCenter);
 

@@ -10,7 +10,7 @@ a42cb596806624fc3c30c0cd7bbacca0  lib/systemd/system/e-ag-networkprofil.service
 e3f3fa139fc7fecaa70a585ccc2363a9  usr/bin/dds-conf
 162d1a8704a82ac5f8bf41e225dff282  usr/bin/dds-monitor
 1724a1047ec2807319982fda850539c8  usr/bin/dds-service
-1164f44941c8fd0db0a4fc2d6580cbab  usr/bin/e-ag
+d187963176503b98aa777a2fab1d3598  usr/bin/e-ag
 ac6e8ebb371d1c9e085e4967500f6a83  usr/bin/e-ag-networkprofil
 db3e2ce6fc094749e56e7e3b8cb826c6  usr/bin/e-ag-tray
 944b7f0c4517d2015bbd90f7f97250d5  usr/bin/mediastreamer

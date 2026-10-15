@@ -106,5 +106,7 @@
         <file>icons/delhost.svg</file>
         <file>icons/getdesktopextension.svg</file>
         <file>icons/dds.svg</file>
+        <file>icons/wifi-off.svg</file>
+        <file>icons/wifi-on.svg</file>
     </qresource>
 </RCC>
