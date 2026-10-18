@@ -211,8 +211,20 @@ QWidget* MainWindow::rdpWidget()
         /************************************************************/
         system("pkill mediastreamer");
         QString kmt10="mediastreamer --mode sender --sendermode multicast --audiosource none --preview none --videosource screen --screen 0 &";
-        system(kmt10.toStdString().c_str());
+        ///system(kmt10.toStdString().c_str());
+        eagtraySendDataDetached(kmt10);
+       /* eagtraySendData(kmt10, [this](const QString &output){
+                    //qDebug().noquote() << "Komut sonucu:\n" << output;
+                    qDebug() << "Komut sonucu:\n" << output;
 
+                   /* trayCommandResult=output.trimmed();
+                    if(trayCommandResult!="")
+                    {
+                        QStringList seslst;
+                        seslst=trayCommandResult.split("\n");
+                        ses->addItems(seslst);
+                    }*/
+               // });
         //QString kmt="/usr/bin/serverscreen "+ekranScale1->currentText()+" "+newIp+" &";
         //system(kmt.toStdString().c_str());
         QThread::sleep(1); // saniye cinsinden
