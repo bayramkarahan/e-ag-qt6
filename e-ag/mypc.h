@@ -217,8 +217,10 @@ bool refreshContinueState=false;
     MulticastReceiver *receiver;
     //QPointer<MulticastReceiver> receiver;
     QImage prevImage;
-    RstpReceiverStream *receiverStream;
 
+
+    RstpReceiverStream *receiverStream = nullptr;
+    bool streamStartPending = false;
      QGridLayout *layout;
 };
 

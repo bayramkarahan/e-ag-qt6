@@ -436,41 +436,92 @@ void MyPc::setKilitTransparanState(bool state){
 
 void MyPc::setIconControlState(bool state)
 {
-    if(state)
-    {
-        qDebug()  <<"çalıştır";
-       // ./streamplayer --receivermode multicast --videosource
-        //        screen --audiosource none
 
-        StreamSettings settings;
-        settings.mode = StreamMode::Receiver;
-        settings.receivermode=ReceiverMode::Unicast;
-
-        settings.video.source= VideoSource::ScreenFFmpeg;
-        settings.audio.source= AudioSource::None;
-        settings.video.bitrate = 2000;
-        settings.video.screenIndex = 0;
-
-        receiverStream = new RstpReceiverStream(iconstateLabel);
-        if (!receiverStream->open(settings))return;
-        receiverStream->start(ip);
-         //receiverStream->start("192.168.1.103");
-        layout->addWidget(receiverStream->m_openglrenderer,3, 1, 1, 6);
-        //receiverStream->m_openglrenderer->show();
-    }else
-    {
-        qDebug()  <<"durdur";
-        if (receiverStream)
+    if (state)
         {
-            receiverStream->stop();
+            // Aynı akışın tekrar tekrar başlatılmasını önle.
+            if (receiverStream || streamStartPending)
+                return;
 
-            if (receiverStream->m_openglrenderer)
+            streamStartPending = true;
+
+            QTimer::singleShot(10, this, [this]()
             {
-                layout->removeWidget(receiverStream->m_openglrenderer);
-                receiverStream->m_openglrenderer->hide();
-            }
+                // Bu sırada durdurma isteği geldiyse başlatma.
+                if (!streamStartPending)
+                    return;
+
+                QThread::sleep(5);
+
+                // Bekleme sırasında durum değişmiş olabilir.
+                if (!streamStartPending)
+                    return;
+
+                streamStartPending = false;
+
+                qDebug() << "Akış başlatılıyor";
+
+                StreamSettings settings;
+                settings.mode = StreamMode::Receiver;
+                settings.receivermode = ReceiverMode::Unicast;
+                settings.video.source = VideoSource::ScreenFFmpeg;
+                settings.audio.source = AudioSource::None;
+                settings.video.bitrate = 2000;
+                settings.video.screenIndex = 0;
+
+                auto *stream = new RstpReceiverStream(iconstateLabel);
+
+                if (!stream->open(settings))
+                {
+                    qDebug() << "Akış açılamadı";
+                    delete stream;
+                    return;
+                }
+
+                receiverStream = stream;
+
+                if (!receiverStream->start(ip))
+                {
+                    // start() bool döndürüyorsa bu kontrol kullanılabilir.
+                    // start() void ise bu if bloğunu kaldır.
+                }
+
+                if (receiverStream->m_openglrenderer)
+                {
+                    layout->addWidget(
+                        receiverStream->m_openglrenderer,
+                        3, 1, 1, 6
+                    );
+                }
+            });
         }
-    }
+        else
+        {
+            qDebug() << "Akış durduruluyor";
+
+            // Henüz başlamamış bir işlemi iptal et.
+            streamStartPending = false;
+
+            if (!receiverStream)
+            {
+                qDebug() << "Durdurulacak akış yok";
+                return;
+            }
+
+            RstpReceiverStream *stream = receiverStream;
+            receiverStream = nullptr;
+
+            stream->stop();
+
+            if (stream->m_openglrenderer)
+            {
+                layout->removeWidget(stream->m_openglrenderer);
+                stream->m_openglrenderer->hide();
+            }
+
+            delete stream;
+        }
+
     return;
     // 🔒 Her durumda sadece 1 thread çalışsın
     if (receiver && receiver->isRunning()) {

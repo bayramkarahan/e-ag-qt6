@@ -106,7 +106,7 @@ void MainWindow::slotEkranIzle()
         }
     }
 
-   QThread::sleep(2); // saniye cinsinden
+   //QThread::sleep(2); // saniye cinsinden
 
    for(int i=0;i<onlinePcList.count();i++)
    {//onlinePcList[i]->connectState&&
