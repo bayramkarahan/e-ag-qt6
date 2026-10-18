@@ -1,6 +1,7 @@
 #ifndef PIPEWIRESCREENCAPTURE_H
 #define PIPEWIRESCREENCAPTURE_H
-
+#include <QMutex>
+#include "../common/MediaFrame.h"
 #include "../interfaces/IVideoCapture.h"
 #include<QDebug>
 
@@ -29,14 +30,32 @@ public:
     void release(MediaFrame &frame) override;
 
     void setMasterTime(MasterTime *masterTime) override;
+    bool setPortalConnection(int fd, uint nodeId);
+static void onStateChanged(
+    void *data,
+    pw_stream_state oldState,
+    pw_stream_state state,
+    const char *error);
 
-private:
+static void onParamChanged(
+    void *data,
+    uint32_t id,
+    const spa_pod *param);
+QByteArray m_frameData;
 
     static void onProcess(void *userdata);
+
+private:
 
     bool dequeueFrame();
 
 private:
+QMutex m_frameMutex;
+MediaFrame m_latestFrame;
+bool m_hasFrame = false;
+
+int m_portalFd = -1;
+uint32_t m_nodeId = PW_ID_ANY;
 
     VideoCaptureSettings m_settings;
 

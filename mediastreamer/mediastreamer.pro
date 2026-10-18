@@ -67,6 +67,7 @@ HEADERS += \
     audiocapture/microphoneaudiocapture.h \
     audiocapture/audioframe.h \
     audiocapture/systemaudiocapture.h \
+    videocapture/desktopsession.h \
     videocapture/ffmpegpipewirescreencapture.h \
     videocapture/ffmpegscreencapture.h \
     videocapture/mediafilecapture.h \

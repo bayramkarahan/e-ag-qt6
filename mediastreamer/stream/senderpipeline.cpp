@@ -36,74 +36,6 @@ SenderPipeline::SenderPipeline(QObject *parent)
     }
 
 
-    WaylandScreenCast *screenCast =
-        new WaylandScreenCast(this);
-
-    connect(screenCast,
-            &WaylandScreenCast::sessionCreated,
-            this,
-            [screenCast]()
-    {
-        screenCast->selectSources(
-            true,   // monitor
-            false,  // window
-            false   // cursor
-        );
-    });
-
-    connect(screenCast,
-            &WaylandScreenCast::sourcesSelected,
-            this,
-            [screenCast]()
-    {
-        screenCast->start();
-    });
-
-    connect(screenCast,
-            &WaylandScreenCast::started,
-            this,
-            [screenCast]()
-    {
-        qDebug()
-            << "Node:"
-            << screenCast->nodeId();
-
-        screenCast->openPipeWireRemote();
-    });
-
-    connect(screenCast,
-            &WaylandScreenCast::pipeWireRemoteOpened,
-            this,
-            [](int fd)
-    {
-        qDebug()
-            << "PipeWire FD:"
-            << fd;
-    });
-
-    connect(screenCast,
-            &WaylandScreenCast::ready,
-            this,
-            [screenCast]()
-    {
-        qDebug()
-            << "Screen capture ready:"
-            << "node =" << screenCast->nodeId()
-            << "fd =" << screenCast->pipeWireFd();
-    });
-
-    connect(screenCast,
-            &WaylandScreenCast::error,
-            this,
-            [](const QString &error)
-    {
-        qWarning()
-            << "ScreenCast error:"
-            << error;
-    });
-
-    screenCast->createSession();
-
 
 }
 void SenderPipeline::onControlMessage(
@@ -494,8 +426,143 @@ bool SenderPipeline::startCamera()
     }
     return true;
 }
-
 bool SenderPipeline::startScreen()
+{
+    const DesktopSession session = detectDesktopSession();
+
+        qDebug() << "Desktop session:"
+                 << (session == DesktopSession::Wayland ? "Wayland" :
+                     session == DesktopSession::X11 ? "X11" : "Unknown");
+
+        if (session == DesktopSession::Wayland)
+        {
+            // Wayland: Portal + PipeWire
+           return startWaylandScreenCapture();
+
+        }
+        if (session == DesktopSession::X11)
+        {
+            // Burada mevcut X11/x11grab ekran yakalama
+            // sınıfını başlat.
+           return startX11ScreenCapture();
+        }
+          qWarning() << "Unknown desktop session;"
+                        " screen capture was not started.";
+}
+
+bool SenderPipeline::startWaylandScreenCapture()
+{
+    m_settings.video.source = VideoSource::ScreenPipeWire;
+
+    if (!videoEnabled())
+        return false;
+
+    auto *screenCast = new WaylandScreenCast(this);
+
+    connect(screenCast,
+            &WaylandScreenCast::sessionCreated,
+            screenCast,
+            [screenCast]()
+    {
+        screenCast->selectSources(true, false, false);
+    });
+
+    connect(screenCast,
+            &WaylandScreenCast::sourcesSelected,
+            screenCast,
+            [screenCast]()
+    {
+        screenCast->start();
+    });
+
+    connect(screenCast,
+            &WaylandScreenCast::started,
+            screenCast,
+            [screenCast]()
+    {
+        qDebug() << "PipeWire node:" << screenCast->nodeId();
+        screenCast->openPipeWireRemote();
+    });
+
+    connect(screenCast,
+            &WaylandScreenCast::ready,
+            this,
+            [this, screenCast]()
+    {
+        const int fd = screenCast->pipeWireFd();
+        const uint nodeId = screenCast->nodeId();
+
+        qDebug() << "Portal ready:"
+                 << "node =" << nodeId
+                 << "fd =" << fd;
+
+        // CaptureThread tarafında portal FD'sini
+        // open() öncesinde aktaracak düzenleme gerekli.
+        auto *capture = new CaptureThread;
+
+        // Bu çağrı, CaptureThread içinde portal bilgilerini
+        // open() öncesinde kullanacak şekilde düzenlenmeli.
+        if (!capture->openWithPortal(m_settings.video, fd, nodeId)) {
+            qWarning() << "PipeWire screen capture açılamadı";
+            capture->deleteLater();
+            return;
+        }
+
+        capture->setMasterTime(m_masterTime);
+
+        auto *videoSender = new VideoSender;
+        videoSender->setMasterTime(m_masterTime);
+
+        if (!videoSender->open(
+                m_settings.video.width,
+                m_settings.video.height,
+                m_settings.video.fps,
+                m_settings.video.bitrate,
+                QHostAddress(m_settings.videoAddress),
+                m_settings.videoPort,
+                m_settings.sendermode)) {
+            qWarning() << "VideoSender açılamadı";
+            capture->deleteLater();
+            videoSender->deleteLater();
+            return;
+        }
+
+        connect(videoSender,
+                &VideoSender::spsReady,
+                m_session,
+                &SessionDescription::setSps);
+
+        connect(videoSender,
+                &VideoSender::ppsReady,
+                m_session,
+                &SessionDescription::setPps);
+
+        connect(capture,
+                &CaptureThread::frameReady,
+                videoSender,
+                &VideoSender::onFrame,
+                Qt::QueuedConnection);
+
+        m_capture = capture;
+        m_videoSender = videoSender;
+
+        m_session->setVideoEnabled(true);
+        m_capture->start();
+    });
+
+    connect(screenCast,
+            &WaylandScreenCast::error,
+            this,
+            [](const QString &message)
+    {
+        qWarning() << "Wayland capture error:" << message;
+    });
+
+    screenCast->createSession();
+    return true;
+}
+
+bool SenderPipeline::startX11ScreenCapture()
 {
     // start streaming
    /* StreamSettings settings;
@@ -790,7 +857,6 @@ bool SenderPipeline::startScreen()
     return true;
 }
 
-
 bool SenderPipeline::startMediaFile()
 {
     qDebug() << "START MEDIA FILE";
@@ -898,7 +964,6 @@ bool SenderPipeline::startMediaFile()
     return true;
 }
 
-
 void SenderPipeline::stop()
 {
     m_microphoneAudioCapture->close();
@@ -910,11 +975,7 @@ void SenderPipeline::stop()
     m_capture = nullptr;
 }
 
-
-
-void SenderPipeline::rtspPlayRequested(const QHostAddress &addr,
-                                       quint16 videoPort,
-                                       quint16 audioPort)
+void SenderPipeline::rtspPlayRequested(const QHostAddress &addr,quint16 videoPort,quint16 audioPort)
 {
     if (videoPort != 0)
     {
@@ -938,34 +999,8 @@ void SenderPipeline::rtspPlayRequested(const QHostAddress &addr,
         m_audioSender->addClient(addr, audioPort);
     }
 }
-/*
-void SenderPipeline::rtspPlayRequested(const QHostAddress &addr,
-                                      quint16 videoPort,
-                                      quint16 audioPort)
-{
-    qDebug() << "PLAY REQUEST";
-    qDebug() << addr;
-    qDebug() << videoPort;
-    qDebug() << audioPort;
-    if (videoPort != 0)
-        {
-            m_videoSender->addClient(addr, videoPort);
-        }
 
-    if (audioPort != 0)
-        {
-            m_audioSender->addClient(addr, audioPort);
-        }
-
-    // Bir sonraki adım:
-    // m_videoSender->addClient(addr, videoPort);
-    //m_audioSender->addClient(addr, audioPort);
-}
-*/
-void SenderPipeline::rtspTeardownRequested(
-        const QHostAddress &addr,
-        quint16 videoPort,
-        quint16 audioPort)
+void SenderPipeline::rtspTeardownRequested(const QHostAddress &addr,quint16 videoPort,quint16 audioPort)
 {
     if (m_videoSender && videoPort != 0)
         m_videoSender->removeClient(addr, videoPort);

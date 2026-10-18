@@ -9,7 +9,11 @@
 #include <QDBusUnixFileDescriptor>
 #include <QHash>
 #include <QSize>
-
+#include <QDBusPendingCallWatcher>
+extern "C" {
+#include <pipewire/pipewire.h>
+#include <spa/param/video/format-utils.h>
+}
 class WaylandScreenCast : public QObject
 {
     Q_OBJECT
@@ -29,6 +33,18 @@ public:
 
     explicit WaylandScreenCast(QObject *parent = nullptr);
     ~WaylandScreenCast();
+    static void onStateChanged(
+          void *data,
+          pw_stream_state oldState,
+          pw_stream_state state,
+          const char *error);
+
+      static void onParamChanged(
+          void *data,
+          uint32_t id,
+          const spa_pod *param);
+
+      static void onProcess(void *data);
 
     bool createSession();
 
@@ -78,14 +94,19 @@ private slots:
     void onStartResponse(
         uint response,
         const QVariantMap &results);
+    bool connectRequest(
+        const QString &operation,
+        const QDBusObjectPath &requestPath,
+        const char *slot);
 
+    void disconnectRequest(
+        const QString &operation,
+        const char *slot);
 private:
-
-    void handleError(
-        const QString &message);
-
-    QString makeToken(
-        const QString &prefix) const;
+    void handleError(const QString &message);
+    QString makeToken(const QString &prefix) const;
+    bool connectRequest(const QDBusObjectPath &requestPath,const char *slot);
+    void disconnectRequest(const QDBusObjectPath &requestPath,const char *slot);
 
 private:
 

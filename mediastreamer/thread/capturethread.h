@@ -26,14 +26,17 @@ public:
     ~CaptureThread();
 
     bool open(const VideoCaptureSettings &settings);
-void setMasterTime(MasterTime *);
+	void setMasterTime(MasterTime *);
     void start();
     void stop();
     IVideoCapture *capture() const
     {
         return m_capture;
     }
-
+	bool setPortalConnection(int fd, uint nodeId);
+	bool openWithPortal(const VideoCaptureSettings &settings,
+                    int fd,
+                    uint nodeId);
 signals:
 
     void frameReady(const MediaFrame &frame);

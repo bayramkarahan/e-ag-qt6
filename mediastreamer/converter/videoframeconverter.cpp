@@ -142,6 +142,10 @@ bool VideoFrameConverter::convert(const MediaFrame &input,
         return convertSwScale(input, output,
                               AV_PIX_FMT_RGBA);
 
+    case PixelFormat::BGRA8888:
+        return convertSwScale(input, output,
+                              AV_PIX_FMT_BGRA);
+
     case PixelFormat::RGB24:
         return convertSwScale(input, output,
                               AV_PIX_FMT_RGB24);
@@ -168,7 +172,6 @@ bool VideoFrameConverter::convert(const MediaFrame &input,
         return false;
     }
 }
-
 bool VideoFrameConverter::rgbaToYuv420(
         const MediaFrame &input,
         MediaFrame &output)

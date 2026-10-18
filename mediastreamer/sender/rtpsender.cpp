@@ -176,10 +176,11 @@ void RtpSender::sendPacket(const RTPPacket &packet)
        else
        {
 
-
         //qCritical()<< "RtpSender: Unicast";
+
         for (const auto &d : std::as_const(m_destinations))
         {
+            //qCritical()<< "RtpSender: Unicast"<<packet.data.size();
             qint64 written =m_socket.writeDatagram(packet.data,d.address,d.port);
         }
     }

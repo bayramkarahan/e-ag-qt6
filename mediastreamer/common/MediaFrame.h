@@ -8,17 +8,12 @@
 enum class PixelFormat
 {
     Unknown,
-
     NV12,
-
     YUV420P,
-
     RGBA8888,
-
+    BGRA8888,  // Yeni
     YUYV,
-
     UYVY,
-
     RGB24
 };
 

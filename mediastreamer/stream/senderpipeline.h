@@ -35,7 +35,7 @@
 #include "common/mediafileinforeader.h"
 #include "common/camerainforeader.h"
 #include "../udpmesageservice/controlserver.h"
-
+#include "../videocapture/desktopsession.h"
 #include<QGuiApplication>
 
 class SenderPipeline : public QObject
@@ -69,6 +69,8 @@ private:
     bool startCamera();
     bool startMediaFile();
     bool startScreen();
+    bool startX11ScreenCapture();
+    bool startWaylandScreenCapture();
     void setupClock();
     void setupSession();
     void onControlMessage(

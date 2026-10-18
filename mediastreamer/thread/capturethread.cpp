@@ -19,6 +19,18 @@ CaptureThread::~CaptureThread()
 {
     stop();
 }
+bool CaptureThread::setPortalConnection(int fd, uint nodeId)
+{
+    auto *capture =
+        dynamic_cast<PipeWireScreenCapture *>(m_capture);
+
+    if (!capture) {
+        qWarning() << "PipeWireScreenCapture aktif değil";
+        return false;
+    }
+
+    return capture->setPortalConnection(fd, nodeId);
+}
 
 bool CaptureThread::open(const VideoCaptureSettings &settings)
 {
@@ -53,8 +65,8 @@ bool CaptureThread::open(const VideoCaptureSettings &settings)
                 m_mediaFileCapture = capture;
         break;
 }
-    case VideoSource::ScreenFFmpegPipeWire:
-        m_capture = new FFmpegPipeWireScreenCapture;
+    case VideoSource::ScreenPipeWire:
+        m_capture = new PipeWireScreenCapture;
 
         break;
     }
@@ -66,7 +78,41 @@ bool CaptureThread::open(const VideoCaptureSettings &settings)
 
     return m_capture->open(settings);
 }
+bool CaptureThread::openWithPortal(
+    const VideoCaptureSettings &settings,
+    int fd,
+    uint nodeId)
+{
+    if (m_capture) {
+        delete m_capture;
+        m_capture = nullptr;
+    }
 
+    m_settings = settings;
+    m_mediaFileCapture = nullptr;
+
+    if (settings.source != VideoSource::ScreenPipeWire) {
+        qWarning() << "Kaynak ScreenPipeWire değil";
+        return false;
+    }
+
+    auto *capture = new PipeWireScreenCapture;
+
+    if (!capture->setPortalConnection(fd, nodeId)) {
+        delete capture;
+        return false;
+    }
+
+    m_capture = capture;
+
+    if (!m_capture->open(settings)) {
+        delete m_capture;
+        m_capture = nullptr;
+        return false;
+    }
+
+    return true;
+}
 void CaptureThread::setMasterTime(MasterTime *masterTime)
 {
     m_capture->setMasterTime(masterTime);
@@ -136,7 +182,7 @@ void CaptureThread::process()
         //-------------------------------------------------
         // Kamera / ekran
         //-------------------------------------------------
-        if (!m_mediaFileCapture)
+   /*     if (!m_mediaFileCapture)
         {
             MediaFrame frame;
 
@@ -149,7 +195,22 @@ void CaptureThread::process()
 
             continue;
         }
+*/
+if (!m_mediaFileCapture)
+{
+    MediaFrame frame;
 
+    if (m_capture->grab(frame))
+    {
+        emit frameReady(frame);
+    }
+    else
+    {
+        QThread::usleep(1000);
+    }
+
+    continue;
+}
         //-------------------------------------------------
         // Queue boşsa ReaderThread'in doldurmasını bekle
         //-------------------------------------------------
