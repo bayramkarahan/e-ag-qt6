@@ -182,21 +182,15 @@ bool RstpReceiverStream::start(QString hostIp)
 
     if (hasVideo)
     {
-        m_videoDecoder = VideoDecoderFactory::create(this);
+        m_videoDecoder =VideoDecoderFactory::create(this, m_settings);
 
         if (!m_videoDecoder)
         {
-            qCritical() << "Video decoder creation failed";
+            qCritical() << "No usable video decoder";
             return false;
         }
 
         m_videoDecoder->setSettings(m_settings);
-
-        if (!m_videoDecoder->start())
-        {
-            qCritical() << "Video decoder start failed";
-            return false;
-        }
 
         if (m_videoDecoder->type() ==
             AbstractVideoDecoder::Type::VAAPI)

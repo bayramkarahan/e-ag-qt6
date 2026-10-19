@@ -103,20 +103,13 @@ bool RtpReceiverStream::startVideo()
     // VIDEO DECODER
     // --------------------------------------------------
 
-    m_videoDecoder = VideoDecoderFactory::create(this);
+    m_videoDecoder =VideoDecoderFactory::create(this, m_settings);
 
     if (!m_videoDecoder)
     {
-        qCritical() << "Video decoder oluşturulamadı";
+        qCritical() << "No usable video decoder";
         return false;
     }
-
-    if (!m_videoDecoder->start())
-    {
-        qCritical() << "Video decoder başlatılamadı";
-        return false;
-    }
-
     m_videoDecoder->setSettings(m_settings);
 
     // --------------------------------------------------
@@ -245,22 +238,15 @@ bool RtpReceiverStream::startAudioVideo()
     // VIDEO DECODER
     // --------------------------------------------------
 
-    m_videoDecoder = VideoDecoderFactory::create(this);
+    m_videoDecoder =VideoDecoderFactory::create(this, m_settings);
 
     if (!m_videoDecoder)
     {
-        qCritical() << "Video decoder oluşturulamadı";
-        return false;
-    }
-
-    if (!m_videoDecoder->start())
-    {
-        qCritical() << "Video decoder başlatılamadı";
+        qCritical() << "No usable video decoder";
         return false;
     }
 
     m_videoDecoder->setSettings(m_settings);
-
     // --------------------------------------------------
     // VIDEO RENDERER
     // --------------------------------------------------
