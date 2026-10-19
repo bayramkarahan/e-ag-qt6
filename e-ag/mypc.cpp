@@ -445,13 +445,13 @@ void MyPc::setIconControlState(bool state)
 
             streamStartPending = true;
 
-            QTimer::singleShot(10, this, [this]()
+            QTimer::singleShot(5000, this, [this]()
             {
                 // Bu sırada durdurma isteği geldiyse başlatma.
                 if (!streamStartPending)
                     return;
 
-                QThread::sleep(5);
+                //QThread::sleep(5);
 
                 // Bekleme sırasında durum değişmiş olabilir.
                 if (!streamStartPending)
