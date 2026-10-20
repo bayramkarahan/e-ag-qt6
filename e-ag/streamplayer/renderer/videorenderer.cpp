@@ -6,7 +6,7 @@
 VideoRenderer::VideoRenderer(QWidget *parent)
     : AbstractVideoRenderer(parent)
 {
-    setMinimumSize(640,480);
+    //setMinimumSize(640,480);
 
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAutoFillBackground(false);

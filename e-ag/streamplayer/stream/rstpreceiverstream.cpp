@@ -201,7 +201,7 @@ bool RstpReceiverStream::start(QString hostIp)
         else
         {
             qDebug() << "Renderer: CPU";
-            m_openglrenderer = new OpenGLVideoRenderer;
+            m_openglrenderer = new VideoRenderer;
         }
 
         if (m_settings.previewMode == PreviewMode::Normal)

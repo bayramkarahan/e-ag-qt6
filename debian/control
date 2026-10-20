@@ -26,7 +26,8 @@ Architecture: amd64
 Depends:  
 	${shlibs:Depends},
     ${misc:Depends},
-    libqt6svg6 | qt6-svg-plugins | qt6-base-plugins, 
+    libqt6svg6,
+    qt6-svg-plugins, 
     libavcodec59 | libavcodec61 | libavcodec62,
     libavformat59 | libavformat61 | libavformat62,
     libavutil57 | libavutil59 | libavutil60,

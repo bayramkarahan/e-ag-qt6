@@ -468,6 +468,10 @@ qDebug() << "Akış başlatılıyor"<<ip;
                 settings.audio.source = AudioSource::None;
                 settings.video.bitrate = 2000;
                 settings.video.screenIndex = 0;
+                settings.video.fps=10;
+                settings.video.width=320;
+                settings.video.height=240;
+
 
                 auto *stream = new RstpReceiverStream(iconstateLabel);
 
