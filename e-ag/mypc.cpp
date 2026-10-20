@@ -444,7 +444,7 @@ void MyPc::setIconControlState(bool state)
                 return;
 
             streamStartPending = true;
-
+qDebug() << "Akış başlatılıyor"<<ip;
             QTimer::singleShot(5000, this, [this]()
             {
                 // Bu sırada durdurma isteği geldiyse başlatma.
