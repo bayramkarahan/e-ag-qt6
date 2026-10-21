@@ -1,0 +1,7 @@
+[Nemo Action]
+Name=dds
+Comment=Seçilen dosyayı gönder
+Exec=/usr/bin/dds-monitor --mode rightclick --target desktop %F
+Icon-Name=network-transmit
+Selection=any
+Extensions=;

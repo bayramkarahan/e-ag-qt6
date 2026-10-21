@@ -27,7 +27,7 @@ Depends:
 	${shlibs:Depends},
     ${misc:Depends},
     libqt6svg6,
-    qt6-svg-plugins, 
+    qt6-svg-plugins | libqt6svgwidgets6, 
     libavcodec59 | libavcodec61 | libavcodec62,
     libavformat59 | libavformat61 | libavformat62,
     libavutil57 | libavutil59 | libavutil60,

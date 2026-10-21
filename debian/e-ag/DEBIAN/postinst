@@ -1,0 +1,51 @@
+#!/bin/sh
+
+systemctl daemon-reload || true
+
+systemctl enable e-ag-networkprofil.service || true
+systemctl start e-ag-networkprofil.service || true
+
+systemctl enable ssh.service || true
+systemctl start ssh.service || true
+
+#systemctl enable vsftpd.service || true
+#systemctl start vsftpd.service || true
+
+systemctl enable e-ag-x11vnclogin.service || true
+systemctl start e-ag-x11vnclogin.service || true
+
+systemctl enable e-ag-x11vncdesktop.service || true
+systemctl start e-ag-x11vncdesktop.service || true
+
+# dds
+systemctl enable dds-service.service || true
+systemctl start dds-service.service || true
+
+systemctl enable dds-debinstaller@.service || true
+systemctl start ddsd-ebinstaller@.service || true
+
+systemctl enable dds-scriptexec@.service || true
+systemctl start dds-scriptexec@.service || true
+
+#xrdp
+systemctl stop xrdp || true
+rm -rf /var/log/xrdp || true
+
+mkdir -p /var/log/xrdp || true
+
+touch /var/log/xrdp/xrdp.log || true
+touch /var/log/xrdp/sesman.log || true
+touch /var/log/xrdp.log || true
+touch /var/log/xrdp-sesman.log || true
+
+chown -R xrdp:xrdp /var/log/xrdp || true
+chown xrdp:xrdp /var/log/xrdp.log /var/log/xrdp-sesman.log || true
+
+chmod 755 /var/log/xrdp || true
+chmod 644 /var/log/xrdp/*.log || true
+chmod 644 /var/log/xrdp.log /var/log/xrdp-sesman.log || true
+
+systemctl restart xrdp || true
+
+
+exit 0
