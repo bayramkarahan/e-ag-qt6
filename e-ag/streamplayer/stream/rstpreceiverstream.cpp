@@ -6,10 +6,10 @@
 #include "../decoder/AbstractVideoDecoder.h"
 #include "../decoder/videodecoderfactory.h"
 #include "../player/audioplayback.h"
-#include "../renderer/openglvaapizerocopyrenderer.h"
-#include "../renderer/openglvideorenderer.h"
-#include "../renderer/videorenderer.h"
-#include "../renderer/AbstractVideoRenderer.h"
+#include "../preview/openglvaapizerocopypreview.h"
+#include "../preview/openglvideopreview.h"
+#include "../preview/videopreview.h"
+#include "../preview/AbstractVideoPreview.h"
 #include "../rstp-sync/mediaclock.h"
 #include "../rstp-sync/videoscheduler.h"
 #include "../rstp-sync/audioscheduler.h"
@@ -17,7 +17,7 @@
 RstpReceiverStream::RstpReceiverStream(QObject *parent)
     : QObject(parent)
 {
-    /*m_controlClient = new ControlClient(this);
+    m_controlClient = new ControlClient(this);
 
     connect(m_controlClient,&ControlClient::serverFound,
         this,&RstpReceiverStream::onServerFound);
@@ -25,7 +25,7 @@ RstpReceiverStream::RstpReceiverStream(QObject *parent)
     connect(m_controlClient,&ControlClient::messageReceived,
         this,&RstpReceiverStream::onControlMessage);
 
-    m_controlClient->start(6001);*/
+    m_controlClient->start(6001);
 
   //  m_controlClient->discoverServer();
 
@@ -134,6 +134,7 @@ bool RstpReceiverStream::open(const StreamSettings &settings)
     return true;
 }
 
+
 bool RstpReceiverStream::start(QString hostIp)
 {
     qDebug() << "RUNNING AS RTSP UNICAST RECEIVER";
@@ -189,30 +190,21 @@ bool RstpReceiverStream::start(QString hostIp)
             qCritical() << "No usable video decoder";
             return false;
         }
-
         m_videoDecoder->setSettings(m_settings);
+        m_preview = new VideoPreview;
+        m_preview->setSettings(m_settings);
 
-        if (m_videoDecoder->type() ==
-            AbstractVideoDecoder::Type::VAAPI)
+        if (m_settings.previewMode == PreviewMode::NormalPreview)
         {
-            qDebug() << "Renderer: VAAPI";
-            m_openglrenderer = new OpenGLVaapiZeroCopyRenderer;
+            m_preview->resize(m_settings.video.width,m_settings.video.height);
+            m_preview->show();
         }
-        else
+        else if (m_settings.previewMode == PreviewMode::MultiPreview)
         {
-            qDebug() << "Renderer: CPU";
-            m_openglrenderer = new VideoRenderer;
+            m_preview->resize(m_settings.video.width,m_settings.video.height);
+            m_preview->show();
         }
-
-        if (m_settings.previewMode == PreviewMode::Normal)
-        {
-            m_openglrenderer->resize(
-                m_settings.video.width,
-                m_settings.video.height);
-
-            m_openglrenderer->show();
-        }
-        else if (m_settings.previewMode == PreviewMode::FullScreen)
+        else if (m_settings.previewMode == PreviewMode::FullScreenPreview)
         {
             const QList<QScreen *> screens =
                 QGuiApplication::screens();
@@ -235,14 +227,14 @@ bool RstpReceiverStream::start(QString hostIp)
                      << m_settings.video.screenIndex
                      << geometry;
 
-            m_openglrenderer->setWindowFlags(
+            m_preview->setWindowFlags(
                 Qt::FramelessWindowHint |
                 Qt::WindowStaysOnTopHint |
                 Qt::X11BypassWindowManagerHint);
 
-            m_openglrenderer->setGeometry(geometry);
-            m_openglrenderer->show();
-            m_openglrenderer->raise();
+            m_preview->setGeometry(geometry);
+            m_preview->show();
+            m_preview->raise();
         }
     }
 
@@ -302,8 +294,8 @@ bool RstpReceiverStream::start(QString hostIp)
 
             connect(m_videoScheduler,
                     &VideoScheduler::frameReady,
-                    m_openglrenderer,
-                    &AbstractVideoRenderer::onFrame,
+                    m_preview,
+                    &VideoPreview::onFrame,
                     Qt::QueuedConnection);
 
             connect(m_videoScheduler,
@@ -329,8 +321,8 @@ bool RstpReceiverStream::start(QString hostIp)
             // Yalnızca video: doğrudan renderer
             connect(m_videoDecoder,
                     &AbstractVideoDecoder::frameReady,
-                    m_openglrenderer,
-                    &AbstractVideoRenderer::onFrame,
+                    m_preview,
+                    &VideoPreview::onFrame,
                     Qt::QueuedConnection);
         }
     }
@@ -557,11 +549,11 @@ void RstpReceiverStream::stop()
     // 6. RENDERER
     // --------------------------------------------------
 
-    if (m_openglrenderer)
+    if (m_preview)
     {
       ///  qDebug() << "6 - Renderer hide";
 
-        m_openglrenderer->hide();
+        m_preview->hide();
     }
 
 
@@ -580,6 +572,7 @@ void RstpReceiverStream::stop()
 
   ///  qDebug() << "========== ReceiverStream STOPPED ==========";
 }
+
 
 
 void RstpReceiverStream::tryStartPlayback()

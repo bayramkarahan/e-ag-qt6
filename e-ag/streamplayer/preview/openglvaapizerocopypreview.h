@@ -19,16 +19,17 @@ extern "C" {
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
-#include "AbstractVideoRenderer.h"
+#include "AbstractVideoPreview.h"
 
 
-class OpenGLVaapiZeroCopyRenderer :public AbstractVideoRenderer,
+class OpenGLVaapiZeroCopyPreview :
+    public AbstractVideoPreview,
     protected QOpenGLFunctions_3_3_Core
 {
     Q_OBJECT
 
 public:
-    explicit OpenGLVaapiZeroCopyRenderer(QWidget *parent = nullptr);
+    explicit OpenGLVaapiZeroCopyPreview(QWidget *parent = nullptr);
 
     ///void setFrame(const MediaFrame &frame) override;
 

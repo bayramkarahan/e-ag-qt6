@@ -60,7 +60,7 @@ void RtpVideoScheduler::processQueue()
 
         if (diff < -20000)
         {
-            qDebug() << "DROP VIDEO" << diff;
+            qDebug() << "DROP VIDEO" << diff<<m_firstPts<<clockUs<<frame.pts;
             m_queue.dequeue();
             continue;
         }
@@ -70,6 +70,8 @@ void RtpVideoScheduler::processQueue()
         break;
     }
 }
+
+
 void RtpVideoScheduler::enqueue(const MediaFrame &frame)
 {
     static qint64 last = -1;

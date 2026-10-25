@@ -243,6 +243,7 @@ void RtspWorker::processVideoPacket(const AVPacket &packet)
         int offset = (p[2] == 1) ? 3 : 4;
 
         int type = p[offset] & 0x1f;
+
 /*
         static quint64 nalCount = 0;
         ++nalCount;

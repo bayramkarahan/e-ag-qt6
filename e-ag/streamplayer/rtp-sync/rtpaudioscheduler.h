@@ -8,7 +8,6 @@
 #include "../audio/audioframe.h"
 #include "../rtp-sync/rtpmediaclock.h"
 #include "../common/StreamSettings.h"
-
 class RtpAudioScheduler : public QObject
 {
     Q_OBJECT

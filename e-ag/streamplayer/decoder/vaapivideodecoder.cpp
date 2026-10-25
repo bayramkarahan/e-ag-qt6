@@ -439,3 +439,477 @@ void VaapiVideoDecoder::decodePacket(const QByteArray &nal,
     }
 }
 
+/*
+void VaapiVideoDecoder::decodePacket(const QByteArray &nal,
+                                     qint64 pts)
+{
+    av_packet_unref(m_packet);
+
+    if (!m_codecContext)
+        return;
+
+    if (av_new_packet(m_packet, nal.size()) < 0)
+        return;
+
+    memcpy(m_packet->data,
+           nal.constData(),
+           nal.size());
+
+    m_packet->pts = pts;
+    m_packet->dts = pts;
+
+    int ret = avcodec_send_packet(m_codecContext, m_packet);
+
+    if (ret < 0)
+    {
+        char err[256];
+        av_strerror(ret, err, sizeof(err));
+
+        qDebug() << "send_packet:" << err;
+        return;
+    }
+
+    while (true)
+    {
+        ret = avcodec_receive_frame(m_codecContext, m_frame);
+
+        if (ret == AVERROR(EAGAIN) ||
+            ret == AVERROR_EOF)
+        {
+            break;
+        }
+
+        if (ret < 0)
+        {
+            char err[256];
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug() << "receive_frame:" << err;
+            break;
+        }
+
+        av_frame_unref(m_swFrame);
+
+        ret = av_hwframe_transfer_data(
+                    m_swFrame,
+                    m_frame,
+                    0);
+
+        if (ret < 0)
+        {
+            char err[256];
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug() << "transfer:" << err;
+            continue;
+        }
+
+        MediaFrame frame;
+
+        frame.width  = m_swFrame->width;
+        frame.height = m_swFrame->height;
+        frame.format = PixelFormat::YUV420P;
+        frame.pts    = pts;
+
+        frame.buffer.reset(new MediaBuffer);
+
+        MediaBuffer *buffer = frame.buffer.data();
+
+        int size = av_image_get_buffer_size(
+                    AV_PIX_FMT_YUV420P,
+                    frame.width,
+                    frame.height,
+                    1);
+
+        buffer->storage.resize(size);
+
+        av_image_fill_arrays(
+                    buffer->plane,
+                    buffer->stride,
+                    reinterpret_cast<uint8_t*>(buffer->storage.data()),
+                    AV_PIX_FMT_YUV420P,
+                    frame.width,
+                    frame.height,
+                    1);
+
+        // NV12 -> YUV420P converter
+        m_sws = sws_getCachedContext(
+                    m_sws,
+                    frame.width,
+                    frame.height,
+                    (AVPixelFormat)m_swFrame->format,
+                    frame.width,
+                    frame.height,
+                    AV_PIX_FMT_YUV420P,
+                    SWS_FAST_BILINEAR,
+                    nullptr,
+                    nullptr,
+                    nullptr);
+
+        if (!m_sws)
+        {
+            qDebug() << "Cannot create sws context";
+            av_frame_unref(m_frame);
+            continue;
+        }
+
+        sws_scale(
+                    m_sws,
+                    m_swFrame->data,
+                    m_swFrame->linesize,
+                    0,
+                    frame.height,
+                    buffer->plane,
+                    buffer->stride);
+
+        buffer->planeCount = 3;
+
+        buffer->planeSize[0] =
+                buffer->stride[0] * frame.height;
+
+        buffer->planeSize[1] =
+                buffer->stride[1] * (frame.height / 2);
+
+        buffer->planeSize[2] =
+                buffer->stride[2] * (frame.height / 2);
+
+        emit frameReady(frame);
+
+        av_frame_unref(m_frame);
+    }
+}
+*/
+
+/*void VaapiVideoDecoder::decodePacket(const QByteArray &nal,
+                                     qint64 pts)
+{
+    av_packet_unref(m_packet);
+
+    if (!m_codecContext)
+        return;
+
+    if (av_new_packet(m_packet, nal.size()) < 0)
+        return;
+
+    memcpy(m_packet->data,
+           nal.constData(),
+           nal.size());
+
+    m_packet->pts = pts;
+    m_packet->dts = pts;
+
+    int ret = avcodec_send_packet(m_codecContext, m_packet);
+
+    if (ret < 0)
+    {
+        char err[256];
+        av_strerror(ret, err, sizeof(err));
+
+        qDebug() << "send_packet:" << err;
+        return;
+    }
+
+    while (true)
+    {
+        ret = avcodec_receive_frame(m_codecContext, m_frame);
+
+        if (ret == AVERROR(EAGAIN) ||
+            ret == AVERROR_EOF)
+        {
+            break;
+        }
+
+        if (ret < 0)
+        {
+            char err[256];
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug() << "receive_frame:" << err;
+            break;
+        }
+
+        av_frame_unref(m_swFrame);
+
+        ret = av_hwframe_transfer_data(
+                    m_swFrame,
+                    m_frame,
+                    0);
+
+        if (ret < 0)
+        {
+            char err[256];
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug() << "transfer:" << err;
+            continue;
+        }
+
+        MediaFrame frame;
+
+        //-----------------------------------------------------
+        // Hedef çözünürlük
+        //-----------------------------------------------------
+
+        int dstWidth  = m_swFrame->width;
+        int dstHeight = m_swFrame->height;
+
+        if (m_settings.video.width > 0 &&
+            m_settings.video.height > 0)
+        {
+            dstWidth  = m_settings.video.width;
+            dstHeight = m_settings.video.height;
+        }
+
+        //-----------------------------------------------------
+        // swscale oluştur
+        //-----------------------------------------------------
+
+        m_sws = sws_getCachedContext(
+                    m_sws,
+                    m_swFrame->width,
+                    m_swFrame->height,
+                    (AVPixelFormat)m_swFrame->format,
+                    dstWidth,
+                    dstHeight,
+                    AV_PIX_FMT_YUV420P,
+                    SWS_BILINEAR,
+                    nullptr,
+                    nullptr,
+                    nullptr);
+
+        if (!m_sws)
+        {
+            qDebug() << "Cannot create sws context";
+            continue;
+        }
+
+        //-----------------------------------------------------
+
+        frame.width  = dstWidth;
+        frame.height = dstHeight;
+        frame.format = PixelFormat::YUV420P;
+        frame.pts    = pts;
+
+        frame.buffer.reset(new MediaBuffer);
+
+        MediaBuffer *buffer = frame.buffer.data();
+
+        int size = av_image_get_buffer_size(
+                        AV_PIX_FMT_YUV420P,
+                        dstWidth,
+                        dstHeight,
+                        1);
+
+        buffer->storage.resize(size);
+
+        av_image_fill_arrays(
+                    buffer->plane,
+                    buffer->stride,
+                    reinterpret_cast<uint8_t*>(buffer->storage.data()),
+                    AV_PIX_FMT_YUV420P,
+                    dstWidth,
+                    dstHeight,
+                    1);
+
+        /*qDebug()
+                << "HW"
+                << av_get_pix_fmt_name((AVPixelFormat)m_frame->format)
+                << "SW"
+                << av_get_pix_fmt_name((AVPixelFormat)m_swFrame->format)
+                << "OUT"
+                << dstWidth
+                << "x"
+                << dstHeight;*/
+
+        //-----------------------------------------------------
+        // NV12 -> YUV420P + Resize
+        //-----------------------------------------------------
+
+   /*     sws_scale(
+                m_sws,
+                m_swFrame->data,
+                m_swFrame->linesize,
+                0,
+                m_swFrame->height,
+                buffer->plane,
+                buffer->stride);
+
+        //-----------------------------------------------------
+
+        buffer->planeCount = 3;
+
+        buffer->planeSize[0] =
+                buffer->stride[0] * dstHeight;
+
+        buffer->planeSize[1] =
+                buffer->stride[1] * (dstHeight / 2);
+
+        buffer->planeSize[2] =
+                buffer->stride[2] * (dstHeight / 2);
+
+        emit frameReady(frame);
+
+        av_frame_unref(m_frame);
+    }
+}
+*/
+/*void VaapiVideoDecoder::decodePacket(const QByteArray &nal,
+                                    qint64 pts)
+{
+    av_packet_unref(m_packet);
+
+    if (!m_codecContext)
+        return;
+/*
+    const uint8_t *p =
+        reinterpret_cast<const uint8_t*>(nal.constData());
+
+    int offset = (p[2] == 1) ? 3 : 4;
+
+    qDebug()
+        << "DECODE NAL"
+        << (p[offset] & 0x1f)
+        << nal.size();
+
+    qDebug().noquote()
+        << nal.left(16).toHex(' ');
+*/
+/*
+    if (av_new_packet(m_packet, nal.size()) < 0)
+        return;
+
+    memcpy(m_packet->data,
+           nal.constData(),
+           nal.size());
+    m_packet->pts = pts;
+    m_packet->dts = pts;
+    ///m_packet->pts = AV_NOPTS_VALUE;
+    ///m_packet->dts = AV_NOPTS_VALUE;
+    int ret = avcodec_send_packet(
+                m_codecContext,
+                m_packet);
+
+    if (ret < 0)
+    {
+        char err[256];
+        av_strerror(ret, err, sizeof(err));
+
+        qDebug()
+                << "send_packet:"
+                << err;
+
+        return;
+    }
+
+    while (true)
+    {
+        ret = avcodec_receive_frame(
+                    m_codecContext,
+                    m_frame);
+
+        if (ret == AVERROR(EAGAIN) ||
+            ret == AVERROR_EOF)
+        {
+            break;
+        }
+
+        if (ret < 0)
+        {
+            char err[256];
+
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug()
+                    << "receive_frame:"
+                    << err;
+
+            break;
+        }
+
+        av_frame_unref(m_swFrame);
+
+        ret = av_hwframe_transfer_data(
+                    m_swFrame,
+                    m_frame,
+                    0);
+
+        if (ret < 0)
+        {
+            char err[256];
+
+            av_strerror(ret, err, sizeof(err));
+
+            qDebug()
+                    << "transfer:"
+                    << err;
+
+            continue;
+        }
+
+       /*qDebug()
+                << "VAAPI frame"
+                << m_swFrame->width
+                << "x"
+                << m_swFrame->height;
+*/
+  /*      MediaFrame frame;
+
+        frame.width  = m_swFrame->width;
+        frame.height = m_swFrame->height;
+        frame.format = PixelFormat::YUV420P;
+       //  frame.format = PixelFormat::NV12
+        frame.pts    = pts;
+        ///frame.pts = m_swFrame->best_effort_timestamp;
+        frame.buffer.reset(new MediaBuffer);
+
+        MediaBuffer *buffer = frame.buffer.data();
+
+        int size =
+                av_image_get_buffer_size(
+                    AV_PIX_FMT_YUV420P,
+                    frame.width,
+                    frame.height,
+                    1);
+
+        buffer->storage.resize(size);
+
+        av_image_fill_arrays(
+                    buffer->plane,
+                    buffer->stride,
+                    reinterpret_cast<uint8_t*>(
+                        buffer->storage.data()),
+                    AV_PIX_FMT_YUV420P,
+                    frame.width,
+                    frame.height,
+                    1);
+        qDebug()
+                << "HW"
+                << av_get_pix_fmt_name((AVPixelFormat)m_frame->format)
+                << "SW"
+                << av_get_pix_fmt_name((AVPixelFormat)m_swFrame->format);
+
+        av_image_copy(
+                    buffer->plane,
+                    buffer->stride,
+                    (const uint8_t**)m_swFrame->data,
+                    m_swFrame->linesize,
+                    AV_PIX_FMT_YUV420P,
+                    frame.width,
+                    frame.height);
+
+        buffer->planeCount = 3;
+
+        buffer->planeSize[0] =
+                buffer->stride[0] * frame.height;
+
+        buffer->planeSize[1] =
+                buffer->stride[1] * (frame.height / 2);
+
+        buffer->planeSize[2] =
+                buffer->stride[2] * (frame.height / 2);
+
+        emit frameReady(frame);
+        av_frame_unref(m_frame);
+    }
+
+}*/

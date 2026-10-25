@@ -70,7 +70,7 @@ struct StreamSettings
     // Preview
     //----------------------------------------------------
 
-    PreviewMode previewMode = PreviewMode::Normal;
+    PreviewMode previewMode = PreviewMode::NormalPreview;
 
     //----------------------------------------------------
     // Network

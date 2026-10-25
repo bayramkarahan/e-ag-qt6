@@ -22,7 +22,6 @@ class RtpVideoScheduler;
 class RtpAudioScheduler;
 class AbstractVideoDecoder;
 class CpuVideoDecoder;
-class AbstractVideoRenderer;
 class RTPJitterBuffer;
 class RtpReceiverStream: public QObject
 {
@@ -37,17 +36,14 @@ public:
     bool startAudio();
     bool startVideo();
     bool startAudioVideo();
-
+VideoPreview*      m_preview = nullptr;
 private:
-    AbstractVideoRenderer*     m_openglrenderer = nullptr;
-        StreamSettings m_settings;
+         StreamSettings m_settings;
 
         RtpMasterTime*        m_masterTime = nullptr;
         RtpMediaClock*        m_clock = nullptr;
 
 
-            VideoRenderer*     m_renderer = nullptr;
-            VideoPreview*      m_preview = nullptr;
             //OpenGLVaapiZeroCopyRenderer*     m_openglvaapizerorenderer = nullptr;
 
             OpenGLVideoPreview*      m_openglpreview = nullptr;

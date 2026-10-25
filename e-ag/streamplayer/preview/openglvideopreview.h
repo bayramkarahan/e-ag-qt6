@@ -1,28 +1,94 @@
 #ifndef OPENGLVIDEOPREVIEW_H
 #define OPENGLVIDEOPREVIEW_H
 
-#include <QObject>
+#include <QOpenGLWidget>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
 
-#include "../renderer/openglvideorenderer.h"
-#include "../rstp-sync/mediaclock.h"
+#include <QMutex>
 
-class OpenGLVideoPreview : public QObject
+#include "../common/MediaFrame.h"
+#include "AbstractVideoPreview.h"
+class OpenGLVideoPreview :
+        public AbstractVideoPreview,
+        protected QOpenGLFunctions
 {
     Q_OBJECT
 
 public:
-    explicit OpenGLVideoPreview(OpenGLVideoRenderer *renderer,
-                                QObject *parent = nullptr);
+    explicit OpenGLVideoPreview(QWidget *parent = nullptr);
 
-    void setMediaClock(MediaClock *clock);
-
+    ~OpenGLVideoPreview() override;
 public slots:
+
     void onFrame(const MediaFrame &frame);
 
-private:
-    MediaClock *m_clock = nullptr;
+    void clear();
 
-    OpenGLVideoRenderer *m_renderer = nullptr;
+protected:
+
+    void initializeGL() override;
+
+    void resizeGL(int w,
+                  int h) override;
+
+    void paintGL() override;
+
+private:
+
+    bool initShaders();
+
+    bool initGeometry();
+
+    bool initTextures(int width,
+                      int height);
+
+    void uploadTextures();
+
+    void releaseTextures();
+
+private:
+
+    QMutex m_mutex;
+
+    MediaFrame m_frame;
+
+    //----------------------------------------------------
+    // OpenGL
+    //----------------------------------------------------
+
+    QOpenGLShaderProgram m_program;
+
+    QOpenGLVertexArrayObject m_vao;
+
+    QOpenGLBuffer m_vbo{QOpenGLBuffer::VertexBuffer};
+
+
+    GLuint m_texY  = 0;
+    GLuint m_texUV = 0;   // NV12 için
+
+    GLuint m_texU  = 0;   // YUV420P için
+    GLuint m_texV  = 0;   // YUV420P için
+
+    bool m_textureInitialized = false;
+
+    int m_textureWidth  = 0;
+    int m_textureHeight = 0;
+
+    //----------------------------------------------------
+    // Shader locations
+    //----------------------------------------------------
+
+    GLint m_locTexY = -1;
+    GLint m_locTexU = -1;
+    GLint m_locTexV = -1;
+
+    GLint m_locPixelFormat;
+    GLint m_locTexUV;
+
+
 };
 
-#endif // OPENGLVIDEOPREVIEW_H
+#endif

@@ -53,7 +53,7 @@ bool CommandLineParser::parse(QApplication &app,
 
     parser.addOption({
         "preview",
-        "none | normal | fullscreen",
+        "none | normal | multi | fullscreen",
         "preview"
     });
 
@@ -120,10 +120,11 @@ bool CommandLineParser::parse(QApplication &app,
     if (preview == "none")
         settings.previewMode = PreviewMode::None;
     else if (preview == "fullscreen")
-        settings.previewMode = PreviewMode::FullScreen;
+        settings.previewMode = PreviewMode::FullScreenPreview;
+    else if (preview == "multi")
+        settings.previewMode = PreviewMode::MultiPreview;
     else if (preview == "normal" || preview.isEmpty())
-        settings.previewMode = PreviewMode::Normal;
-
+        settings.previewMode = PreviewMode::NormalPreview;
     //----------------------------------------------------
     // videosource
     //----------------------------------------------------

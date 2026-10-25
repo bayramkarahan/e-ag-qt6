@@ -7,10 +7,10 @@
 #include "../decoder/AbstractVideoDecoder.h"
 #include "../decoder/videodecoderfactory.h"
 #include "../player/rtpaudioplayback.h"
-#include "../renderer/openglvaapizerocopyrenderer.h"
-#include "../renderer/openglvideorenderer.h"
-#include "../renderer/videorenderer.h"
-#include "../renderer/AbstractVideoRenderer.h"
+#include "../preview/openglvaapizerocopypreview.h"
+#include "../preview/openglvideopreview.h"
+#include "../preview/videopreview.h"
+#include "../preview/AbstractVideoPreview.h"
 #include "../rtp-sync/rtpmediaclock.h"
 #include "../rtp-sync/rtpvideoscheduler.h"
 #include "../rtp-sync/rtpaudioscheduler.h"
@@ -115,7 +115,7 @@ bool RtpReceiverStream::startVideo()
     // --------------------------------------------------
     // RENDERER
     // --------------------------------------------------
-
+/*
     if (m_videoDecoder->type() ==
         AbstractVideoDecoder::Type::VAAPI)
     {
@@ -126,21 +126,22 @@ bool RtpReceiverStream::startVideo()
     {
         qDebug() << "Renderer: CPU";
         m_openglrenderer = new OpenGLVideoRenderer;
-    }
-
+    }*/
+    m_preview = new VideoPreview;
+    m_preview->setSettings(m_settings);
     // --------------------------------------------------
     // PREVIEW
     // --------------------------------------------------
 
-    if (m_settings.previewMode == PreviewMode::Normal)
+    if (m_settings.previewMode == PreviewMode::NormalPreview)
     {
-        m_openglrenderer->resize(
+        m_preview->resize(
             m_settings.video.width,
             m_settings.video.height);
 
-        m_openglrenderer->show();
+        m_preview->show();
     }
-    else if (m_settings.previewMode == PreviewMode::FullScreen)
+    else if (m_settings.previewMode == PreviewMode::FullScreenPreview)
     {
         const QList<QScreen *> screens = QGuiApplication::screens();
 
@@ -161,14 +162,14 @@ bool RtpReceiverStream::startVideo()
                  << m_settings.video.screenIndex
                  << geometry;
 
-        m_openglrenderer->setWindowFlags(
+        m_preview->setWindowFlags(
             Qt::FramelessWindowHint |
             Qt::WindowStaysOnTopHint |
             Qt::X11BypassWindowManagerHint);
 
-        m_openglrenderer->setGeometry(geometry);
-        m_openglrenderer->show();
-        m_openglrenderer->raise();
+        m_preview->setGeometry(geometry);
+        m_preview->show();
+        m_preview->raise();
     }
 
     // --------------------------------------------------
@@ -204,8 +205,8 @@ bool RtpReceiverStream::startVideo()
 
     connect(m_videoScheduler,
             &RtpVideoScheduler::frameReady,
-            m_openglrenderer,
-            &AbstractVideoRenderer::onFrame,
+            m_preview,
+            &VideoPreview::onFrame,
             Qt::QueuedConnection);
 
     // --------------------------------------------------
@@ -245,13 +246,13 @@ bool RtpReceiverStream::startAudioVideo()
         qCritical() << "No usable video decoder";
         return false;
     }
-
     m_videoDecoder->setSettings(m_settings);
+
     // --------------------------------------------------
     // VIDEO RENDERER
     // --------------------------------------------------
 
-    if (m_videoDecoder->type() ==
+    /*if (m_videoDecoder->type() ==
         AbstractVideoDecoder::Type::VAAPI)
     {
         qDebug() << "Renderer: VAAPI";
@@ -261,21 +262,23 @@ bool RtpReceiverStream::startAudioVideo()
     {
         qDebug() << "Renderer: CPU";
         m_openglrenderer = new OpenGLVideoRenderer;
-    }
+    }*/
+    m_preview = new VideoPreview;
+    m_preview->setSettings(m_settings);
 
     // --------------------------------------------------
     // VIDEO PREVIEW
     // --------------------------------------------------
 
-    if (m_settings.previewMode == PreviewMode::Normal)
+    if (m_settings.previewMode == PreviewMode::NormalPreview)
     {
-        m_openglrenderer->resize(
+        m_preview->resize(
             m_settings.video.width,
             m_settings.video.height);
 
-        m_openglrenderer->show();
+        m_preview->show();
     }
-    else if (m_settings.previewMode == PreviewMode::FullScreen)
+    else if (m_settings.previewMode == PreviewMode::FullScreenPreview)
     {
         const QList<QScreen *> screens = QGuiApplication::screens();
 
@@ -292,14 +295,14 @@ bool RtpReceiverStream::startAudioVideo()
 
         const QRect geometry = screen->geometry();
 
-        m_openglrenderer->setWindowFlags(
+        m_preview->setWindowFlags(
             Qt::FramelessWindowHint |
             Qt::WindowStaysOnTopHint |
             Qt::X11BypassWindowManagerHint);
 
-        m_openglrenderer->setGeometry(geometry);
-        m_openglrenderer->show();
-        m_openglrenderer->raise();
+        m_preview->setGeometry(geometry);
+        m_preview->show();
+        m_preview->raise();
     }
 
     // --------------------------------------------------
@@ -335,8 +338,8 @@ bool RtpReceiverStream::startAudioVideo()
 
     connect(m_videoScheduler,
             &RtpVideoScheduler::frameReady,
-            m_openglrenderer,
-            &AbstractVideoRenderer::onFrame,
+            m_preview,
+            &VideoPreview::onFrame,
             Qt::QueuedConnection);
 
     // --------------------------------------------------
@@ -449,273 +452,6 @@ bool RtpReceiverStream::start()
     return false;
 }
 
-
-/*
-bool RtpReceiverStream::start1()
-{
-    qDebug() << "RUNNING AS RTP MULTICAST RECEIVER";
-
-    m_clock = new RtpMediaClock;
-
-    m_audioScheduler = new RtpAudioScheduler(m_clock);
-    m_audioScheduler->open(m_settings.video);
-   /* connect(m_audioScheduler,&RtpAudioScheduler::firstFrameReceived,this,[this](qint64 pts)
-    {
-        if (m_audioStarted) return;
-        m_audioStarted = true;
-        m_firstAudioPts = pts;
-        qDebug() << "RECEIVER AUDIO FIRST PTS =" << pts;
-        tryStartPlayback();
-    });*/
-/*
-    m_videoScheduler = new RtpVideoScheduler(m_clock);
-    m_videoScheduler->open(m_settings.video);
-  /*  connect(m_videoScheduler,&RtpVideoScheduler::firstFrameReceived,this,[this](qint64 pts)
-    {
-        if (m_videoStarted) return;
-        m_videoStarted = true;
-        m_firstVideoPts = pts;
-        qDebug() << "RECEIVER VIDEO FIRST PTS =" << pts;
-        tryStartPlayback();
-    });*/
-
-    // --------------------------------------------------
-    // RTP SOURCE
-    // --------------------------------------------------
-/*
-    m_rtpSource = new RtpSource(this);
-
-    connect(m_rtpSource,
-            &RtpSource::connected,
-            this,
-            []()
-            {
-                qDebug() << "RTP Multicast Connected";
-            });
-
-    connect(m_rtpSource,
-            &RtpSource::disconnected,
-            this,
-            []()
-            {
-                qDebug() << "RTP Multicast Disconnected";
-            });
-
-    connect(m_rtpSource,
-            &RtpSource::errorOccurred,
-            this,
-            [](const QString &err)
-            {
-                qCritical() << "RTP ERROR:" << err;
-            });
-
-    // --------------------------------------------------
-    // VIDEO DECODER
-    // --------------------------------------------------
-
-    if (m_settings.captureMode == CaptureMode::Video ||
-        m_settings.captureMode == CaptureMode::AudioVideo)
-    {
-        m_videoDecoder =
-            VideoDecoderFactory::create(this);
-
-        if (!m_videoDecoder->start())
-            return false;
-
-        m_videoDecoder->setSettings(m_settings);
-
-
-        // Renderer
-
-        if (m_videoDecoder->type() ==
-            AbstractVideoDecoder::Type::VAAPI)
-        {
-            qDebug() << "Renderer: VAAPI";
-
-            m_openglrenderer =
-                new OpenGLVaapiZeroCopyRenderer;
-        }
-        else
-        {
-            qDebug() << "Renderer: CPU";
-
-            m_openglrenderer =
-                new OpenGLVideoRenderer;
-        }
-
-
-        // Preview
-
-        if (m_settings.previewMode != PreviewMode::None)
-        {
-            if (m_settings.previewMode ==
-                PreviewMode::Normal)
-            {
-                m_openglrenderer->resize(
-                    m_settings.video.width,
-                    m_settings.video.height);
-
-                m_openglrenderer->show();
-            }
-            else if (m_settings.previewMode ==
-                     PreviewMode::FullScreen)
-            {
-                const QList<QScreen *> screens =
-                    QGuiApplication::screens();
-
-                if (m_settings.video.screenIndex < 0 ||
-                    m_settings.video.screenIndex >= screens.size())
-                {
-                    qWarning()
-                        << "Invalid screen index:"
-                        << m_settings.video.screenIndex;
-
-                    return false;
-                }
-
-                QScreen *screen =
-                    screens.at(
-                        m_settings.video.screenIndex);
-
-                QRect geometry =
-                    screen->geometry();
-
-                qDebug()
-                    << "Fullscreen screen:"
-                    << m_settings.video.screenIndex
-                    << geometry;
-
-                m_openglrenderer->setWindowFlags(
-                    Qt::FramelessWindowHint |
-                    Qt::WindowStaysOnTopHint |
-                    Qt::X11BypassWindowManagerHint
-                );
-
-                m_openglrenderer->setGeometry(
-                    geometry);
-
-                m_openglrenderer->show();
-                m_openglrenderer->raise();
-            }
-        }
-    }
-
-
-    // --------------------------------------------------
-    // RTP VIDEO PIPELINE
-    // --------------------------------------------------
-
-    if (m_settings.captureMode == CaptureMode::Video ||
-        m_settings.captureMode == CaptureMode::AudioVideo)
-    {
-        m_videoJitterBuffer =new RTPJitterBuffer(this);
-
-        m_h264Depacketizer =new H264Depacketizer(this);
-
-        connect(m_rtpSource,&RtpSource::videoPacket,
-                m_videoJitterBuffer,&RTPJitterBuffer::processPacket,
-                Qt::QueuedConnection);
-
-        connect(m_videoJitterBuffer,&RTPJitterBuffer::packetReady,
-                m_h264Depacketizer,&H264Depacketizer::processPacket,
-                Qt::QueuedConnection);
-
-        connect(m_h264Depacketizer,&H264Depacketizer::nalReady,
-                m_videoDecoder,&AbstractVideoDecoder::decode,
-                Qt::DirectConnection);
-/************************************************/
-   /*     connect(m_videoDecoder,&AbstractVideoDecoder::frameReady,
-                         m_videoScheduler,&RtpVideoScheduler::enqueue,
-                         Qt::QueuedConnection);
-
-        QObject::connect(m_videoScheduler,&RtpVideoScheduler::frameReady,
-                         m_openglrenderer,&AbstractVideoRenderer::onFrame,
-                         Qt::QueuedConnection);
-
-       /* connect(m_videoDecoder,&AbstractVideoDecoder::frameReady,
-                m_openglrenderer,&AbstractVideoRenderer::onFrame,
-                Qt::QueuedConnection); */
-  //  }
-
-    // --------------------------------------------------
-    // RTP AUDIO PIPELINE
-    // --------------------------------------------------
-  /*  if (m_settings.captureMode == CaptureMode::Audio ||
-        m_settings.captureMode == CaptureMode::AudioVideo)
-    {
-        qDebug() << "SES Başladı..";
-
-        m_audioDecoder = new AudioOpusDecoder;
-
-        if (!m_audioDecoder->open(
-                m_settings.audioSampleRate,
-                m_settings.audioChannels))
-        {
-            qCritical() << "AudioOpusDecoder açılamadı";
-            return false;
-        }
-
-        m_playback = new RtpAudioPlayback;
-
-        if (!m_playback->open(
-                m_settings.audioSampleRate,
-                m_settings.audioChannels))
-        {
-            qCritical() << "AudioPlayback açılamadı";
-            return false;
-        }
-
-        m_playback->setClock(m_clock);
-
-        m_audioJitterBuffer =
-            new RTPJitterBuffer(this);
-
-        // RTP AUDIO
-        connect(m_rtpSource,
-                &RtpSource::audioPacket,
-                m_audioJitterBuffer,
-                &RTPJitterBuffer::processPacket,
-                Qt::QueuedConnection);
-
-        // RTP -> Opus
-        connect(m_audioJitterBuffer,&RTPJitterBuffer::packetReady,
-                m_audioDecoder,&AudioOpusDecoder::decodeRtp,
-                Qt::QueuedConnection);
-
-        // PCM -> AudioScheduler
-        connect(m_audioDecoder,
-                &AudioOpusDecoder::frameReady,
-                m_audioScheduler,
-                &RtpAudioScheduler::enqueue,
-                Qt::QueuedConnection);
-
-        // Scheduler -> Sound card
-        connect(m_audioScheduler,
-                &RtpAudioScheduler::frameReady,
-                m_playback,
-                &RtpAudioPlayback::onFrame,
-                Qt::QueuedConnection);
-/*
-        connect(m_audioDecoder,&AudioOpusDecoder::frameReady,
-                m_playback,&AudioPlayback::onFrame,
-                Qt::QueuedConnection);*/
-
-
-
-    ///}
-
-    // --------------------------------------------------
-    // RTP SOURCE START
-    // --------------------------------------------------
-/*
-    if (!m_rtpSource->open(m_settings))
-        return false;
-
-    m_rtpSource->start();
-
-    return true;
-}
-*/
 void RtpReceiverStream::tryStartPlayback()
 {
     if (m_clock->isStarted())

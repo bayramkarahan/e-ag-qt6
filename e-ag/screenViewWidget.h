@@ -94,7 +94,7 @@ void MainWindow::slotEkranIzle()
             QJsonObject sendJson;
             sendJson["mainmessagetype"] = "x11command";
             sendJson["submessagetype"] ="x11command" ;
-            sendJson["mission"] = "mediastreamer --mode sender --sendermode unicast --audiosource none --preview none --videosource screen --screen 0 ";
+            sendJson["mission"] = "mediastreamer --mode sender --sendermode unicast --audiosource none --quality 5 --videosource screen --screen 0 ";
             //sendJson["mission"] = "mediastreamer --mode sender --capture video --preview none --source screen --screen 0 ";
             sendJson["missionmessage"]="";
             sendJson["messagevisible"]="0";
@@ -103,6 +103,7 @@ void MainWindow::slotEkranIzle()
 
             QByteArray datagram = QJsonDocument(sendJson).toJson(QJsonDocument::Compact);
             udpSocketSend->writeDatagram(datagram,QHostAddress(onlinePcList[i]->ip), uport.toInt());
+        multiPreview=true;
         }
     }
 
@@ -135,7 +136,7 @@ void MainWindow::slotEkranIzleDurdur()
 
     // Ardından client uygulamalarını kapat
     udpSendData("x11command", "x11command", "pkill mediastreamer", "", false);
-
+    multiPreview=false;
     mesajSlot(tr("Seçili Ekran İzlemeler Durduruldu."));
 
 }

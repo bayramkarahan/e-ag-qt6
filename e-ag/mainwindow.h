@@ -405,6 +405,7 @@ private:
     QQueue<TransferJob> transferQueue; // transfer listesi
     int maxParallelTransfers = 5;      // aynı anda çalışacak transfer sayısı
     int runningTransfers = 0;          // şu anda çalışan transfer sayısı
+    bool multiPreview=false;
 
   };
 

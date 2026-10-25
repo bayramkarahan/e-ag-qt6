@@ -471,7 +471,7 @@ qDebug() << "Akış başlatılıyor"<<ip;
                 settings.video.fps=10;
                 settings.video.width=320;
                 settings.video.height=240;
-
+                settings.previewMode=PreviewMode::MultiPreview;
 
                 auto *stream = new RstpReceiverStream(iconstateLabel);
 
@@ -490,10 +490,10 @@ qDebug() << "Akış başlatılıyor"<<ip;
                     // start() void ise bu if bloğunu kaldır.
                 }
 
-                if (receiverStream->m_openglrenderer)
+                if (receiverStream->m_preview)
                 {
                     layout->addWidget(
-                        receiverStream->m_openglrenderer,
+                        receiverStream->m_preview,
                         3, 1, 1, 6
                     );
                 }
@@ -517,10 +517,10 @@ qDebug() << "Akış başlatılıyor"<<ip;
 
             stream->stop();
 
-            if (stream->m_openglrenderer)
+            if (stream->m_preview)
             {
-                layout->removeWidget(stream->m_openglrenderer);
-                stream->m_openglrenderer->hide();
+                layout->removeWidget(stream->m_preview);
+                stream->m_preview->hide();
             }
 
             delete stream;

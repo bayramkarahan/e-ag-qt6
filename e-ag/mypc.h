@@ -43,7 +43,7 @@
 #include<QPainter>
 #include <QStyle>
 #include "streamplayer/stream/rstpreceiverstream.h"
-#include "streamplayer/renderer/AbstractVideoRenderer.h"
+#include "streamplayer/preview/videopreview.h"
 #include<QGridLayout>
 
 class NetProfil

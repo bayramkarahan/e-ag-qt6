@@ -25,21 +25,20 @@ enum class ReceiverMode
 enum class PreviewMode
 {
     None,
-    Normal,
-    FullScreen
+    NormalPreview,
+    FullScreenPreview,
+    MultiPreview
 };
+
 
 enum class VideoSource
 {
     None,
     Camera,
-    ScreenQt,
     ScreenFFmpeg,
     MediaFile,
-    ScreenFFmpegPipeWire,
-    ScreenWayland,
-    ScreenPipeWire,
-    ScreenX11
+    ScreenPipeWire
+
 };
 
 enum class AudioSource

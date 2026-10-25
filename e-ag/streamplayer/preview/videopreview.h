@@ -1,30 +1,36 @@
+
 #ifndef VIDEOPREVIEW_H
 #define VIDEOPREVIEW_H
 
-#include <QObject>
-
+#include <QWidget>
+#include <QImage>
+#include <QMutex>
+#include <QElapsedTimer>
 #include "../converter/videoconverter.h"
-#include "../renderer/videorenderer.h"
-#include "../rtp-sync/rtpmediaclock.h"
-class VideoPreview : public QObject
+#include "../common/StreamSettings.h"
+
+class VideoPreview :  public QWidget
 {
     Q_OBJECT
 
 public:
+    explicit VideoPreview(QWidget *parent = nullptr);
 
-    explicit VideoPreview(VideoRenderer *renderer,
-                          QObject *parent=nullptr);
-void setMediaClock(RtpMediaClock *masterTime);
-public slots:
-
+    void setImage(const QImage &image);
     void onFrame(const MediaFrame &frame);
+    void clear();
+    void setSettings(const StreamSettings &settings);
+protected:
+    void paintEvent(QPaintEvent *event) override;
 
 private:
-    RtpMediaClock *m_clock = nullptr;
+    mutable QMutex m_mutex;
     VideoConverter m_converter;
+    QImage m_image;
 
-    VideoRenderer *m_renderer=nullptr;
-
+    QElapsedTimer m_frameLimiter;
+    static constexpr qint64 FRAME_INTERVAL_MS = 200; // 10 FPS
+    StreamSettings  m_settings;
 };
 
 #endif

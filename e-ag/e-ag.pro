@@ -44,6 +44,7 @@ SOURCES += \
     streamplayer/decoder/audioopusdecoder.cpp \
     streamplayer/decoder/h264decoder.cpp \
     streamplayer/decoder/h264depacketizer.cpp \
+    streamplayer/decoder/openglvaapizerocopyrenderer.cpp \
     streamplayer/decoder/vaapivideodecoder.cpp \
     streamplayer/decoder/vaapizerocopydecoder.cpp \
     streamplayer/decoder/videodecoderfactory.cpp \
@@ -53,17 +54,15 @@ SOURCES += \
     streamplayer/player/audioprocessor.cpp \
     streamplayer/player/rtpaudioplayback.cpp \
     streamplayer/player/rtpaudioprocessor.cpp \
+    streamplayer/preview/openglvaapizerocopypreview.cpp \
     streamplayer/preview/openglvideopreview.cpp \
+    streamplayer/preview/testvideowidget.cpp \
     streamplayer/preview/videopreview.cpp \
     streamplayer/receiver/rtpreceiver.cpp \
     streamplayer/receiver/rtpsource.cpp \
     streamplayer/receiver/rtpworker.cpp \
     streamplayer/receiver/rtspsource.cpp \
     streamplayer/receiver/rtspworker.cpp \
-    streamplayer/renderer/openglvaapizerocopyrenderer.cpp \
-    streamplayer/renderer/openglvideorenderer.cpp \
-    streamplayer/renderer/testvideowidget.cpp \
-    streamplayer/renderer/videorenderer.cpp \
     streamplayer/rstp-sync/audioscheduler.cpp \
     streamplayer/rstp-sync/mediaclock.cpp \
     streamplayer/rstp-sync/videoscheduler.cpp \
@@ -134,30 +133,27 @@ HEADERS += \
     streamplayer/decoder/audioopusdecoder.h \
     streamplayer/decoder/h264decoder.h \
     streamplayer/decoder/h264depacketizer.h \
+    streamplayer/decoder/openglvaapizerocopyrenderer.h \
     streamplayer/decoder/vaapivideodecoder.h \
     streamplayer/decoder/vaapizerocopydecoder.h \
     streamplayer/decoder/videodecoderfactory.h \
     streamplayer/encoder/audioopusencoder.h \
-    streamplayer/interfaces/ICapture.h \
-    streamplayer/interfaces/IVideoCapture.h \
     streamplayer/network/rtpjitterbuffer.h \
     streamplayer/network/rtppacket.h \
     streamplayer/player/audioplayback.h \
     streamplayer/player/audioprocessor.h \
     streamplayer/player/rtpaudioplayback.h \
     streamplayer/player/rtpaudioprocessor.h \
+    streamplayer/preview/AbstractVideoPreview.h \
+    streamplayer/preview/openglvaapizerocopypreview.h \
     streamplayer/preview/openglvideopreview.h \
+    streamplayer/preview/testvideowidget.h \
     streamplayer/preview/videopreview.h \
     streamplayer/receiver/rtpreceiver.h \
     streamplayer/receiver/rtpsource.h \
     streamplayer/receiver/rtpworker.h \
     streamplayer/receiver/rtspsource.h \
     streamplayer/receiver/rtspworker.h \
-    streamplayer/renderer/AbstractVideoRenderer.h \
-    streamplayer/renderer/openglvaapizerocopyrenderer.h \
-    streamplayer/renderer/openglvideorenderer.h \
-    streamplayer/renderer/testvideowidget.h \
-    streamplayer/renderer/videorenderer.h \
     streamplayer/rstp-sync/audioscheduler.h \
     streamplayer/rstp-sync/mediaclock.h \
     streamplayer/rstp-sync/videoscheduler.h \

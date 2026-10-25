@@ -632,7 +632,8 @@ void MainWindow::pcRightClickSignalSlot()
 MainWindow::~MainWindow()
 {
     qDebug()<<"e-ag Kapatıldı.";
-    QThread::sleep(1); // saniye cinsinden
+    if(multiPreview) slotEkranIzleDurdur();
+    //QThread::sleep(1); // saniye cinsinden
     //system("sleep 1");
     slotVncFlipStop();
     //system("sleep 1");

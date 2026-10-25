@@ -23,7 +23,6 @@ class VideoScheduler;
 class AudioScheduler;
 class AbstractVideoDecoder;
 class CpuVideoDecoder;
-class AbstractVideoRenderer;
 class RstpReceiverStream : public QObject
 {
     Q_OBJECT
@@ -31,7 +30,6 @@ class RstpReceiverStream : public QObject
 public:
     explicit RstpReceiverStream(QObject *parent = nullptr);
     ~RstpReceiverStream();
-    AbstractVideoRenderer*     m_openglrenderer = nullptr;
     bool open(const StreamSettings &settings);
     bool start(QString hostIp);
     void stop();
@@ -42,27 +40,19 @@ public:
         quint16 port);
     void onControlMessage(
         const ControlMessage &message);
+    VideoPreview*      m_preview = nullptr;
 private:
-
+    //AbstractVideoRenderer*     m_openglrenderer = nullptr;
     StreamSettings m_settings;
 
     MasterTime*        m_masterTime = nullptr;
     MediaClock*        m_clock = nullptr;
-
-    VideoRenderer*     m_renderer = nullptr;
-    VideoPreview*      m_preview = nullptr;
-    //OpenGLVaapiZeroCopyRenderer*     m_openglvaapizerorenderer = nullptr;
-
-    OpenGLVideoPreview*      m_openglpreview = nullptr;
-
     RTPReceiver*       m_videoReceiver = nullptr;
     RTPReceiver*       m_audioReceiver = nullptr;
-
     H264Depacketizer*  m_depacketizer = nullptr;
     //H264Decoder*       m_videoDecoder = nullptr;
     AbstractVideoDecoder *m_videoDecoder = nullptr;
     //CpuVideoDecoder *m_videoDecoder = nullptr;
-
     AudioOpusDecoder*  m_audioDecoder = nullptr;
 
     VideoScheduler*    m_videoScheduler = nullptr;
