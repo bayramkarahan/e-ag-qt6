@@ -210,7 +210,7 @@ QWidget* MainWindow::rdpWidget()
 
         /************************************************************/
         system("pkill mediastreamer");
-        QString kmt10="mediastreamer --mode sender --sendermode multicast --audiosource none --preview none --videosource screen --screen 0 &";
+        QString kmt10="mediastreamer --mode sender --sendermode multicast --audiosource none --quality 50 --videosource screen --screen 0 &";
         ///system(kmt10.toStdString().c_str());
         eagtraySendDataDetached(kmt10);
        /* eagtraySendData(kmt10, [this](const QString &output){
