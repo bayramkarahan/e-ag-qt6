@@ -48,10 +48,6 @@ bool CaptureThread::open(const VideoCaptureSettings &settings)
         m_capture = new V4L2Capture;
         break;
 
-    case VideoSource::ScreenQt:
-        m_capture = new ScreenCapture;
-        break;
-
    case VideoSource::ScreenFFmpeg:
     {
         m_capture = new FFmpegScreenCapture;

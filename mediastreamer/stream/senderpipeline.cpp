@@ -260,9 +260,8 @@ bool SenderPipeline::start()
     case VideoSource::MediaFile:
         return startMediaFile();
 
-    case VideoSource::ScreenQt:
+    case VideoSource::ScreenPipeWire:
     case VideoSource::ScreenFFmpeg:
-    case VideoSource::ScreenFFmpegPipeWire:
         return startScreen();
 
     default:
@@ -426,6 +425,7 @@ bool SenderPipeline::startCamera()
     }
     return true;
 }
+
 bool SenderPipeline::startScreen()
 {
     const DesktopSession session = detectDesktopSession();

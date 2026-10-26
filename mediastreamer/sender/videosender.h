@@ -5,7 +5,6 @@
 #include <QHostAddress>
 #include "sync/mastertime.h"
 #include "../common/MediaFrame.h"
-#include "../converter/frameconverter.h"
 #include "../encoder/h264encoder.h"
 #include "../network/rtppacketizer.h"
 #include "../sender/rtpsender.h"
@@ -53,10 +52,9 @@ private:
     H264Encoder      m_encoder;
     RTPPacketizer    m_packetizer;
     RtpSender  m_sender;
-
+    VideoFrameConverter m_converter;
     MediaFrame m_yuvFrame;
     SessionDescription m_session;
-    VideoFrameConverter m_converter;
     MasterTime *m_masterTime = nullptr;
 };
 

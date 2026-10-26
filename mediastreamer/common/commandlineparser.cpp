@@ -4,6 +4,32 @@
 #include <QHostAddress>
 #include <QDebug>
 
+
+VideoQualityProfile CommandLineParser::applyVideoQuality(int quality)
+{
+    static constexpr VideoQualityProfile profiles[] = {
+        {  100,  160, 120,  5 }, //  0
+        {  150,  320, 240,  8 }, // 10
+        {  250,  320, 240, 10 }, // 20
+        {  350,  640, 480,  8 }, // 30
+        {  500,  640, 480, 10 }, // 40
+        {  650,  800, 600, 10 }, // 50
+        {  800,  800, 600, 12 }, // 60
+        { 1000, 1024, 768, 12 }, // 70
+        { 1200, 1280, 768, 12 }, // 80
+        { 1600, 1280, 960, 15 }, // 90
+        { 2500, 1920,1080, 20 }  // 100
+    };
+
+    quality = qBound(0, quality, 100);
+
+    const int index = ((quality + 5) / 10)-1;
+    const auto &p = profiles[index];
+
+   return p;
+}
+
+
 bool CommandLineParser::parse(QApplication &app,
                               StreamSettings &settings)
 {
@@ -37,6 +63,11 @@ bool CommandLineParser::parse(QApplication &app,
         "audiosource"
     });
     parser.addOption({
+        "quality",
+        "0-100",
+        "quality"
+    });
+    parser.addOption({
         "file",
         "Video file",
         "file"
@@ -54,11 +85,7 @@ bool CommandLineParser::parse(QApplication &app,
         "screen"
     });
 
-    parser.addOption({
-        "preview",
-        "none | local | remote",
-        "preview"
-    });
+
 
     parser.addOption({
         "address",
@@ -102,6 +129,20 @@ bool CommandLineParser::parse(QApplication &app,
         settings.sendermode = SenderMode::Multicast;
     else
         settings.sendermode = SenderMode::Unicast;
+
+    QString quality = parser.value("quality").toLower();
+    VideoQualityProfile vqp;
+    if (quality != "")
+        vqp=applyVideoQuality(quality.toUInt());
+    else
+        vqp=applyVideoQuality(settings.quality);
+
+    settings.video.bitrate=vqp.bitrate;
+    settings.video.fps=vqp.fps;
+    settings.video.width=vqp.width;
+    settings.video.height=vqp.height;
+
+
     //----------------------------------------------------
     // audiosource
     //----------------------------------------------------
@@ -118,18 +159,7 @@ bool CommandLineParser::parse(QApplication &app,
         settings.audio.source = AudioSource::Both;
     else if (audiosource == "none"||audiosource == "")
         settings.audio.source = AudioSource::None;
-    //----------------------------------------------------
-    // Preview
-    //----------------------------------------------------
 
-    QString preview = parser.value("preview").toLower();
-
-    if (preview == "none")
-        settings.previewMode = PreviewMode::None;
-    else if (preview == "remote")
-        settings.previewMode = PreviewMode::Remote;
-    else if (preview == "local" || preview.isEmpty())
-        settings.previewMode = PreviewMode::Local;
 
     //----------------------------------------------------
     // Source

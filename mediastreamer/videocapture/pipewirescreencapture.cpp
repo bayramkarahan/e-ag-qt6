@@ -143,7 +143,9 @@ void PipeWireScreenCapture::onProcess(void *userdata)
                 frame.width = width;
                 frame.height = height;
                 frame.format = self->m_format;
-                frame.pts = self->m_pts++;
+                //frame.pts = self->m_pts++;
+                //frame.pts = m_masterTime ? m_masterTime->nowUs() : 0;
+                frame.pts = self->m_masterTime? self->m_masterTime->nowUs(): 0;
 
                 {
                     QMutexLocker locker(&self->m_frameMutex);

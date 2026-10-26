@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     StreamSettings settings;
     //settings.mode=StreamMode::Sender;
     //settings.video.source = CaptureSource::Camera;
-    settings.video.fileName="selcuk.mp4";
+    settings.video.fileName="***.mp4";
     if (!CommandLineParser::parse(app, settings))
         return -1;
 
@@ -35,14 +35,18 @@ int main(int argc, char *argv[])
     settings.audio.channels=2;
     settings.audio.frameSample=960;
     settings.audio.bitrate=20000;
-    settings.video.bitrate=1000;
-
     settings.audioAddress=settings.videoAddress;
     settings.audioPort=settings.videoPort+2;
-    settings.video.screenIndex = 0;
+    /*settings.video.screenIndex = 0;
+    settings.video.bitrate=1000;
     settings.video.fps    = 10;
     settings.video.width  = 320;
-    settings.video.height = 180;
+    settings.video.height = 180;*/
+     qCritical() <<"Video Kalitesi:"<<settings.video.bitrate
+                <<settings.video.fps
+                <<settings.video.width
+                <<settings.video.height;
+
     //settings.video.timeMode = TimeMode::MasterClock;
 
     SenderPipeline sp;

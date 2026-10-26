@@ -65,7 +65,7 @@ struct StreamSettings
 
     VideoCaptureSettings video;
     AudioCaptureSettings audio;
-
+    int quality=30;
     //----------------------------------------------------
     // Preview
     //----------------------------------------------------
