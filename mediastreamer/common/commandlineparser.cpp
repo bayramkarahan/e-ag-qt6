@@ -23,10 +23,11 @@ VideoQualityProfile CommandLineParser::applyVideoQuality(int quality)
 
     quality = qBound(0, quality, 100);
 
-    const int index = ((quality + 5) / 10)-1;
+    const int index = qBound(0, (quality + 5) / 10, 10);
     const auto &p = profiles[index];
 
-   return p;
+    return p;
+
 }
 
 
