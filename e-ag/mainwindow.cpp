@@ -632,6 +632,14 @@ void MainWindow::pcRightClickSignalSlot()
 MainWindow::~MainWindow()
 {
     qDebug()<<"e-ag Kapatıldı.";
+    if(shareServerScreenFfmpeg){
+    qDebug()<<"mediastreamer sonlandırılıyor.";
+    shareServerScreenFfmpeg=false;
+    system("pkill mediastreamer");
+    udpSendData("x11command","x11command","pkill streamplayer","",false);
+    udpSendData("x11command", "keyboardmouseon", "","keyboard-mouse-on",false);
+   }
+
     if(multiPreview) slotEkranIzleDurdur();
     //QThread::sleep(1); // saniye cinsinden
     //system("sleep 1");

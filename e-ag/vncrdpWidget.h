@@ -188,7 +188,7 @@ QWidget* MainWindow::rdpWidget()
     serverEkranYansitFfmpegSeciliPcButton->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
     serverEkranYansitFfmpegSeciliPcButton->setIcon(QIcon(":icons/networkvnc.svg"));
     connect(serverEkranYansitFfmpegSeciliPcButton, &QPushButton::clicked, [=]() {
-
+        shareServerScreenFfmpeg=true;
         bool cbstate=cb->checkState();
         bool kfcbstate=kfcb->checkState();
         QString viewState="";
@@ -291,15 +291,16 @@ QWidget* MainWindow::rdpWidget()
     // ekranYansitFfmpegDurdur->setAutoFillBackground(true);
     ekranYansitFfmpegDurdur->setText(tr("Yansıtmayı \nffmpeg Durdur"));
     connect(ekranYansitFfmpegDurdur, &QToolButton::clicked, [=]() {
-        system("pkill mediastreamer");
-        ///system("/usr/bin/serverscreen&");
-        QThread::sleep(1); // saniye cinsinden
-        udpSendData("x11command","x11command","pkill streamplayer","",false);
-        QThread::sleep(1); // saniye cinsinden
-        ///udpSendData("x11command","x11command","clientscreen");
-        udpSendData("x11command", "keyboardmouseon", "","keyboard-mouse-on",false);
-        //tabwid->setStyleSheet("font-size:"+QString::number(font.toInt()-2)+"px;");
-
+        shareServerScreenFfmpeg=false;
+        QTimer::singleShot(100, this, [this](){
+            system("pkill mediastreamer");
+        });
+        QTimer::singleShot(200, this, [this](){
+            udpSendData("x11command","x11command","pkill streamplayer","",false);
+        });
+        QTimer::singleShot(300, this, [this](){
+            udpSendData("x11command", "keyboardmouseon", "","keyboard-mouse-on",false);
+        });
         vncPc->setEnabled(true);
         rdpPc->setEnabled(true);
         serverEkranYansitSeciliPcButton->setEnabled(true);

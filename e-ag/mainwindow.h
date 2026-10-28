@@ -406,6 +406,7 @@ private:
     int maxParallelTransfers = 5;      // aynı anda çalışacak transfer sayısı
     int runningTransfers = 0;          // şu anda çalışan transfer sayısı
     bool multiPreview=false;
+    bool shareServerScreenFfmpeg=false;
 
   };
 

@@ -95,7 +95,6 @@ void MainWindow::slotEkranIzle()
             sendJson["mainmessagetype"] = "x11command";
             sendJson["submessagetype"] ="x11command" ;
             sendJson["mission"] = "mediastreamer --mode sender --sendermode unicast --audiosource none --quality 5 --videosource screen --screen 0 ";
-            //sendJson["mission"] = "mediastreamer --mode sender --capture video --preview none --source screen --screen 0 ";
             sendJson["missionmessage"]="";
             sendJson["messagevisible"]="0";
             sendJson["server_address"] = onlinePcList[i]->netProfil.serverAddress;
@@ -103,7 +102,7 @@ void MainWindow::slotEkranIzle()
 
             QByteArray datagram = QJsonDocument(sendJson).toJson(QJsonDocument::Compact);
             udpSocketSend->writeDatagram(datagram,QHostAddress(onlinePcList[i]->ip), uport.toInt());
-        multiPreview=true;
+            multiPreview=true;
         }
     }
 
